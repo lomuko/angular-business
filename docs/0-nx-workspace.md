@@ -113,9 +113,9 @@ class: impact
 ## 2.1 Apps
 
 ```
-ng generate @nrwl/schematics:application store --inlineStyle --routing
-./apps/store
-./apps/store-e2e
+ng generate @nrwl/schematics:application shop --inlineStyle --routing
+./apps/shop
+./apps/shop-e2e
 yarn start
 ```
 ---
@@ -168,8 +168,19 @@ class: impact
 ng generate @nrwl/schematics:application warehouse --inlineStyle --routing
 ./apps/warehouse
 ./apps/warehouse-e2e
-yarn start
+ng serve warehouse --port=4201 -o
 ```
+
+```json
+  "start:shop": "ng serve shop --port=4200 -o",
+  "start:warehouse": "ng serve warehouse --port=4201 -o",
+```
+
+```
+yarn start:store
+yarn start:warehouse
+```
+
 
 ---
 

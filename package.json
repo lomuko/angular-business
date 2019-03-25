@@ -11,6 +11,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:shop": "ng serve shop --port=4200 -o",
+    "start:warehouse": "ng serve warehouse --port=4201 -o",
     "build": "ng build",
     "test": "ng test",
     "lint": "./node_modules/.bin/nx lint && ng lint",

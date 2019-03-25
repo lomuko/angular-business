@@ -22,6 +22,12 @@
     },
     "warehouse-e2e": {
       "tags": []
+    },
+    "shop": {
+      "tags": []
+    },
+    "shop-e2e": {
+      "tags": []
     }
   }
 }
