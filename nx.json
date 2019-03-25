@@ -8,13 +8,10 @@
     "nx.json": "*"
   },
   "projects": {
-    "store": {
+    "shop": {
       "tags": []
     },
-    "store-e2e": {
-      "tags": []
-    },
-    "ui": {
+    "shop-e2e": {
       "tags": []
     },
     "warehouse": {
@@ -23,10 +20,7 @@
     "warehouse-e2e": {
       "tags": []
     },
-    "shop": {
-      "tags": []
-    },
-    "shop-e2e": {
+    "ui": {
       "tags": []
     }
   }
