@@ -124,7 +124,8 @@ yarn start
 
 ```
 ng generate @nrwl/schematics:library ui --inlineStyle
-yarn start
+./lis/ui
+ng generate @schematics/angular:component product --project=ui --export --inlineStyle
 ```
 
 ---
