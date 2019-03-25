@@ -154,7 +154,7 @@ export class AppModule {}
 
 class: impact
 
-# 3 Apps
+# 3 Aplicaciones
 
 ## Frontend webs
 
@@ -203,14 +203,44 @@ ng serve api
 
 > Recap:
 
-# 3 Apps
+# 3 Aplicaciones
 
-## Frontend webs
+## 3.1 Frontend webs
 
-## Backend Apis
+## 3.2 Backend Apis
 
 ---
 
+class: impact
+
+# 4 Librerías
+
+## 4.1 Compartidas
+
+## 4.2 Otras
+
+---
+
+## 4.1
+
+ng generate @nrwl/schematics:library shared
+libs\shared\src\lib\models\greetings.interface.ts
+export interface Greetings {
+  message: string;
+}
+this.httpClient.get<Greetings>('/api/').subscribe((data: Greetings) => (this.title += ' and ' + data.message));
+
+---
+> Recap:
+
+# 4 Librerías
+
+## 4.1 Compartidas
+
+## 4.2 Otras
+
+
+---
 
 > Next:
 

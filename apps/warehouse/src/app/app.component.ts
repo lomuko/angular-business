@@ -1,3 +1,5 @@
+import { Greetings } from '@angular-business/shared';
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'warehouse';
+  constructor(private httpClient: HttpClient) {
+    this.httpClient.get<Greetings>('/api/').subscribe((data: Greetings) => (this.title += ' and ' + data.message));
+  }
 }
