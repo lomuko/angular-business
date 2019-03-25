@@ -186,6 +186,18 @@ yarn start:warehouse
 
 ## 3.2 Backend Apis
 
+```
+ng generate @nrwl/schematics:node-application api --frontendProject=shop
+ng serve api
+"start:api": "ng serve api",
+"warehouse.serve.proxyConfig": "apps/warehouse//proxy.conf.json"
+```
+
+```typescript
+  constructor(private httpClient: HttpClient) {
+    this.httpClient.get<any>('/api/').subscribe(data => (this.title += ' and ' + data.message));
+  }
+```
 
 ---
 

@@ -1,11 +1,8 @@
 {
-    "spellright.language": [
-        "en",
-        "es"
-    ],
-    "spellright.documentTypes": [
-        "markdown",
-        "latex",
-        "plaintext"
-    ]
+  "spellright.language": ["en", "es"],
+  "spellright.documentTypes": ["markdown", "latex", "plaintext"],
+  "material-icon-theme.folders.associations": {
+    "customFolderName": "ui",
+    "sample": "views"
+  }
 }

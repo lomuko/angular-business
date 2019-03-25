@@ -13,6 +13,7 @@
     "start": "ng serve",
     "start:shop": "ng serve shop --port=4200 -o",
     "start:warehouse": "ng serve warehouse --port=4201 -o",
+    "start:api": "ng serve api",
     "build": "ng build",
     "test": "ng test",
     "lint": "./node_modules/.bin/nx lint && ng lint",
@@ -36,6 +37,8 @@
   },
   "private": true,
   "dependencies": {
+    "@nestjs/common": "5.5.0",
+    "@nestjs/core": "5.5.0",
     "@angular/animations": "^7.0.0",
     "@angular/common": "^7.0.0",
     "@angular/compiler": "^7.0.0",
@@ -49,6 +52,9 @@
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
+    "ts-jest": "24.0.0",
+    "@nestjs/schematics": "5.11.2",
+    "@nestjs/testing": "5.5.0",
     "jest-preset-angular": "^7.0.1",
     "@angular/compiler-cli": "~7.2.0",
     "@angular/language-service": "^7.0.0",
