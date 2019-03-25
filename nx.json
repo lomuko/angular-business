@@ -16,6 +16,12 @@
     },
     "ui": {
       "tags": []
+    },
+    "warehouse": {
+      "tags": []
+    },
+    "warehouse-e2e": {
+      "tags": []
     }
   }
 }

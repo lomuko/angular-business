@@ -128,6 +128,18 @@ ng generate @nrwl/schematics:library ui --inlineStyle
 ng generate @schematics/angular:component product --project=ui --export --inlineStyle
 ```
 
+```typescript
+import { UiModule } from '@angular-business/ui';
+@NgModule({
+  imports: [ UiModule],
+})
+export class AppModule {}
+```
+
+```html
+<angular-business-product></angular-business-product>
+```
+
 ---
 
 > Recap:
@@ -139,6 +151,43 @@ ng generate @schematics/angular:component product --project=ui --export --inline
 ## Libs
 
 ---
+
+class: impact
+
+# 3 Apps
+
+## Frontend webs
+
+## Backend Apis
+
+---
+
+## 3.1 Frontend webs
+
+```
+ng generate @nrwl/schematics:application warehouse --inlineStyle --routing
+./apps/warehouse
+./apps/warehouse-e2e
+yarn start
+```
+
+---
+
+## 3.2 Backend Apis
+
+
+---
+
+> Recap:
+
+# 3 Apps
+
+## Frontend webs
+
+## Backend Apis
+
+---
+
 
 > Next:
 
