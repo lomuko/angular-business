@@ -112,33 +112,12 @@ class: impact
 
 ## 2.1 Apps
 
-```
-ng generate @nrwl/schematics:application shop --inlineStyle --routing
-./apps/shop
-./apps/shop-e2e
-yarn start
-```
+
 ---
 
 ## 2.2 Libs
 
-```
-ng generate @nrwl/schematics:library views --inlineStyle
-./lis/ui
-ng generate @schematics/angular:component product --project=views --export --inlineStyle
-```
 
-```typescript
-import { ViewsModule } from '@angular-business/views';
-@NgModule({
-  imports: [ ViewsModule],
-})
-export class AppModule {}
-```
-
-```html
-<angular-business-product></angular-business-product>
-```
 
 ---
 
@@ -163,6 +142,13 @@ class: impact
 ---
 
 ## 3.1 Frontend webs
+
+```
+ng generate @nrwl/schematics:application shop --inlineStyle --routing
+./apps/shop
+./apps/shop-e2e
+yarn start
+```
 
 ```
 ng generate @nrwl/schematics:application warehouse --inlineStyle --routing
@@ -215,29 +201,56 @@ class: impact
 
 # 4 Librerías
 
-## 4.1 Compartidas
+## 4.1 TypeScript
 
-## 4.2 Otras
+## 4.2 Angular
 
 ---
 
-## 4.1
+## 4.1 Librerías en TypeScript
 
+```terminal
 ng generate @nrwl/schematics:library shared
 libs\shared\src\lib\models\greetings.interface.ts
+```
+
+```typescript
 export interface Greetings {
   message: string;
 }
 this.httpClient.get<Greetings>('/api/').subscribe((data: Greetings) => (this.title += ' and ' + data.message));
+```
+
+---
+
+## 4.2 Librerías de Angular
+
+```
+ng generate @nrwl/schematics:library views --inlineStyle
+./lis/views
+ng generate @schematics/angular:component product --project=views --export --inlineStyle
+```
+
+```typescript
+import { ViewsModule } from '@angular-business/views';
+@NgModule({
+  imports: [ ViewsModule],
+})
+export class AppModule {}
+```
+
+```html
+<angular-business-product></angular-business-product>
+```
 
 ---
 > Recap:
 
 # 4 Librerías
 
-## 4.1 Compartidas
+## 4.1 TypeScript
 
-## 4.2 Otras
+## 4.2 Angular
 
 
 ---
