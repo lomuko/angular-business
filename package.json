@@ -1,6 +1,12 @@
 {
   "name": "angular-business",
-  "version": "0.0.0",
+  "author": {
+    "name": "Albert Basalo",
+    "url": "https://twitter.com/albertobasalo"
+  },
+  "description": "Tutorial avanzado de desarrollo con Angular para emresas",
+  "homepage": "https://academia-binaria.com",
+  "version": "7.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
