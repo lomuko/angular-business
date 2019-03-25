@@ -1,5 +1,6 @@
 {
-  "rulesDirectory": ["node_modules/@nrwl/schematics/src/tslint"],
+  "rulesDirectory": ["node_modules/@nrwl/schematics/src/tslint", "node_modules/codelyzer"],
+  "plugins": ["@getify/proper-arrows"],
   "rules": {
     "arrow-return-shorthand": true,
     "callable-types": true,
@@ -43,16 +44,32 @@
     "triple-equals": [true, "allow-null-check"],
     "unified-signatures": true,
     "variable-name": false,
-
     "nx-enforce-module-boundaries": [
       true,
       {
         "allow": [],
-        "depConstraints": [{ "sourceTag": "*", "onlyDependOnLibsWithTags": ["*"] }]
+        "depConstraints": [
+          {
+            "sourceTag": "*",
+            "onlyDependOnLibsWithTags": ["*"]
+          }
+        ]
       }
     ],
     "no-magic-numbers": [true, 0, 1],
     "cyclomatic-complexity": [true, 8],
-    "max-file-line-count": [true, 256]
+    "max-file-line-count": [true, 256],
+    "directive-selector": [true, "attribute", "app", "camelCase"],
+    "component-selector": [true, "element", "app", "kebab-case"],
+    "no-output-on-prefix": true,
+    "use-input-property-decorator": true,
+    "use-output-property-decorator": true,
+    "use-host-property-decorator": true,
+    "no-input-rename": true,
+    "no-output-rename": true,
+    "use-life-cycle-interface": true,
+    "use-pipe-transform-interface": true,
+    "component-class-suffix": true,
+    "directive-class-suffix": true
   }
 }
