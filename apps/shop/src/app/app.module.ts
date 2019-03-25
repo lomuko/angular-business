@@ -1,4 +1,4 @@
-import { UiModule } from '@angular-business/ui';
+import { ViewsModule } from '@angular-business/views';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, RouterModule.forRoot([], { initialNavigation: 'enabled' }), UiModule, HttpClientModule],
+  imports: [BrowserModule, RouterModule.forRoot([], { initialNavigation: 'enabled' }), ViewsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -123,15 +123,15 @@ yarn start
 ## 2.2 Libs
 
 ```
-ng generate @nrwl/schematics:library ui --inlineStyle
+ng generate @nrwl/schematics:library views --inlineStyle
 ./lis/ui
-ng generate @schematics/angular:component product --project=ui --export --inlineStyle
+ng generate @schematics/angular:component product --project=views --export --inlineStyle
 ```
 
 ```typescript
-import { UiModule } from '@angular-business/ui';
+import { ViewsModule } from '@angular-business/views';
 @NgModule({
-  imports: [ UiModule],
+  imports: [ ViewsModule],
 })
 export class AppModule {}
 ```

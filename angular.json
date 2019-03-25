@@ -229,30 +229,6 @@
         }
       }
     },
-    "ui": {
-      "root": "libs/ui",
-      "sourceRoot": "libs/ui/src",
-      "projectType": "library",
-      "prefix": "angular-business",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/ui/tsconfig.lib.json", "libs/ui/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/builders:jest",
-          "options": {
-            "jestConfig": "libs/ui/jest.config.js",
-            "tsConfig": "libs/ui/tsconfig.spec.json",
-            "setupFile": "libs/ui/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {}
-    },
     "api": {
       "root": "apps/api",
       "sourceRoot": "apps/api/src",
@@ -323,6 +299,30 @@
           "options": {
             "jestConfig": "libs/shared/jest.config.js",
             "tsConfig": "libs/shared/tsconfig.spec.json"
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "views": {
+      "root": "libs/views",
+      "sourceRoot": "libs/views/src",
+      "projectType": "library",
+      "prefix": "angular-business",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/views/tsconfig.lib.json", "libs/views/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/views/jest.config.js",
+            "tsConfig": "libs/views/tsconfig.spec.json",
+            "setupFile": "libs/views/src/test-setup.ts"
           }
         }
       },

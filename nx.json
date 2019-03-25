@@ -20,13 +20,13 @@
     "warehouse-e2e": {
       "tags": []
     },
-    "ui": {
-      "tags": []
-    },
     "api": {
       "tags": []
     },
     "shared": {
+      "tags": []
+    },
+    "views": {
       "tags": []
     }
   }

@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@angular-business/ui": ["libs/ui/src/index.ts"],
-      "@angular-business/shared": ["libs/shared/src/index.ts"]
+      "@angular-business/shared": ["libs/shared/src/index.ts"],
+      "@angular-business/views": ["libs/views/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
