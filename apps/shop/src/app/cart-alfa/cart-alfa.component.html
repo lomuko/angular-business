@@ -1,0 +1,36 @@
+<section>
+  <header>
+    <h2>Shoppping Cart Alfa</h2>
+  </header>
+  <main>
+    <form>
+      <label for="product">Product: </label>
+      <input name="product"
+             placeholder="product"
+             [(ngModel)]="item.product"
+             type="text">
+      <label for="quantity">Quantity: </label>
+      <input name="quantity"
+             placeholder="quantity"
+             [(ngModel)]="item.quantity"
+             type="number">
+      <button (click)="addToCart()">Add to cart</button>
+    </form>
+    <table>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+      </tr>
+      <tr *ngFor="let item of cart.items">
+        <td>{{ item.product }}</td>
+        <td>{{ item.quantity }}</td>
+      </tr>
+    </table>
+  </main>
+  <footer>
+    <dl>
+      <dt><strong>Total Units</strong></dt>
+      <dd>{{ totalUnits }}</dd>
+    </dl>
+  </footer>
+</section>
