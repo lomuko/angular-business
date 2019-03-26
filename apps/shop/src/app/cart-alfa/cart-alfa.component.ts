@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartAlfaComponent implements OnInit {
   public totalUnits = 0;
-  public item;
-  public cart = { items: [] };
+  public item: Item;
+  public cart: Cart = { items: [] };
 
   constructor() {}
 
@@ -24,4 +24,13 @@ export class CartAlfaComponent implements OnInit {
     this.totalUnits += item.quantity;
     this.resetItem();
   }
+}
+
+export interface Item {
+  product: any;
+  quantity: number;
+}
+
+export interface Cart {
+  items: Item[];
 }
