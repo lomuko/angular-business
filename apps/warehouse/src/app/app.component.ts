@@ -1,4 +1,4 @@
-import { Greetings } from '@angular-business/shared';
+import { Greetings } from '@angular-business/models';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 

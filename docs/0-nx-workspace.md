@@ -210,8 +210,8 @@ class: impact
 ## 4.1 Librerías en TypeScript
 
 ```terminal
-ng generate @nrwl/schematics:library shared
-libs\shared\src\lib\models\greetings.interface.ts
+ng generate @nrwl/schematics:library models
+libs\shared\src\lib\greetings.interface.ts
 ```
 
 ```typescript

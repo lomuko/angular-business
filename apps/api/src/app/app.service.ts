@@ -1,4 +1,4 @@
-import { Greetings } from '@angular-business/shared';
+import { Greetings } from '@angular-business/models';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

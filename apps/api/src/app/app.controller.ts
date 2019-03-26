@@ -1,4 +1,4 @@
-import { Greetings } from '@angular-business/shared';
+import { Greetings } from '@angular-business/models';
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 
