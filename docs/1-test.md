@@ -128,10 +128,50 @@ class: impact
 
 ## 3.1 Jest
 
+```json
+  "test:shop": "ng test shop --watch",
+  "test:warehouse": "ng test warehouse --watch",
+  "test:api": "ng test api --watch",
+```
+
+```terminal
+yarn test:shop
+yarn test:warehouse
+yarn test:api
+```
+
 ---
 
 ## 3.2 Tests unitarios
 
+shop: app.component.spec.ts
+
+```typescript
+it('should render title in a h1 tag after api call have finished', done => {
+  const waitMs = 500;
+  const fixture = TestBed.createComponent(AppComponent);
+  setTimeout(() => {
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to shop and Welcome to api!!');
+    done();
+  }, waitMs);
+});
+```
+shop: app.component.ts
+
+```typescript
+  this.httpClient
+    .get<Greetings>('http://localhost:3333/api/')
+    .subscribe((data: Greetings) => (this.title += ' and ' + data.message));
+  }
+```
+
+api: main.ts
+
+```typescript
+  app.enableCors();
+```
 
 ---
 
