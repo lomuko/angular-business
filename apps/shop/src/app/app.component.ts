@@ -10,8 +10,6 @@ export class AppComponent {
   title = 'shop';
   constructor(private httpClient: HttpClient) {
     //this.httpClient.get<any>('/api/').subscribe(data => (this.title += ' and ' + data.message));
-    this.httpClient
-      .get<Greetings>('http://localhost:3333/api/')
-      .subscribe((data: Greetings) => (this.title += ' and ' + data.message));
+    this.httpClient.get<Greetings>('/api/').subscribe((data: Greetings) => (this.title += ' and ' + data.message));
   }
 }

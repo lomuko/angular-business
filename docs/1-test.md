@@ -147,30 +147,19 @@ yarn test:api
 shop: app.component.spec.ts
 
 ```typescript
-it('should render title in a h1 tag after api call have finished', done => {
-  const waitMs = 500;
-  const fixture = TestBed.createComponent(AppComponent);
-  setTimeout(() => {
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to shop and Welcome to api!!');
-    done();
-  }, waitMs);
-});
-```
-shop: app.component.ts
-
-```typescript
-  this.httpClient
-    .get<Greetings>('http://localhost:3333/api/')
-    .subscribe((data: Greetings) => (this.title += ' and ' + data.message));
-  }
-```
-
-api: main.ts
-
-```typescript
-  app.enableCors();
+beforeEach(async(() => {
+  const httpClientMock = {
+    get: jest.fn()
+  };
+  httpClientMock.get.mockReturnValueOnce(of({ message: 'Welcome to api!' }));
+  TestBed.configureTestingModule({
+    imports: [RouterTestingModule, ViewsModule, HttpClientModule],
+    declarations: [AppComponent],
+    providers: [{ provide: HttpClient, useValue: httpClientMock }]
+  }).compileComponents();
+}));
+expect(app.title).toEqual('shop and Welcome to api!');
+expect(compiled.querySelector('h1').textContent).toContain('Welcome to shop and Welcome to api!!');
 ```
 
 ---
