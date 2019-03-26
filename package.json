@@ -18,6 +18,8 @@
     "test": "ng test",
     "lint": "./node_modules/.bin/nx lint && ng lint",
     "e2e": "ng e2e",
+    "e2e:shop": "ng e2e shop-e2e --watch ",
+    "e2e:warehouse": "ng e2e warehouse-e2e --watch",
     "affected:apps": "./node_modules/.bin/nx affected:apps",
     "affected:libs": "./node_modules/.bin/nx affected:libs",
     "affected:build": "./node_modules/.bin/nx affected:build",

@@ -12,7 +12,7 @@ class: impact
 
 # {{title}}
 
-## Nx workspace
+## Repositorios profesionales con Nx
 
 ---
 
@@ -191,9 +191,9 @@ ng serve api
 
 # 3 Aplicaciones
 
-## 3.1 Frontend webs
+## Frontend webs
 
-## 3.2 Backend Apis
+## Backend Apis
 
 ---
 
@@ -201,9 +201,9 @@ class: impact
 
 # 4 Librerías
 
-## 4.1 TypeScript
+## 4.1 Librerías en TypeScript
 
-## 4.2 Angular
+## 4.2 Librerías de Angular
 
 ---
 
@@ -248,9 +248,9 @@ export class AppModule {}
 
 # 4 Librerías
 
-## 4.1 TypeScript
+## Librerías en TypeScript
 
-## 4.2 Angular
+## Librerías de Angular
 
 
 ---
@@ -264,7 +264,7 @@ export class AppModule {}
 ## Cypress para test de integración
 
 
-> **Blog de apoyo:** [Nx workspace](https://academia-binaria.com/Nx-workspace/)
+> **Blog de apoyo:** [Repositorios profesionales con Nx](https://academia-binaria.com/Repositorios-profesionales-con-Nx/)
 
 > > By [Alberto Basalo](https://twitter.com/albertobasalo)
 
