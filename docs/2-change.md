@@ -44,6 +44,9 @@ ng generate @schematics/angular:component cart --project=shop --module=cart\cart
 ng generate @schematics/angular:component cartAlfa --project=shop --module=shared\shared.module.ts --export --inlineStyle
 ```
 
+> TODO: document process to create component and wire route...
+
+
 ---
 
 ## 1.2 OnPush
