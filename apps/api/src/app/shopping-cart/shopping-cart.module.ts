@@ -3,4 +3,4 @@ import { ShoppingCartController } from './shopping-cart.controller';
 import { ShoppingCartService } from './shopping-cart.service';
 
 @Module({ controllers: [ShoppingCartController], providers: [ShoppingCartService] })
-export class ProductsModule {}
+export class ShoppingCartModule {}

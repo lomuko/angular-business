@@ -1,52 +1,56 @@
-<form novalidate
-      (ngSubmit)="addToCart()">
-  <mat-card class="shoping-cart-card">
-    <mat-card-header>
-      <mat-card-title>Shoppping Cart Alfa</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="row">
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input name="product"
-                   placeholder="Product"
-                   [(ngModel)]="item.product"
-                   type="text"
-                   readonly
-                   matInput>
-          </mat-form-field>
-        </div>
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input name="quantity"
-                   placeholder="Quantity"
-                   [(ngModel)]="item.quantity"
-                   type="number"
-                   matInput>
-          </mat-form-field>
-        </div>
+<mat-card class="shoping-cart-card">
+  <mat-card-header>
+    <mat-card-title>Shoppping Cart Alfa</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form novalidate
+          class="row"
+          (ngSubmit)="addToCart()">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input name="product"
+                 placeholder="Product"
+                 [(ngModel)]="item.product.description"
+                 type="text"
+                 matInput>
+        </mat-form-field>
       </div>
-    </mat-card-content>
-    <mat-card-actions>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input name="quantity"
+                 placeholder="Quantity"
+                 [(ngModel)]="item.quantity"
+                 type="number"
+                 matInput>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <button mat-raised-button
+                color="primary"
+                type="submit">Add to cart</button>
+      </div>
+    </form>
+    <table>
+      <tr class="row">
+        <th class="col">Description</th>
+        <th class="col">Quantity</th>
+      </tr>
+      <tr *ngFor="let item of shoppingCart.items"
+          class="row">
+        <td class="col">{{ item.product.description }}</td>
+        <td class="col">{{ item.quantity }}</td>
+      </tr>
+    </table>
+  </mat-card-content>
+  <mat-card-footer>
+    <dl>
+      <dt class="col"><strong>Total Units in the cart</strong></dt>
+      <dd class="col">{{ totalUnits }}</dd>
+    </dl>
+    <mat-card-actions class="row">
       <button mat-raised-button
               color="primary"
-              type="submit">Add to cart</button>
+              type="button">Save</button>
     </mat-card-actions>
-    <mat-card-footer>
-      <table>
-        <tr>
-          <th>Product</th>
-          <th>Quantity</th>
-        </tr>
-        <tr *ngFor="let item of cart.items">
-          <td>{{ item.product }}</td>
-          <td>{{ item.quantity }}</td>
-        </tr>
-      </table>
-      <dl>
-        <dt><strong>Total Units</strong></dt>
-        <dd>{{ totalUnits }}</dd>
-      </dl>
-    </mat-card-footer>
-  </mat-card>
-</form>
+  </mat-card-footer>
+</mat-card>
