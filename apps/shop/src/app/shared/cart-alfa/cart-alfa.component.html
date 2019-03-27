@@ -37,11 +37,15 @@
       <tr class="row">
         <th class="col">Description</th>
         <th class="col">Quantity</th>
+        <th class="col">Remove</th>
       </tr>
       <tr *ngFor="let item of shoppingCart.items"
           class="row">
         <td class="col">{{ item.product.description }}</td>
         <td class="col">{{ item.quantity }}</td>
+        <td class="col"><button mat-raised-button
+                  color="primary"
+                  (click)="removeFromCart(item)">X</button></td>
       </tr>
     </table>
   </mat-card-content>

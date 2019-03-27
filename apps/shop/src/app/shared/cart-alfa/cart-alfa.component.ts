@@ -50,4 +50,8 @@ export class CartAlfaComponent implements OnInit {
     this.totalUnits += this.item.quantity;
     this.resetItem();
   }
+  public removeFromCart(item: ShoppingCartItem) {
+    this.shoppingCart.items = this.shoppingCart.items.filter(i => i.product._id === item.product._id);
+    this.totalUnits -= item.quantity;
+  }
 }
