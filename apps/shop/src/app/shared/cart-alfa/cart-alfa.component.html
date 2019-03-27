@@ -43,9 +43,11 @@
           class="row">
         <td class="col">{{ item.product.description }}</td>
         <td class="col">{{ item.quantity }}</td>
-        <td class="col"><button mat-raised-button
+        <td class="col">
+          <button mat-raised-button
                   color="primary"
-                  (click)="removeFromCart(item)">X</button></td>
+                  (click)="removeFromCart(item)">X</button>
+        </td>
       </tr>
     </table>
   </mat-card-content>
@@ -55,7 +57,8 @@
       <dd class="col">{{ totalUnits }}</dd>
     </dl>
     <mat-card-actions class="row">
-      <button mat-raised-button
+      <button (click)="saveShoppingCart.next(shoppingCart)"
+              mat-raised-button
               color="primary"
               type="button">Save</button>
     </mat-card-actions>

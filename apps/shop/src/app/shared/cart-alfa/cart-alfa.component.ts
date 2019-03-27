@@ -1,6 +1,6 @@
 import { Categories, Product, ShoppingCart, ShoppingCartItem } from '@angular-business/models';
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'angular-business-cart-alfa',
@@ -26,18 +26,24 @@ import { Component, Input, OnInit } from '@angular/core';
         margin-right: 0;
       }
     `
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class CartAlfaComponent implements OnInit {
+  @Input() public shoppingCart: ShoppingCart;
+  @Output() public saveShoppingCart: EventEmitter<ShoppingCart> = new EventEmitter<ShoppingCart>();
   public totalUnits = 0;
   public item: ShoppingCartItem;
-  @Input() public shoppingCart: ShoppingCart;
   public products: Product[];
+
   constructor(private httpClient: HttpClient) {}
 
   public ngOnInit() {
-    this.resetItem();
     this.httpClient.get<Product[]>('api/products').subscribe(products => (this.products = products));
+    this.resetItem();
+    this.totalUnits = this.shoppingCart.items
+      .map(item => item.quantity)
+      .reduce((accumalated, current) => accumalated + current);
   }
   private resetProduct() {
     return { _id: '', description: '', category: Categories.Computer, brand: '', price: 0, stock: 0 };
@@ -51,7 +57,7 @@ export class CartAlfaComponent implements OnInit {
     this.resetItem();
   }
   public removeFromCart(item: ShoppingCartItem) {
-    this.shoppingCart.items = this.shoppingCart.items.filter(i => i.product._id === item.product._id);
+    this.shoppingCart.items = this.shoppingCart.items.filter(i => i.product._id !== item.product._id);
     this.totalUnits -= item.quantity;
   }
 }
