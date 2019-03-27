@@ -5,7 +5,10 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-const routes: Routes = [{ path: '', loadChildren: './home/home.module#HomeModule' }];
+const routes: Routes = [
+  { path: '', loadChildren: './home/home.module#HomeModule' },
+  { path: 'cart', loadChildren: './cart/cart.module#CartModule' }
+];
 
 @NgModule({
   declarations: [AppComponent],
