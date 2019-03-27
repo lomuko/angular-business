@@ -1,56 +1,57 @@
-import { Component } from '@angular/core';
+import { Card, Product } from '@angular-business/models';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'angular-business-home',
   templateUrl: './home.component.html',
-  styles: [`
-    .grid-container {
-      margin: 20px;
-    }
-    
-    .dashboard-card {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      right: 15px;
-      bottom: 15px;
-    }
-    
-    .more-button {
-      position: absolute;
-      top: 5px;
-      right: 10px;
-    }
-    
-    .dashboard-card-content {
-      text-align: center;
-    }
-    
-  `]
-})
-export class HomeComponent {
-  /** Based on the screen size, switch from standard to one column per row */
-  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return [
-          { title: 'Card 1', cols: 1, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 }
-        ];
+  styles: [
+    `
+      .grid-container {
+        margin: 20px;
       }
 
-      return [
-        { title: 'Card 1', cols: 2, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 1, rows: 2 },
-        { title: 'Card 4', cols: 1, rows: 1 }
-      ];
-    })
-  );
+      .dashboard-card {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        right: 15px;
+        bottom: 15px;
+      }
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+      .more-button {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+      }
+
+      .dashboard-card-content {
+        text-align: center;
+      }
+    `
+  ]
+})
+export class HomeComponent implements OnInit {
+  public cards: Observable<Card[]>;
+
+  constructor(private httpClient: HttpClient) {}
+
+  public ngOnInit() {
+    this.cards = this.httpClient.get<Product[]>('api/products').pipe(
+      map(products => {
+        return products.map(product => {
+          return {
+            title: product.description,
+            subtitle: `${product.brand} - ${product.category}`,
+            content: `Current stock : ${product.stock} - Current price : ${product.price}`,
+            actions: [`Add more stock`],
+            cols: 1,
+            rows: 1
+          };
+        });
+      })
+    );
+  }
 }
