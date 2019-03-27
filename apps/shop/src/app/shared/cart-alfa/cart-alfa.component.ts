@@ -1,5 +1,5 @@
+import { Categories, ShoppingCart, ShoppingCartItem } from '@angular-business/models';
 import { Component, Input, OnInit } from '@angular/core';
-import { Categories, ShoppingCart, ShoppingCartItem } from '../../../../../../libs/models/src';
 
 @Component({
   selector: 'angular-business-cart-alfa',

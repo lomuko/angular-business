@@ -1,6 +1,6 @@
+import { ShoppingCart } from '@angular-business/models';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ShoppingCart } from '../../../../../libs/models/src';
 
 @Component({
   selector: 'angular-business-cart',
