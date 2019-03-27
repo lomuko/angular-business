@@ -1,6 +1,6 @@
 <form novalidate
       (ngSubmit)="addToCart()">
-  <mat-card class="shipping-card">
+  <mat-card class="shoping-cart-card">
     <mat-card-header>
       <mat-card-title>Shoppping Cart Alfa</mat-card-title>
     </mat-card-header>
@@ -12,6 +12,7 @@
                    placeholder="Product"
                    [(ngModel)]="item.product"
                    type="text"
+                   readonly
                    matInput>
           </mat-form-field>
         </div>

@@ -3,7 +3,28 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'angular-business-cart-alfa',
   templateUrl: './cart-alfa.component.html',
-  styles: []
+  styles: [
+    `
+      .full-width {
+        width: 100%;
+      }
+      .shoping-cart-card {
+        min-width: 120px;
+        margin: 20px auto;
+      }
+      .row {
+        display: flex;
+        flex-direction: row;
+      }
+      .col {
+        flex: 1;
+        margin-right: 20px;
+      }
+      .col:last-child {
+        margin-right: 0;
+      }
+    `
+  ]
 })
 export class CartAlfaComponent implements OnInit {
   public totalUnits = 0;
