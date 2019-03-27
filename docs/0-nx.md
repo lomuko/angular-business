@@ -242,6 +242,7 @@ export class AppModule {}
 ```html
 <angular-business-product></angular-business-product>
 ```
+---
 
 ---
 > Recap:

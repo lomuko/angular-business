@@ -27,6 +27,7 @@
               "apps/shop/src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "apps/shop/src/styles.css"
             ],
             "scripts": [],
@@ -152,6 +153,7 @@
               "apps/warehouse/src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "apps/warehouse/src/styles.css"
             ],
             "scripts": [],
