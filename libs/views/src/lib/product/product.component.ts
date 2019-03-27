@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Card } from '@angular-business/models';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'angular-business-product',
@@ -6,10 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class ProductComponent implements OnInit {
+  @Input() public card: Card;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
