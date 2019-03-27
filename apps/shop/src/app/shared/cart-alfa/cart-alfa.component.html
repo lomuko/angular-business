@@ -8,11 +8,14 @@
           (ngSubmit)="addToCart()">
       <div class="col">
         <mat-form-field class="full-width">
-          <input name="product"
-                 placeholder="Product"
-                 [(ngModel)]="item.product.description"
-                 type="text"
-                 matInput>
+          <mat-select name="product"
+                      placeholder="Product"
+                      [(ngModel)]="item.product">
+            <mat-option *ngFor="let product of products"
+                        [value]="product">
+              {{ product.description }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
       <div class="col">

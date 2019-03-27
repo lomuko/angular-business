@@ -1,4 +1,5 @@
-import { Categories, ShoppingCart, ShoppingCartItem } from '@angular-business/models';
+import { Categories, Product, ShoppingCart, ShoppingCartItem } from '@angular-business/models';
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -31,11 +32,12 @@ export class CartAlfaComponent implements OnInit {
   public totalUnits = 0;
   public item: ShoppingCartItem;
   @Input() public shoppingCart: ShoppingCart;
-
-  constructor() {}
+  public products: Product[];
+  constructor(private httpClient: HttpClient) {}
 
   public ngOnInit() {
     this.resetItem();
+    this.httpClient.get<Product[]>('api/products').subscribe(products => (this.products = products));
   }
   private resetProduct() {
     return { _id: '', description: '', category: Categories.Computer, brand: '', price: 0, stock: 0 };
