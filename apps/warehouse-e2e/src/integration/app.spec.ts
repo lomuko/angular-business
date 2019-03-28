@@ -1,4 +1,4 @@
-import { getGreeting, getProduct } from '../support/app.po';
+import { getGreeting, getProductListHeader } from '../support/app.po';
 
 describe('Hello Nx', () => {
   beforeEach(() => cy.visit('/'));
@@ -7,7 +7,7 @@ describe('Hello Nx', () => {
     getGreeting().contains('Welcome to warehouse and Welcome to api!!');
   });
 
-  it('should contains a product working component', () => {
-    getProduct().contains('product works!');
+  it('should contains a product list working component', () => {
+    getProductListHeader().contains('Product List');
   });
 });
