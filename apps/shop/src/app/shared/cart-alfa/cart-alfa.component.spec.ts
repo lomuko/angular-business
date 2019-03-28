@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ShoppingCartItemsListComponent } from '../shopping-cart-items-list/shopping-cart-items-list.component';
+import { ShoppingCartTotalUnitsComponent } from '../shopping-cart-total-units/shopping-cart-total-units.component';
 import { CartAlfaComponent } from './cart-alfa.component';
 
 describe('CartAlfaComponent', () => {
@@ -17,7 +19,7 @@ describe('CartAlfaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CartAlfaComponent],
+      declarations: [CartAlfaComponent, ShoppingCartItemsListComponent, ShoppingCartTotalUnitsComponent],
       imports: [CommonModule, FormsModule, ViewsModule, NoopAnimationsModule],
       providers: [{ provide: HttpClient, useValue: httpClientMock }]
     }).compileComponents();

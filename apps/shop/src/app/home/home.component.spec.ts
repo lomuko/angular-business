@@ -1,4 +1,4 @@
-import { Categories } from '@angular-business/models';
+import { productsMock } from '@angular-business/models';
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClient } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
@@ -17,16 +17,7 @@ describe('HomeComponent', () => {
       get: jest.fn()
     };
     httpClientMock.get.mockReturnValueOnce(
-      of([
-        {
-          _id: 'A-1',
-          description: 'iMac',
-          category: Categories.Computer,
-          brand: 'Apple',
-          price: 3000,
-          stock: 10
-        }
-      ])
+      of(productsMock)
     );
     TestBed.configureTestingModule({
       declarations: [HomeComponent],
