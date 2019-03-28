@@ -1,4 +1,4 @@
-import { Categories } from '@angular-business/models';
+import { productsMock, shoppingCartMock } from '@angular-business/models';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
@@ -14,46 +14,9 @@ describe('CartComponent', () => {
     getProducts: jest.fn(),
     postShoppingCart: jest.fn()
   };
-  cartServiceMock.getShoppingCart.mockReturnValueOnce(
-    of({
-      _id: 'aRandomIdentificator',
-      items: [
-        {
-          product: {
-            _id: 'A-1',
-            description: 'iMac',
-            category: Categories.Computer,
-            brand: 'Apple',
-            price: 3000,
-            stock: 10
-          },
-          quantity: 1
-        }
-      ],
-      client: '',
-      status: `created at ${new Date().toISOString()}`
-    })
-  );
-  cartServiceMock.getProducts.mockReturnValueOnce(
-    of([
-      {
-        _id: 'A-1',
-        description: 'iMac',
-        category: Categories.Computer,
-        brand: 'Apple',
-        price: 3000,
-        stock: 10
-      }
-    ])
-  );
-  cartServiceMock.postShoppingCart.mockReturnValueOnce(
-    of({
-      _id: 'aRandomIdentificator',
-      items: [],
-      client: '',
-      status: `saved at ${new Date().toISOString()}`
-    })
-  );
+  cartServiceMock.getShoppingCart.mockReturnValueOnce(of(shoppingCartMock));
+  cartServiceMock.getProducts.mockReturnValueOnce(of(productsMock));
+  cartServiceMock.postShoppingCart.mockReturnValueOnce(of(shoppingCartMock));
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [CartComponent],
