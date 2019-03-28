@@ -33,29 +33,13 @@
                 type="submit">Add to cart</button>
       </div>
     </form>
-    <table>
-      <tr class="row">
-        <th class="col">Description</th>
-        <th class="col">Quantity</th>
-        <th class="col">Remove</th>
-      </tr>
-      <tr *ngFor="let item of shoppingCart.items"
-          class="row">
-        <td class="col">{{ item.product.description }}</td>
-        <td class="col">{{ item.quantity }}</td>
-        <td class="col">
-          <button mat-raised-button
-                  color="primary"
-                  (click)="removeFromCart(item)">X</button>
-        </td>
-      </tr>
-    </table>
+    <angular-business-shopping-cart-items-list [shoppingCartItems]="shoppingCart.items"
+                                               (remove)="removeFromCart($event)">
+    </angular-business-shopping-cart-items-list>
   </mat-card-content>
   <mat-card-footer>
-    <dl>
-      <dt class="col"><strong>Total Units in the cart</strong></dt>
-      <dd class="col">{{ totalUnits }}</dd>
-    </dl>
+    <angular-business-shopping-cart-total-units [totalUnits]="totalUnits">
+    </angular-business-shopping-cart-total-units>
     <mat-card-actions class="row">
       <button (click)="saveShoppingCart.next(shoppingCart)"
               mat-raised-button

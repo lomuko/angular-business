@@ -1,8 +1,15 @@
 <h1>
   Shopping Cart
 </h1>
-<angular-business-cart-alfa *ngIf="shoppingCart && products"
+<!-- <angular-business-cart-alfa *ngIf="shoppingCart && products"
                             [shoppingCart]="shoppingCart"
                             [products]="products"
                             (saveShoppingCart)="postShoppingCart($event)">
-</angular-business-cart-alfa>
+</angular-business-cart-alfa> -->
+<div *ngIf="(shoppingCart$ | async) as shoppingCart">
+  <angular-business-cart-alfa *ngIf="products$ | async as products"
+                              [shoppingCart]="shoppingCart"
+                              [products]="products"
+                              (saveShoppingCart)="postShoppingCart($event)">
+  </angular-business-cart-alfa>
+</div>

@@ -41,10 +41,14 @@ ng generate @schematics/angular:component cart --project=shop --module=cart\cart
 ## 1.1 Default
 
 ```terminal
-ng generate @schematics/angular:component cartAlfa --project=shop --module=shared\shared.module.ts --export --inlineStyle
+ng g @schematics/angular:component cartAlfa --project=shop --module=shared/shared.module.ts --export --inlineStyle
+ng g @schematics/angular:component shoppingCartItemsList --project=shop --module=shared/shared.module.ts --inlineStyle
+ng g @schematics/angular:component shoppingCartTotalUnits --project=shop --module=shared/shared.module.ts --inlineStyle
 ```
 
 > TODO: document process to create component and wire route...
+three scenarios ok
+rename art-alfa to shoppingcart
 ng generate @schematics/angular:service cart --project=shop
 
 ---
@@ -197,4 +201,3 @@ expect(compiled.querySelector('h1').textContent).toContain('Welcome to shop and 
 > **Blog de apoyo:** [Test de integración y unitarios](https://academia-binaria.com/test-de-integracion-y-unitarios/)
 
 > > By [Alberto Basalo](https://twitter.com/albertobasalo)
-
