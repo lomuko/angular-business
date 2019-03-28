@@ -1,14 +1,9 @@
 import { LayoutModule } from '@angular/cdk/layout';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatButtonModule, MatIconModule, MatListModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  MatButtonModule,
-  MatIconModule,
-  MatListModule,
-  MatSidenavModule,
-  MatToolbarModule,
-} from '@angular/material';
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { ROUTES } from '../../app.routes';
 import { ShellComponent } from './shell.component';
 
 describe('ShellComponent', () => {
@@ -26,6 +21,7 @@ describe('ShellComponent', () => {
         MatListModule,
         MatSidenavModule,
         MatToolbarModule,
+        RouterTestingModule.withRoutes(ROUTES)
       ]
     }).compileComponents();
   }));
