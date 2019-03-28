@@ -1,6 +1,6 @@
-import { ShoppingCart } from '@angular-business/models';
-import { HttpClient } from '@angular/common/http';
+import { Product, ShoppingCart } from '@angular-business/models';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'angular-business-cart',
@@ -10,16 +10,15 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
   public shoppingCart: ShoppingCart;
+  public products: Product[];
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private cartService: CartService) {}
 
   ngOnInit() {
-    this.httpClient.get<ShoppingCart>('api/shopping-cart').subscribe(shoppingCart => (this.shoppingCart = shoppingCart));
+    this.cartService.getShoppingCart().subscribe(shoppingCart => (this.shoppingCart = shoppingCart));
+    this.cartService.getProducts().subscribe(products => (this.products = products));
   }
-
   public postShoppingCart(shoppingCart: ShoppingCart) {
-    this.httpClient
-      .post<ShoppingCart>('api/shopping-cart', shoppingCart)
-      .subscribe(shoppingCartSaved => (this.shoppingCart = shoppingCartSaved));
+    this.cartService.postShoppingCart(shoppingCart).subscribe(shoppingCartSaved => (this.shoppingCart = shoppingCartSaved));
   }
 }

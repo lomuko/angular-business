@@ -1,5 +1,4 @@
 import { Categories, Product, ShoppingCart, ShoppingCartItem } from '@angular-business/models';
-import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
@@ -31,15 +30,14 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 })
 export class CartAlfaComponent implements OnInit {
   @Input() public shoppingCart: ShoppingCart;
+  @Input() public products: Product[];
   @Output() public saveShoppingCart: EventEmitter<ShoppingCart> = new EventEmitter<ShoppingCart>();
   public totalUnits = 0;
   public item: ShoppingCartItem;
-  public products: Product[];
 
-  constructor(private httpClient: HttpClient) {}
+  constructor() {}
 
   public ngOnInit() {
-    this.httpClient.get<Product[]>('api/products').subscribe(products => (this.products = products));
     this.resetItem();
     this.totalUnits = this.shoppingCart.items
       .map(item => item.quantity)

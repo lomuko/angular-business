@@ -45,7 +45,7 @@ ng generate @schematics/angular:component cartAlfa --project=shop --module=share
 ```
 
 > TODO: document process to create component and wire route...
-
+ng generate @schematics/angular:service cart --project=shop
 
 ---
 
