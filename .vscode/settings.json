@@ -1,4 +1,17 @@
 {
   "spellright.language": ["en", "es"],
-  "spellright.documentTypes": ["markdown", "latex", "plaintext"]
+  "spellright.documentTypes": [
+    "markdown",
+    "latex",
+    "plaintext"
+  ],
+  "workbench.colorCustomizations": {
+    "editorError.foreground": "#ff9900",
+    "editorWarning.foreground": "#BBCBC2",
+    "editorInfo.foreground": "#9ea39e",
+    "titleBar.activeBackground": "#25ad96",
+    "titleBar.inactiveBackground": "#25ad9699",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveForeground": "#15202b99"
+  }
 }
