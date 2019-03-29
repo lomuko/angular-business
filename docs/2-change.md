@@ -48,7 +48,7 @@ ng g @schematics/angular:component shoppingCartTotalUnits --project=shop --modul
 
 > TODO: document process to create component and wire route...
 three scenarios ok
-rename art-alfa to shoppingcart
+rename cart-alfa to shoppingCart
 ng generate @schematics/angular:service cart --project=shop
 
 ---
