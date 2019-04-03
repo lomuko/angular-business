@@ -1,10 +1,14 @@
 import { productsMock, shoppingCartMock } from '@angular-business/models';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { CartService } from '../cart.service';
 import { SharedModule } from '../shared/shared.module';
+import { ItemPickerComponent } from './item-picker/item-picker.component';
+import { ItemsListComponent } from './items-list/items-list.component';
 import { ShoppingCartComponent } from './shopping-cart.component';
+import { TotalUnitsComponent } from './total-units/total-units.component';
 
 describe('ShoppingCartComponent', () => {
   let component: ShoppingCartComponent;
@@ -20,8 +24,8 @@ describe('ShoppingCartComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ShoppingCartComponent],
-      imports: [SharedModule, NoopAnimationsModule],
+      declarations: [ShoppingCartComponent, ItemPickerComponent, ItemsListComponent, TotalUnitsComponent],
+      imports: [FormsModule, NoopAnimationsModule, SharedModule],
       providers: [{ provide: CartService, useValue: cartServiceMock }]
     }).compileComponents();
   }));
@@ -36,20 +40,3 @@ describe('ShoppingCartComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-/*
-beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [CartAlfaComponent, ShoppingCartItemsListComponent, ShoppingCartTotalUnitsComponent],
-      imports: [CommonModule, FormsModule, ViewsModule, NoopAnimationsModule],
-      providers: [{ provide: HttpClient, useValue: httpClientMock }]
-    }).compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(CartAlfaComponent);
-    component = fixture.componentInstance;
-    component.shoppingCart = shoppingCartMock;
-    component.products = productsMock;
-    fixture.detectChanges();
-  });
-*/
