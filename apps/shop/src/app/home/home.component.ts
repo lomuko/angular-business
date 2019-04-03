@@ -7,31 +7,7 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'angular-business-home',
   templateUrl: './home.component.html',
-  styles: [
-    `
-      .grid-container {
-        margin: 20px;
-      }
-
-      .dashboard-card {
-        position: absolute;
-        top: 15px;
-        left: 15px;
-        right: 15px;
-        bottom: 15px;
-      }
-
-      .more-button {
-        position: absolute;
-        top: 5px;
-        right: 10px;
-      }
-
-      .dashboard-card-content {
-        text-align: center;
-      }
-    `
-  ]
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   public cards: Observable<Card[]>;
@@ -45,8 +21,6 @@ export class HomeComponent implements OnInit {
           return {
             title: product.description,
             subtitle: `${product.brand} - ${product.category}`,
-            content: '',
-            actions: [`Buy now for only ${product.price} €`],
             cols: 1,
             rows: 1
           };

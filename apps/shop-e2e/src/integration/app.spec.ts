@@ -1,6 +1,7 @@
-import { getGreeting, getProductListHeader } from '../support/app.po';
+import { getGreeting, getListHeader, getProductCard } from '../support/app.po';
 
-describe('Hello Nx', () => {
+describe('Shop Home', () => {
+  const numProducts = 6;
   beforeEach(() => cy.visit('/'));
 
   it('should display welcome message from shop and api', () => {
@@ -8,6 +9,12 @@ describe('Hello Nx', () => {
   });
 
   it('should contains a product list working component', () => {
-    getProductListHeader().contains('Product List');
+    getListHeader().contains('Product List');
+  });
+
+  it(`should contains at least ${numProducts} product cards`, () => {
+    getProductCard()
+      .its('length')
+      .should('be.at.least', numProducts);
   });
 });

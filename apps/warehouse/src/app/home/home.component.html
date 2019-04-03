@@ -1,11 +1,13 @@
 <div class="grid-container">
-  <h1 class="mat-h1">Product List</h1>
+  <h1 class="mat-h1"
+      data-cy="list-header">Product List</h1>
   <mat-grid-list cols="2"
                  rowHeight="200px">
     <mat-grid-tile *ngFor="let card of cards | async"
                    [colspan]="card.cols"
                    [rowspan]="card.rows">
-      <angular-business-product [card]="card">
+      <angular-business-product [card]="card"
+                                data-cy="product-card">
       </angular-business-product>
     </mat-grid-tile>
   </mat-grid-list>
