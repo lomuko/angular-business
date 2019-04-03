@@ -9,5 +9,9 @@
     "titleBar.inactiveBackground": "#25ad9699",
     "titleBar.activeForeground": "#15202b",
     "titleBar.inactiveForeground": "#15202b99"
+  },
+  "material-icon-theme.folders.associations": {
+    "warehouse-e2e": "test",
+    "sample": "test"
   }
 }
