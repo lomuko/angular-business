@@ -34,7 +34,7 @@ class: impact
 ---
 
 ```terminal
-ng generate @schematics/angular:module cart --project=shop --routing
+ng generate @schematics/angular:module shopping-cart --project=shop --routing
 ng generate @schematics/angular:component cart --project=shop --module=cart\cart.module.ts
 ```
 

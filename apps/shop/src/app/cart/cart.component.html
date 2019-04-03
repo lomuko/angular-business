@@ -6,10 +6,13 @@
                             [products]="products"
                             (saveShoppingCart)="postShoppingCart($event)">
 </angular-business-cart-alfa> -->
-<div *ngIf="(shoppingCart$ | async) as shoppingCart">
+<span *ngIf="(shoppingCart$ |
+                           async)
+                           as
+                           shoppingCart">
   <angular-business-cart-alfa *ngIf="products$ | async as products"
                               [shoppingCart]="shoppingCart"
                               [products]="products"
                               (saveShoppingCart)="postShoppingCart($event)">
   </angular-business-cart-alfa>
-</div>
+</span>
