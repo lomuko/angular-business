@@ -41,9 +41,9 @@ ng g c shopping-cart --project=shop --module=shopping-cart\shopping-cart.module.
 ## 1.1 Default
 
 ```terminal
-ng g @schematics/angular:component cartAlfa --project=shop --module=shared/shared.module.ts --export --inlineStyle
-ng g @schematics/angular:component shoppingCartItemsList --project=shop --module=shared/shared.module.ts --inlineStyle
-ng g @schematics/angular:component shoppingCartTotalUnits --project=shop --module=shared/shared.module.ts --inlineStyle
+ng g c shopping-cart\itemPicker --project=shop --module=shopping-cart\shopping-cart.module.ts
+ng g c shopping-cart\itemsList --project=shop --module=shopping-cart\shopping-cart.module.ts
+ng g c shopping-cart\total-units --project=shop --module=shopping-cart\shopping-cart.module.ts
 ```
 
 > TODO: document process to create component and wire route...
