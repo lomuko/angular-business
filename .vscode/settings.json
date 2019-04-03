@@ -5,10 +5,10 @@
     "editorError.foreground": "#ff9900",
     "editorWarning.foreground": "#BBCBC2",
     "editorInfo.foreground": "#9ea39e",
-    "titleBar.activeBackground": "#25ad96",
-    "titleBar.inactiveBackground": "#25ad9699",
-    "titleBar.activeForeground": "#15202b",
-    "titleBar.inactiveForeground": "#15202b99"
+    "titleBar.activeBackground": "#215732",
+    "titleBar.inactiveBackground": "#21573299",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveForeground": "#e7e7e799"
   },
   "material-icon-theme.folders.associations": {
     "warehouse-e2e": "test",
