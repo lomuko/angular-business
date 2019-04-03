@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'angular-business-total-units',
@@ -6,10 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class TotalUnitsComponent implements OnInit {
+  @Input() totalUnits = 0;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

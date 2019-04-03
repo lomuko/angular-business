@@ -1,3 +1,30 @@
-<p>
-  item-picker works!
-</p>
+<form novalidate
+      class="row"
+      (ngSubmit)="addToCart()">
+  <div class="col">
+    <mat-form-field class="full-width">
+      <mat-select name="product"
+                  placeholder="Product"
+                  [(ngModel)]="item.product">
+        <mat-option *ngFor="let product of products"
+                    [value]="product">
+          {{ product.description }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col">
+    <mat-form-field class="full-width">
+      <input name="quantity"
+             placeholder="Quantity"
+             [(ngModel)]="item.quantity"
+             type="number"
+             matInput>
+    </mat-form-field>
+  </div>
+  <div class="col">
+    <button mat-raised-button
+            color="primary"
+            type="submit">Add to cart</button>
+  </div>
+</form>
