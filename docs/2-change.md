@@ -38,86 +38,149 @@ ng g m shopping-cart --project=shop --routing
 ng g c shopping-cart --project=shop --module=shopping-cart\shopping-cart.module.ts
 ```
 
-## 1.1 Default
-
 ```terminal
 ng g c shopping-cart\itemPicker --project=shop --module=shopping-cart\shopping-cart.module.ts
 ng g c shopping-cart\itemsList --project=shop --module=shopping-cart\shopping-cart.module.ts
 ng g c shopping-cart\total-units --project=shop --module=shopping-cart\shopping-cart.module.ts
 ```
 
-> TODO: document process to create component and wire route...
-three scenarios ok
-rename cart-alfa to shoppingCart
-ng generate @schematics/angular:service cart --project=shop
+## 1.1 Default
+
+Con las estrategias por defecto
+
+> Las cosas funcionan como se espera.
+
+Se actualiza la vista con:
+
+1 - Datos asíncronos recibidos desde el API
+2 - Procesos en Background
+3 - Interacción del usuario
 
 ---
 
 ## 1.2 OnPush
 
+Al usar la detección OnPush en el contenedor:
+
+> Las datos muestran incoherencias o no se muestran
+
+Se actualiza la vista con:
+
+1 - Los recepción de datos no se muestra en pantalla
+2 - El proceso en Background ya no desencadena la orden de pintado
+3 - La interacción del usuario sí que obliga al repintado, pero no muestra la hora de actualización
 
 ---
 
 > Recap:
 
-# 1 Nx y el CLI
+# 1 Estrategias de detección del cambio
 
-## Integración o e2e
+## Default
 
-## Unitarios
+## OnPush
 
 ---
 
 class: impact
 
-# 2 Test de Integración con Cypress
+# 2 Técnicas OnPush
 
-## Cypress
+## DetectChanges
 
-## Test e2e
-
----
-
-## 2.1 Cypress
-
-```terminal
-yarn add cypress --dev
-```
-
-```json
-  "e2e:shop": "ng e2e shop-e2e --watch",
-  "e2e:warehouse": "ng e2e warehouse-e2e --watch",
-```
-
-```terminal
-yarn e2e:shop
-yarn e2e:warehouse
-```
+## Async
 
 ---
 
-## 2.2 Test e2e
+## 2.1 DetectChanges
+
+Forzar la detección de cambios
 
 ```typescript
-export const getGreeting = () => cy.get('h1');
-export const getProduct = () => cy.get('angular-business-product p');
+import { ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+
+private useCDR = true;
+
+constructor(private cdr: ChangeDetectorRef) {}
+
+if (this.useCDR) {
+  this.cdr.detectChanges();
+}
+
+```
+
+> Las datos se muestran correctamente y a su debido tiempo
+
+Se actualiza la vista con:
+
+1 - La recepción de datos muestra todo ok, a base de hacerlo en cada callback
+2 - El proceso en Background también fuerza el repintado
+3 - La interacción continúa funcionando bien, y refrescando tras el guardado
+
+---
+
+## 2.2 Async
+
+```html
+<mat-card *ngIf="subscribing">
+<mat-card-content *ngIf="(shoppingCart$ | async ) as shoppingCart">
 ```
 
 ```typescript
-import { getGreeting, getProduct } from '../support/app.po';
+public subscribing = false;
+private useCDR = false;
 
-describe('Hello Nx', () => {
-  beforeEach(() => cy.visit('/'));
+tap()
 
-  it('should display welcome message from shop and api', () => {
-    getGreeting().contains('Welcome to shop and Welcome to api!!');
-  });
-
-  it('should contains a product working component', () => {
-    getProduct().contains('product works!');
-  });
-});
 ```
+
+> Las datos siguen mostrando incoherencias o no se muestran
+
+Se actualiza la vista con:
+
+1 - Los recepción de datos muestra todo ok pues el async llama por su cuenta al cdr
+2 - El proceso en Background ahora ya no refresca, sigue necesitando el async
+3 - La interacción continúa de guardado funcionando bien y refrescando tras el guardado, pero la manipulación de la lista ya no
+
+
+---
+
+## 2.3 Clone
+
+> Esta parte no funciona del todo.....
+
+```typescript
+public addToCart(item: ShoppingCartItem) {
+  if (this.cloningList) {
+    this.shoppingCart.items = [...this.shoppingCart.items, { ...item }];
+  } else {
+    this.shoppingCart.items.push({ ...item });
+  }
+  this.calculateTotalUnits(this.shoppingCart);
+  console.log(`Adding item. Now we have ${this.totalUnits} units`);
+}
+
+public removeFromCart(item: ShoppingCartItem) {
+  if (this.cloningList) {
+    this.shoppingCart.items = this.shoppingCart.items.filter(i => i.product._id !== item.product._id);
+  } else {
+    this.shoppingCart.items.forEach((i, index) => {
+      if (i.product._id === item.product._id) this.shoppingCart.items.splice(index, 1);
+    });
+  }
+  this.calculateTotalUnits(this.shoppingCart);
+  console.log(`Remove item with product._id: ${item.product._id}. Now we have ${this.totalUnits} units`);
+}
+
+```
+> Las datos siguen mostrando incoherencias o no se muestran
+
+Se actualiza la vista con:
+
+1 - Los recepción de datos muestra todo ok pues el async llama por su cuenta al cdr
+2 - El proceso en Background ahora ya no refresca, sigue necesitando el async
+3 - La interacción continúa de guardado funcionando bien y refrescando tras el guardado, pero la manipulación de la lista ya no
+
 
 ---
 
