@@ -17,8 +17,8 @@ export class ShoppingCartComponent implements OnInit {
   public totalUnits = 0;
   public changeConfig = {
     simulateBackground: true,
-    useAsync: false,
-    useCDR: true,
+    useAsync: true,
+    useCDR: false,
     cloningList: false
   };
 
@@ -58,8 +58,8 @@ export class ShoppingCartComponent implements OnInit {
     this.products$ = this.cartService.getProducts().pipe(tap(products => (this.products = products)));
   }
   private onDataReceived(shoppingCart: ShoppingCart) {
-    this.calculateTotalUnits(shoppingCart);
     console.log(`Received a cart ${JSON.stringify(this.shoppingCart)} `);
+    this.calculateTotalUnits(shoppingCart);
     if (this.changeConfig.useCDR) {
       this.cdr.detectChanges();
     }
@@ -70,7 +70,7 @@ export class ShoppingCartComponent implements OnInit {
     } else {
       this.totalUnits = 0;
     }
-    console.log(`Now we have ${this.totalUnits} units`);
+    console.log(`Cart has ${this.totalUnits} units`);
   }
 
   public addToCart(item: ShoppingCartItem) {
@@ -104,6 +104,8 @@ export class ShoppingCartComponent implements OnInit {
         if (this.changeConfig.useCDR) {
           this.cdr.detectChanges();
         }
+      } else {
+        console.log(`Auto removing without items `);
       }
     }, timeout);
   }

@@ -162,7 +162,8 @@ tap()
 Se actualiza la vista con:
 
 1 - Los recepción de datos muestra todo ok pues el async llama por su cuenta al cdr
-2 - El proceso en Background ahora ya no refresca, sigue necesitando el async
+2.1 - El proceso en Background del picker vuelve a dejar de funcionar, por qué???
+2.2 - El proceso padre se lanza pero, de nuevo no repinta...
 3 - La interacción continúa de guardado funcionando bien y refrescando tras el guardado, pero la manipulación de la lista ya no
 
 

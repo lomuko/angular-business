@@ -30,6 +30,7 @@
   </mat-card-header>
   <mat-card-content *ngIf="(shoppingCart$ | async ) as shoppingCart">
     <angular-business-item-picker *ngIf="(products$ | async ) as products"
+                                  [simulateBackground]="changeConfig.simulateBackground"
                                   [products]="products"
                                   (itemPicked)="addToCart($event)"></angular-business-item-picker>
     <angular-business-items-list [shoppingCartItems]="shoppingCart.items"
