@@ -5,12 +5,14 @@
     <th class="col">Remove</th>
   </tr>
   <tr *ngFor="let item of shoppingCartItems"
+      data-cy="list-item"
       class="row">
     <td class="col">{{ item.product.description }}</td>
     <td class="col">{{ item.quantity }}</td>
     <td class="col">
       <button mat-raised-button
               color="primary"
+              data-cy="remove-item-button"
               (click)="remove.next(item)">X</button>
     </td>
   </tr>

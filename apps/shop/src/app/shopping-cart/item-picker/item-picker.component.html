@@ -5,6 +5,7 @@
     <mat-form-field class="full-width">
       <mat-select name="product"
                   placeholder="Product"
+                  data-cy="product-selector"
                   [(ngModel)]="item.product">
         <mat-option *ngFor="let product of products"
                     [value]="product">
@@ -18,6 +19,7 @@
       <input name="quantity"
              placeholder="Quantity"
              [(ngModel)]="item.quantity"
+             data-cy="quantity-input"
              type="number"
              matInput>
     </mat-form-field>
@@ -25,6 +27,7 @@
   <div class="col">
     <button mat-raised-button
             color="primary"
+            data-cy="add-button"
             type="submit">Add to cart</button>
   </div>
 </form>
