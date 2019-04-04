@@ -133,8 +133,9 @@ if (this.changeConfig.useCDR) {
 Se actualiza la vista con:
 
 1 - La recepción de datos muestra todo ok, a base de hacerlo en cada callback
-2 - El proceso en Background también fuerza el repintado
-3 - La interacción continúa funcionando bien, y refrescando tras el guardado
+2.1 - El proceso en Background del picker fuerza el repintado por tratarse de un evento Output
+2.1 - El proceso en Background del container fuerza el repintado mediante el cdr
+3 - La interacción continúa funcionando bien, por ser un evento, y ahora además refrescando tras el guardado.
 
 ---
 
@@ -146,9 +147,12 @@ Se actualiza la vista con:
 ```
 
 ```typescript
-public subscribing = false;
-private useCDR = false;
-
+public changeConfig = {
+  simulateBackground: true,
+  useAsync: true,
+  useCDR: false,
+  cloningList: false
+};
 tap()
 
 ```

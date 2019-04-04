@@ -18,7 +18,7 @@ export class ShoppingCartComponent implements OnInit {
   public changeConfig = {
     simulateBackground: true,
     useAsync: false,
-    useCDR: false,
+    useCDR: true,
     cloningList: false
   };
 
@@ -101,9 +101,9 @@ export class ShoppingCartComponent implements OnInit {
         const item = this.shoppingCart.items[0];
         console.log(`Auto removing item ${JSON.stringify(item)} `);
         this.removeFromCart(item);
-        // if (this.useCDR) {
-        //   this.cdr.detectChanges();
-        // }
+        if (this.changeConfig.useCDR) {
+          this.cdr.detectChanges();
+        }
       }
     }, timeout);
   }
