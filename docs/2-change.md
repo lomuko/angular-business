@@ -46,6 +46,11 @@ ng g c shopping-cart\total-units --project=shop --module=shopping-cart\shopping-
 
 ## 1.1 Default
 
+```typescript
+import { ChangeDetectionStrategy } from '@angular/core';
+changeDetection: ChangeDetectionStrategy.Default
+```
+
 Con las estrategias por defecto
 
 > Las cosas funcionan como se espera.
@@ -60,6 +65,12 @@ Se actualiza la vista con:
 
 ## 1.2 OnPush
 
+
+```typescript
+import { ChangeDetectionStrategy } from '@angular/core';
+changeDetection: ChangeDetectionStrategy.OnPush
+```
+
 Al usar la detección OnPush en el contenedor:
 
 > Las datos muestran incoherencias o no se muestran
@@ -67,8 +78,9 @@ Al usar la detección OnPush en el contenedor:
 Se actualiza la vista con:
 
 1 - Los recepción de datos no se muestra en pantalla
-2 - El proceso en Background ya no desencadena la orden de pintado
-3 - La interacción del usuario sí que obliga al repintado, pero no muestra la hora de actualización
+2.1 - El proceso en Background de creación en el picker no ocurre al iniciar porque no llega a crearse. Hay que forzarlo con un click.
+2.2 - El proceso en Background de borrado en el container (si llega a tiempo)  ya no desencadena la orden de pintado
+3 - La interacción del usuario sí que obliga al repintado, pero no actualiza la hora de actualización tras guardar en servidor
 
 ---
 
@@ -90,6 +102,8 @@ class: impact
 
 ## Async
 
+## Inmutable
+
 ---
 
 ## 2.1 DetectChanges
@@ -99,11 +113,16 @@ Forzar la detección de cambios
 ```typescript
 import { ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
-private useCDR = true;
+public changeConfig = {
+  simulateBackground: true,
+  useAsync: false,
+  useCDR: true,
+  cloningList: false
+};
 
 constructor(private cdr: ChangeDetectorRef) {}
 
-if (this.useCDR) {
+if (this.changeConfig.useCDR) {
   this.cdr.detectChanges();
 }
 
@@ -145,7 +164,7 @@ Se actualiza la vista con:
 
 ---
 
-## 2.3 Clone
+## 2.3 Inmutable
 
 > Esta parte no funciona del todo.....
 

@@ -1,9 +1,11 @@
-<mat-card *ngIf="useAsync===false">
+<mat-card *ngIf="changeConfig.useAsync===false">
   <mat-card-header>
     <mat-card-title>Shoppping Cart</mat-card-title>
   </mat-card-header>
-  <mat-card-content *ngIf="shoppingCart && products">
-    <angular-business-item-picker [products]="products"
+  <mat-card-content *ngIf="shoppingCart">
+    <angular-business-item-picker *ngIf="products"
+                                  [simulateBackground]="changeConfig.simulateBackground"
+                                  [products]="products"
                                   (itemPicked)="addToCart($event)"></angular-business-item-picker>
     <angular-business-items-list [shoppingCartItems]="shoppingCart.items"
                                  (remove)="removeFromCart($event)"></angular-business-items-list>
@@ -21,17 +23,17 @@
     </mat-card-actions>
   </mat-card-footer>
 </mat-card>
-<mat-card *ngIf="useAsync">
+
+<mat-card *ngIf="changeConfig.useAsync">
   <mat-card-header>
     <mat-card-title>Shoppping Cart</mat-card-title>
   </mat-card-header>
   <mat-card-content *ngIf="(shoppingCart$ | async ) as shoppingCart">
-    <span *ngIf="(products$ | async ) as products">
-      <angular-business-item-picker [products]="products"
-                                    (itemPicked)="addToCart($event)"></angular-business-item-picker>
-      <angular-business-items-list [shoppingCartItems]="shoppingCart.items"
-                                   (remove)="removeFromCart($event)"></angular-business-items-list>
-    </span>
+    <angular-business-item-picker *ngIf="(products$ | async ) as products"
+                                  [products]="products"
+                                  (itemPicked)="addToCart($event)"></angular-business-item-picker>
+    <angular-business-items-list [shoppingCartItems]="shoppingCart.items"
+                                 (remove)="removeFromCart($event)"></angular-business-items-list>
   </mat-card-content>
   <mat-card-footer>
     <angular-business-total-units [totalUnits]="totalUnits"></angular-business-total-units>
