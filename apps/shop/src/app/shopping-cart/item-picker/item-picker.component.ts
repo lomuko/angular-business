@@ -29,7 +29,7 @@ export class ItemPickerComponent implements OnInit {
   private autoBackGroundPicker() {
     const timeout = 5000;
     setTimeout(() => {
-      this.item = { product: this.products[0], quantity: 8 };
+      this.item = { product: this.products[0], quantity: 7 };
       console.log(`Auto pick item ${JSON.stringify(this.item)} `);
       this.addToCart();
       // if (this.useCDR) {
@@ -42,6 +42,6 @@ export class ItemPickerComponent implements OnInit {
     return { _id: '', description: '', category: Categories.Computer, brand: '', price: 0, stock: 0 };
   }
   private resetItem() {
-    this.item = { product: this.resetProduct(), quantity: 0 };
+    this.item = { product: this.resetProduct(), quantity: 1 };
   }
 }

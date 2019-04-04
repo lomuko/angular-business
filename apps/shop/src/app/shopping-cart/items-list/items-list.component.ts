@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
   selector: 'angular-business-items-list',
   templateUrl: './items-list.component.html',
   styleUrls: [],
-  changeDetection: ChangeDetectionStrategy.Default
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ItemsListComponent implements OnInit {
   @Input() shoppingCartItems: ShoppingCartItem[];

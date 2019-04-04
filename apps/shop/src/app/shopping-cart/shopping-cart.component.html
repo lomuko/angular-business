@@ -1,14 +1,26 @@
-<mat-card *ngIf="changeConfig.useAsync===false">
+<mat-card>
   <mat-card-header>
     <mat-card-title>Shoppping Cart</mat-card-title>
   </mat-card-header>
-  <mat-card-content *ngIf="shoppingCart">
-    <angular-business-item-picker *ngIf="products"
-                                  [simulateBackground]="changeConfig.simulateBackground"
-                                  [products]="products"
-                                  (itemPicked)="addToCart($event)"></angular-business-item-picker>
-    <angular-business-items-list [shoppingCartItems]="shoppingCart.items"
-                                 (remove)="removeFromCart($event)"></angular-business-items-list>
+  <mat-card-content>
+    <span *ngIf="changeConfig.useAsync===false">
+      <span *ngIf="shoppingCart && products">
+        <angular-business-item-picker [simulateBackground]="changeConfig.simulateBackground"
+                                      [products]="products"
+                                      (itemPicked)="addToCart($event)"></angular-business-item-picker>
+        <angular-business-items-list [shoppingCartItems]="shoppingCart.items"
+                                     (remove)="removeFromCart($event)"></angular-business-items-list>
+      </span>
+    </span>
+    <span *ngIf="changeConfig.useAsync===true">
+      <span *ngIf="(shoppingCart$ | async) && (products$ | async )">
+        <angular-business-item-picker [simulateBackground]="changeConfig.simulateBackground"
+                                      [products]="products"
+                                      (itemPicked)="addToCart($event)"></angular-business-item-picker>
+        <angular-business-items-list [shoppingCartItems]="shoppingCart.items"
+                                     (remove)="removeFromCart($event)"></angular-business-items-list>
+      </span>
+    </span>
   </mat-card-content>
   <mat-card-footer>
     <angular-business-total-units [totalUnits]="totalUnits"></angular-business-total-units>
@@ -23,30 +35,7 @@
     </mat-card-actions>
   </mat-card-footer>
 </mat-card>
-
-<mat-card *ngIf="changeConfig.useAsync">
-  <mat-card-header>
-    <mat-card-title>Shoppping Cart</mat-card-title>
-  </mat-card-header>
-  <mat-card-content *ngIf="(shoppingCart$ | async ) as shoppingCart">
-    <angular-business-item-picker *ngIf="(products$ | async ) as products"
-                                  [simulateBackground]="changeConfig.simulateBackground"
-                                  [products]="products"
-                                  (itemPicked)="addToCart($event)"></angular-business-item-picker>
-    <angular-business-items-list [shoppingCartItems]="shoppingCart.items"
-                                 (remove)="removeFromCart($event)"></angular-business-items-list>
-  </mat-card-content>
-  <mat-card-footer>
-    <angular-business-total-units [totalUnits]="totalUnits"></angular-business-total-units>
-    <mat-card-actions>
-      <span class="row">
-        <button (click)="postShoppingCart(shoppingCart)"
-                mat-raised-button
-                color="primary"
-                class="col"
-                type="button">Save</button>
-      </span>
-    </mat-card-actions>
-  </mat-card-footer>
-</mat-card>
-<pre class="row">{{ shoppingCart | json }}</pre>
+<pre *ngIf="changeConfig.useAsync===false"
+     class="row">{{ shoppingCart | json }}</pre>
+<pre *ngIf="changeConfig.useAsync===true"
+     class="row">{{ shoppingCart$ | async | json }}</pre>

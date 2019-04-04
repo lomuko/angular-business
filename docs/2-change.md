@@ -115,8 +115,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
 public changeConfig = {
   simulateBackground: true,
-  useAsync: false,
   useCDR: true,
+  useAsync: false,
   cloningList: false
 };
 
@@ -135,22 +135,22 @@ Se actualiza la vista con:
 1 - La recepción de datos muestra todo ok, a base de hacerlo en cada callback
 2.1 - El proceso en Background del picker fuerza el repintado por tratarse de un evento Output
 2.1 - El proceso en Background del container fuerza el repintado mediante el cdr
-3 - La interacción continúa funcionando bien, por ser un evento, y ahora además refrescando tras el guardado.
+3 - La interacción de guardar funciona bien, por ser un evento DOM, y ahora además refrescando tras el guardado.
 
 ---
 
 ## 2.2 Async
 
 ```html
-<mat-card *ngIf="subscribing">
-<mat-card-content *ngIf="(shoppingCart$ | async ) as shoppingCart">
+<span *ngIf="changeConfig.useAsync===true">
+  <span *ngIf="(shoppingCart$ | async) && (products$ | async )">
 ```
 
 ```typescript
 public changeConfig = {
   simulateBackground: true,
-  useAsync: true,
   useCDR: false,
+  useAsync: true,
   cloningList: false
 };
 tap()
@@ -162,129 +162,127 @@ tap()
 Se actualiza la vista con:
 
 1 - Los recepción de datos muestra todo ok pues el async llama por su cuenta al cdr
-2.1 - El proceso en Background del picker vuelve a dejar de funcionar, por qué???
-2.2 - El proceso padre se lanza pero, de nuevo no repinta...
-3 - La interacción continúa de guardado funcionando bien y refrescando tras el guardado, pero la manipulación de la lista ya no
+2.1 - El proceso en Background del picker fuerza el repintado por tratarse de un evento Output, pero sólo de las unidades
+2.2 - El proceso padre se lanza pero, de nuevo no repinta nada, pues no se detecta evento
+3.1 - Si el usuario añade o quita del carrito se actualiza correctamente
+3.2 - La interacción de guardado continúa funcionando bien y, gracias al async, refrescando tras el guardado. Por tratarse de un observable, el cambio tras el guardado recrea el picker.. y este agrega un nuevo item en background
 
 
 ---
 
 ## 2.3 Inmutable
 
-> Esta parte no funciona del todo.....
+> Qué pasa si ponemos OnPush en ItemsList?
+
+1 - Los recepción de datos funciona porque la lista de items nace con un valor definido
+2.1 - El proceso en Background del picker no repinta porque a nivel del componente nada ha cambiado
+2.2 - Lo mismo si se lanza desde el padre, para el hijo todo sigue igual
+3.1 - Si el usuario añade o quita del carrito se produce un evento DOM y se repinta
+3.2 - Si el usuario guarda se produce un evento DOM y se repinta
+
+El problema es que el componente hijo con la estrategia OnPush ya no detecta cambios internos en un array. Sólo se refresca ante cambios en las referencias. Para forzarlos debemos clonar los objetos.
+
+```typescript
+public changeConfig = {
+  simulateBackground: true,
+  useAsync: true,
+  useCDR: true,
+  cloningList: true
+};
+```
+
+
 
 ```typescript
 public addToCart(item: ShoppingCartItem) {
-  if (this.cloningList) {
+  if (this.changeConfig.cloningList) {
     this.shoppingCart.items = [...this.shoppingCart.items, { ...item }];
   } else {
     this.shoppingCart.items.push({ ...item });
   }
+  console.log(`Added item ${JSON.stringify(item)}`);
   this.calculateTotalUnits(this.shoppingCart);
-  console.log(`Adding item. Now we have ${this.totalUnits} units`);
 }
-
 public removeFromCart(item: ShoppingCartItem) {
-  if (this.cloningList) {
+  if (this.changeConfig.cloningList) {
     this.shoppingCart.items = this.shoppingCart.items.filter(i => i.product._id !== item.product._id);
   } else {
     this.shoppingCart.items.forEach((i, index) => {
       if (i.product._id === item.product._id) this.shoppingCart.items.splice(index, 1);
     });
   }
+  console.log(`Removed item  ${JSON.stringify(item)}`);
   this.calculateTotalUnits(this.shoppingCart);
-  console.log(`Remove item with product._id: ${item.product._id}. Now we have ${this.totalUnits} units`);
 }
-
 ```
-> Las datos siguen mostrando incoherencias o no se muestran
+> Ahora ya es´ta todo rápido y bien
 
 Se actualiza la vista con:
 
 1 - Los recepción de datos muestra todo ok pues el async llama por su cuenta al cdr
-2 - El proceso en Background ahora ya no refresca, sigue necesitando el async
-3 - La interacción continúa de guardado funcionando bien y refrescando tras el guardado, pero la manipulación de la lista ya no
+2 - Los proceso en background generan eventos o lanzan la detección por su cuenta. Para que el componente hijo sea notificado se le envía un clon del array en cada ocasión.
+3 - La interacción genera evento, refresca con async y clona
 
 
 ---
 
 > Recap:
 
-# 2 Test de Integración con Cypress
+# 2 Técnicas OnPush
 
-## Cypress
+## DetectChanges
 
-## Test e2e
+## Async
+
+## Inmutable
 
 ---
 
 class: impact
 
-# 3 Test Unitarios con Jest
+# 3 Estrategia
 
-## Jest
+## OnPush es más ligero
 
-## Tests unitarios
-
----
-
-## 3.1 Jest
-
-```json
-  "test:shop": "ng test shop --watch",
-  "test:warehouse": "ng test warehouse --watch",
-  "test:api": "ng test api --watch",
-```
-
-```terminal
-yarn test:shop
-yarn test:warehouse
-yarn test:api
-```
+## Async, CDR y clone detectan los cambios
 
 ---
 
-## 3.2 Tests unitarios
+## 3.1 OnPush es más ligero
 
-shop: app.component.spec.ts
+- Se lanza menos veces
+- Sólo comprueba referencias, no valores
 
-```typescript
-beforeEach(async(() => {
-  const httpClientMock = {
-    get: jest.fn()
-  };
-  httpClientMock.get.mockReturnValueOnce(of({ message: 'Welcome to api!' }));
-  TestBed.configureTestingModule({
-    imports: [RouterTestingModule, ViewsModule, HttpClientModule],
-    declarations: [AppComponent],
-    providers: [{ provide: HttpClient, useValue: httpClientMock }]
-  }).compileComponents();
-}));
-expect(app.title).toEqual('shop and Welcome to api!');
-expect(compiled.querySelector('h1').textContent).toContain('Welcome to shop and Welcome to api!!');
-```
+---
+
+## 3.2 Async, CDR y clone detectan los cambios
+
+- Async para que las respuestas desde observables sean limpias
+- CDR cuando el cambio venga de procesos asíncronos pero no observables
+- Clonado para que los componentes presentadores detecten cambios en las referencias
 
 ---
 
 > Recap:
 
-# 3 Aplicaciones
+# 3 Estrategia
 
-## Jest
+## OnPush es más ligero
 
-## Tests unitarios
+## Async, CDR y clone detectan los cambios
 
 ---
 
 
 > Next:
 
-# Detección del cambio en Angular
+# Componentes dinámicos, directivas y pipes
 
-## Estrategias de detección del cambio
-## Inmutabilidad
+## Componentes dinámicos
+## Directivas
+## Pipes
 
 
-> **Blog de apoyo:** [Test de integración y unitarios](https://academia-binaria.com/test-de-integracion-y-unitarios/)
+> **Blog de apoyo:** [Detección del cambio en Angular](https://academia-binaria.com/deteccion-del-cambio-en-Angular/)
 
 > > By [Alberto Basalo](https://twitter.com/albertobasalo)

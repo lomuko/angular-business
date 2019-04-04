@@ -17,9 +17,9 @@ export class ShoppingCartComponent implements OnInit {
   public totalUnits = 0;
   public changeConfig = {
     simulateBackground: true,
+    useCDR: true,
     useAsync: true,
-    useCDR: false,
-    cloningList: false
+    cloneInmutable: true
   };
 
   constructor(private cartService: CartService, private cdr: ChangeDetectorRef) {}
@@ -33,7 +33,7 @@ export class ShoppingCartComponent implements OnInit {
   }
   private getServerData() {
     if (this.changeConfig.useAsync) {
-      this.getDataObservables();
+      this.getDataObservables$();
     } else {
       this.subscribeToData();
     }
@@ -50,7 +50,7 @@ export class ShoppingCartComponent implements OnInit {
       }
     });
   }
-  private getDataObservables() {
+  private getDataObservables$() {
     this.shoppingCart$ = this.cartService.getShoppingCart().pipe(
       tap(shoppingCart => (this.shoppingCart = shoppingCart)),
       tap(this.onDataReceived.bind(this))
@@ -74,17 +74,18 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   public addToCart(item: ShoppingCartItem) {
-    if (this.changeConfig.cloningList) {
+    if (this.changeConfig.cloneInmutable) {
       this.shoppingCart.items = [...this.shoppingCart.items, { ...item }];
     } else {
       this.shoppingCart.items.push({ ...item });
     }
     console.log(`Added item ${JSON.stringify(item)}`);
+    console.log(`shoppingCart ${JSON.stringify(this.shoppingCart)}`);
     this.calculateTotalUnits(this.shoppingCart);
   }
 
   public removeFromCart(item: ShoppingCartItem) {
-    if (this.changeConfig.cloningList) {
+    if (this.changeConfig.cloneInmutable) {
       this.shoppingCart.items = this.shoppingCart.items.filter(i => i.product._id !== item.product._id);
     } else {
       this.shoppingCart.items.forEach((i, index) => {
@@ -92,10 +93,12 @@ export class ShoppingCartComponent implements OnInit {
       });
     }
     console.log(`Removed item  ${JSON.stringify(item)}`);
+    console.log(`shoppingCart ${JSON.stringify(this.shoppingCart)}`);
     this.calculateTotalUnits(this.shoppingCart);
   }
   private autoBackGroundRemover(): any {
     const timeout = 10000;
+    console.log(`Auto removing in ${timeout} ms...`);
     setTimeout(() => {
       if (this.shoppingCart.items[0]) {
         const item = this.shoppingCart.items[0];
@@ -111,7 +114,7 @@ export class ShoppingCartComponent implements OnInit {
   }
   public postShoppingCart() {
     if (this.changeConfig.useAsync) {
-      this.postDataAndGetObservable();
+      this.postDataAndGetObservable$();
     } else {
       this.postDataAndSubscribe();
     }
@@ -124,7 +127,7 @@ export class ShoppingCartComponent implements OnInit {
       }
     });
   }
-  private postDataAndGetObservable() {
+  private postDataAndGetObservable$() {
     this.shoppingCart$ = this.cartService.postShoppingCart(this.shoppingCart);
   }
 }
