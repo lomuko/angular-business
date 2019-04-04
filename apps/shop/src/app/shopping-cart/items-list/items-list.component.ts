@@ -1,9 +1,10 @@
 import { ShoppingCartItem } from '@angular-business/models';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'angular-business-items-list',
   templateUrl: './items-list.component.html',
-  styles: []
+  styleUrls: [],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class ItemsListComponent implements OnInit {
   @Input() shoppingCartItems: ShoppingCartItem[];

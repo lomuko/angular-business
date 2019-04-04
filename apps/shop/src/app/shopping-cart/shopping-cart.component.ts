@@ -46,7 +46,9 @@ export class ShoppingCartComponent implements OnInit {
     this.products$ = this.cartService.getProducts();
   }
   private calculateTotalUnits(shoppingCart: ShoppingCart) {
-    this.totalUnits = shoppingCart.items.map(item => item.quantity).reduce((accumalated, current) => accumalated + current);
+    if (shoppingCart.items && shoppingCart.items.length) {
+      this.totalUnits = shoppingCart.items.map(item => item.quantity).reduce((accumalated, current) => accumalated + current);
+    }
   }
   private autoBackGroundChange() {
     const timeout = 5000;

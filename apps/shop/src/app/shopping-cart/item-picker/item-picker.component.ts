@@ -1,10 +1,11 @@
 import { Categories, Product, ShoppingCartItem } from '@angular-business/models';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'angular-business-item-picker',
   templateUrl: './item-picker.component.html',
-  styleUrls: []
+  styleUrls: [],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class ItemPickerComponent implements OnInit {
   @Input() public products: Product[];
