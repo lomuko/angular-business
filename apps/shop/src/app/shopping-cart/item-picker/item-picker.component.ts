@@ -4,7 +4,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'angular-business-item-picker',
   templateUrl: './item-picker.component.html',
-  styleUrls: ['./item-picker.component.css']
+  styleUrls: []
 })
 export class ItemPickerComponent implements OnInit {
   @Input() public products: Product[];

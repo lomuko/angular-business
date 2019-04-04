@@ -10,3 +10,18 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+.full-width {
+  width: 100%;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+}
+.col {
+  flex: 1;
+  margin-right: 20px;
+}
+.col:last-child {
+  margin-right: 0;
+}
