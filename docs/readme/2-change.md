@@ -215,7 +215,7 @@ public removeFromCart(item: ShoppingCartItem) {
   this.calculateTotalUnits(this.shoppingCart);
 }
 ```
-> Ahora ya es´ta todo rápido y bien
+> Ahora ya está todo rápido y bien
 
 Se actualiza la vista con:
 
@@ -278,9 +278,9 @@ class: impact
 
 # Componentes dinámicos, directivas y pipes
 
-## Componentes dinámicos
-## Directivas
-## Pipes
+## Plantillas de contenido dinámico
+## Atributos custom con Directivas
+## Funciones de transformación con Pipes
 
 
 > **Blog de apoyo:** [Detección del cambio en Angular](https://academia-binaria.com/deteccion-del-cambio-en-Angular/)
