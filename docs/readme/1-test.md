@@ -180,7 +180,8 @@ expect(compiled.querySelector('h1').textContent).toContain('Welcome to shop and 
 # Detección del cambio en Angular
 
 ## Estrategias de detección del cambio
-## Inmutabilidad
+## Técnicas OnPush
+## Optimización
 
 
 > **Blog de apoyo:** [Test de integración y unitarios](https://academia-binaria.com/test-de-integracion-y-unitarios/)

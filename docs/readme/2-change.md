@@ -18,7 +18,9 @@ class: impact
 
     # 1. Estrategias de detección del cambio
 
-    # 2. Inmutabilidad
+    # 2. Técnicas OnPush
+
+    # 3. Optimización
 
 
 ---
@@ -240,7 +242,7 @@ Se actualiza la vista con:
 
 class: impact
 
-# 3 Estrategia
+# 3 Optimización
 
 ## OnPush es más ligero
 
@@ -265,7 +267,7 @@ class: impact
 
 > Recap:
 
-# 3 Estrategia
+# 3 Optimización
 
 ## OnPush es más ligero
 
