@@ -13,7 +13,7 @@
             Only {{ card.item.price | number:'1.0-0' }} €
           </div>
           <div class="mat-caption">
-            Also ${{ card.item.price | dollar | number:'1.0-0'}}
+            Also ${{ card.item.price | dollar:'async' | async | number:'1.0-0'}}
           </div>
           <section class="actions">
             <button (click)="buyProduct(card.item)"

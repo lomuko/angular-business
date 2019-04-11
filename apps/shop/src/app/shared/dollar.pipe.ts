@@ -1,9 +1,20 @@
+import { HttpClient } from '@angular/common/http';
 import { Pipe, PipeTransform } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Pipe({
   name: 'dollar'
 })
 export class DollarPipe implements PipeTransform {
   private euroDollars = 1.13;
-  public transform = (euros: number): number => euros * this.euroDollars;
+  constructor(private httpClient: HttpClient) {}
+  public transform(euros: number, args?: any): number | Observable<number> {
+    if (!args) {
+      return euros * this.euroDollars;
+    } else {
+      const ratesApi = 'https://api.exchangeratesapi.io/latest?symbols=USD';
+      return this.httpClient.get<any>(ratesApi).pipe(map(resp => euros * resp.rates.USD));
+    }
+  }
 }
