@@ -86,10 +86,12 @@ class: impact
 
 # 3 Funciones de transformación con Pipes
 
-## Precios en euros y dólares
+## Precios también en dólares
 ## Memoria para no re llamar...
 
 ---
+
+ng generate @schematics/angular:pipe shared/dollar --project=shop --module=shared\shared.module.ts --export
 
 ---
 

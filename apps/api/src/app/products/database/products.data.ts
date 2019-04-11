@@ -46,7 +46,7 @@ export const PRODUCTS: Product[] = [
     description: 'OptiPlex',
     category: Categories.Computer,
     brand: 'Dell',
-    price: 1200,
+    price: 1000,
     stock: 5
   }
 ];
