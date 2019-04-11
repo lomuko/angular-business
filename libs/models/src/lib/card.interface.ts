@@ -3,4 +3,5 @@ export interface Card {
   subtitle: string;
   cols: number;
   rows: number;
+  item?: any;
 }

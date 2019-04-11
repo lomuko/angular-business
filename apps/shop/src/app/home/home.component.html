@@ -8,6 +8,17 @@
                    [rowspan]="card.rows">
       <angular-business-product [card]="card"
                                 data-cy="product-card">
+        <content>
+          <div>
+            Only {{ card.item.price }} <span>Euros</span>
+          </div>
+          <section class="actions">
+            <button (click)="buyProduct(card.item)"
+                    mat-raised-button
+                    color="primary">Buy</button>
+          </section>
+        </content>
+        <footer>Stock: {{ card.item.stock }} units</footer>
       </angular-business-product>
     </mat-grid-tile>
   </mat-grid-list>

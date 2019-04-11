@@ -22,10 +22,14 @@ export class HomeComponent implements OnInit {
             title: product.description,
             subtitle: `${product.brand} - ${product.category}`,
             cols: 1,
-            rows: 1
+            rows: 1,
+            item: product
           };
         });
       })
     );
+  }
+  public buyProduct(product: Product) {
+    console.log('Buying', product);
   }
 }

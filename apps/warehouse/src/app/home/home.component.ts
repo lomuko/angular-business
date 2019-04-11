@@ -21,11 +21,15 @@ export class HomeComponent implements OnInit {
           return {
             title: product.description,
             subtitle: `${product.brand} - ${product.category}`,
+            item: product,
             cols: 1,
             rows: 1
           };
         });
       })
     );
+  }
+  public refillProduct(product: Product) {
+    console.log('Refilling', product);
   }
 }

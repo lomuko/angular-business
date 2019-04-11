@@ -8,6 +8,17 @@
                    [rowspan]="card.rows">
       <angular-business-product [card]="card"
                                 data-cy="product-card">
+        <content>
+          <div>
+            Remains {{ card.item.stock }} <span>units</span>
+          </div>
+          <section class="actions">
+            <button (click)="refillProduct(card.item)"
+                    mat-raised-button
+                    color="primary">Refill</button>
+          </section>
+        </content>
+        <footer>Price: {{ card.item.price }} Euros</footer>
       </angular-business-product>
     </mat-grid-tile>
   </mat-grid-list>
