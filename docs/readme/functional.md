@@ -1,5 +1,8 @@
 # functional
 
+> UserStories por tema, testeables con cypress
+> Requirements unitarios testeables en jest?
+
 ## 0-nx
 
 ### Angular Material
