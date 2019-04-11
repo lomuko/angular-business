@@ -7,7 +7,8 @@
     "markdown",
     "latex",
     "plaintext",
-    "typescript"
+    "typescript",
+    "yaml"
   ],
   "workbench.colorCustomizations": {
     "editorError.foreground": "#ff9900",

@@ -1,0 +1,48 @@
+--- # 0 nx
+As a: customer,
+  I want: to see products home page
+  so that: i can browse for products to buy
+
+As a: seller,
+  I want: to see products home page
+  so that: i can browse for products on stock
+
+--- # 1 test
+
+As a: developer,
+  I want: to test end to end my app
+  so that: i can be sure of the functions
+
+As a: developer,
+  I want: to unit test my app
+  so that: i can be sure of the structure
+
+--- # 2 change
+As a: customer,
+  I want: to see shopping cart page
+  so that: i can browse my list of products
+
+As a: customer,
+  I want: to see shopping cart page
+  so that: i can add products for the list
+
+As a: customer,
+  I want: to see shopping cart page
+  so that: i can remove producs from the list
+
+--- # 3 templates
+As a: customer,
+  I want: to see a product card with price
+  so that: i can decide to purchase it or not
+
+As a: seller,
+  I want: to see a product card with stock
+  so that: i can ask for more or not
+
+As a: seller,
+  I want: to see a mark on aproduct without stock
+  so that: i can check it quickly
+
+As a: customer,
+  I want: to see a product price in euros an dollars
+  so that: i can decide to purchase it or not

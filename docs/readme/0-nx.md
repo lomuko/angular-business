@@ -26,6 +26,17 @@ class: impact
 
 ---
 
+```yaml
+As a: customer,
+  I want: to see products home page
+  so that: i can browse for products to buy
+
+As a: seller,
+  I want: to see products home page
+  so that: i can browse for products on stock
+```
+
+---
 class: impact
 
 # 1 Nx y el CLI

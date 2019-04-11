@@ -25,6 +25,24 @@ class: impact
 
 ---
 
+
+```yaml
+As a: customer,
+  I want: to see shopping cart page
+  so that: i can browse my list of products
+
+As a: customer,
+  I want: to see shopping cart page
+  so that: i can add products for the list
+
+As a: customer,
+  I want: to see shopping cart page
+  so that: i can remove producs from the list
+```
+
+
+---
+
 class: impact
 
 # 1 Estrategias de detección del cambio

@@ -24,6 +24,17 @@ class: impact
 
 ---
 
+```yaml
+As a: developer,
+  I want: to test end to end my app
+  so that: i can be sure of the functions
+
+As a: developer,
+  I want: to unit test my app
+  so that: i can be sure of the structure
+```
+
+---
 class: impact
 
 # 1 Tipos de tests

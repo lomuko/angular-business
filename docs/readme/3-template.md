@@ -25,6 +25,26 @@ class: impact
 
 ---
 
+```yaml
+As a: customer,
+  I want: to see a product card with price
+  so that: i can decide to purchase it or not
+
+As a: seller,
+  I want: to see a product card with stock
+  so that: i can ask for more or not
+
+As a: seller,
+  I want: to see a mark on aproduct without stock
+  so that: i can check it quickly
+
+As a: customer,
+  I want: to see a product price in euros an dollars
+  so that: i can decide to purchase it or not
+```
+
+---
+
 class: impact
 
 # 1 Plantillas de contenido dinámico
