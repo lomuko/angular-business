@@ -67,11 +67,11 @@ class: impact
 
 # 2 Atributos custom con Directivas
 
-## Mostrar mensajes de error
+## Mostrar fuera de stock
 ## https://netbasal.com/create-modular-components-with-angular-structural-directives-1a5198d9ab7d
 
 ---
-
+ng generate @schematics/angular:directive shared/out-of-stock --project=warehouse --module=shared\shared.module.ts --export
 
 
 ---
