@@ -9,12 +9,12 @@ import { map } from 'rxjs/operators';
 export class DollarPipe implements PipeTransform {
   private euroDollars = 1.13;
   constructor(private httpClient: HttpClient) {}
-  public transform(euros: number, args?: any): number | Observable<number> {
-    if (!args) {
+  public transform(euros: number, symbol: string): number | Observable<number> {
+    if (!symbol) {
       return euros * this.euroDollars;
     } else {
-      const ratesApi = 'https://api.exchangeratesapi.io/latest?symbols=USD';
-      return this.httpClient.get<any>(ratesApi).pipe(map(resp => euros * resp.rates.USD));
+      const ratesApi = 'https://api.exchangeratesapi.io/latest?symbols=' + symbol;
+      return this.httpClient.get<any>(ratesApi).pipe(map(resp => euros * resp.rates[symbol]));
     }
   }
 }
