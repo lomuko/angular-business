@@ -9,7 +9,8 @@
       <angular-business-product [card]="card"
                                 data-cy="product-card">
         <content>
-          <div [angularBusinessOutOfStock]="card.item.stock">
+          <div [angularBusinessOutOfStock]="card.item.stock"
+               data-cy="product-stock">
             Remains {{ card.item.stock }} <span>units</span>
           </div>
           <section class="actions">

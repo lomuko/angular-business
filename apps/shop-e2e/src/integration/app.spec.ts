@@ -1,4 +1,4 @@
-import { getGreeting, getListHeader, getProductCard } from '../support/app.po';
+import { getGreeting, getListHeader, getProductCard, getProductPrice } from '../support/app.po';
 
 describe('Shop Home', () => {
   const numProducts = 6;
@@ -16,5 +16,11 @@ describe('Shop Home', () => {
     getProductCard()
       .its('length')
       .should('be.at.least', numProducts);
+  });
+
+  it(`should contains product cards with price`, () => {
+    getProductPrice()
+      .contains('Only')
+      .and('contain', '€');
   });
 });

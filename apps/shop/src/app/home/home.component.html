@@ -9,7 +9,7 @@
       <angular-business-product [card]="card"
                                 data-cy="product-card">
         <content>
-          <div>
+          <div data-cy="product-price">
             Only {{ card.item.price | number:'1.0-0' }} €
           </div>
           <div class="mat-caption">
