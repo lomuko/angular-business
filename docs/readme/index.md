@@ -20,7 +20,9 @@ class: impact
 
 # [1-Test](https://academiabinaria.github.io/angular-business/1-test.html)
 
-# [2-Change](https://academiabinaria.github.io/angular-business/12-change.html)
+# [2-Change](https://academiabinaria.github.io/angular-business/2-change.html)
+
+# [3-Template](https://academiabinaria.github.io/angular-business/3-template.html)
 
 ---
 

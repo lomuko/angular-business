@@ -25,6 +25,15 @@ class: impact
 
 ---
 
+class: impact
+
+# 1 Plantillas de contenido dinámico
+
+## Un componente común
+## Implementaciones distintas
+
+---
+
 ```yaml
 As a: customer,
   I want: to see a product card with price
@@ -33,71 +42,224 @@ As a: customer,
 As a: seller,
   I want: to see a product card with stock
   so that: i can ask for more or not
+```
 
-As a: seller,
-  I want: to see a mark on aproduct without stock
-  so that: i can check it quickly
+---
 
+## 1.1 Un componente común
+
+> La visión del comprador y del vendedor es parecida. Mantenemos estructura, inyectamos contenido.
+
+```html
+<mat-card class="dashboard-card">
+  <mat-card-header>
+    <mat-card-title> {{card.title}} </mat-card-title>
+    <mat-card-subtitle> {{card.subtitle}} </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="dashboard-card-content">
+*   <ng-content select="content"></ng-content>
+    <mat-card-actions>
+      <ng-content select=".actions"></ng-content>
+    </mat-card-actions>
+  </mat-card-content>
+  <mat-card-footer class="mat-caption">
+*   <ng-content select="footer"></ng-content>
+  </mat-card-footer>
+</mat-card>
+```
+
+La directiva `ngContent` permite crear *slots* para incrustar contenido a voluntad del consumidor.
+Cada *slot* se identifica mediante un `select="css-selector"`.
+
+---
+
+## 1.2 Implementaciones distintas
+
+```html
+<angular-business-product [card]="card"
+                          data-cy="product-card">
+* <content>
+    <div data-cy="product-price">
+      Only {{ card.item.price | number:'1.0-0' }} €
+    </div>
+*   <section class="actions">
+      <button (click)="buyProduct(card.item)"
+              mat-raised-button
+              color="primary">Buy</button>
+    </section>
+  </content>
+* <footer>Stock: {{ card.item.stock }} units</footer>
+</angular-business-product>
+```
+
+---
+
+```html
+ <angular-business-product [card]="card"
+                          data-cy="product-card">
+* <content>
+    <div data-cy="product-stock">
+      Remains {{ card.item.stock }} <span>units</span>
+    </div>
+*   <section class="actions">
+      <button (click)="refillProduct(card.item)"
+              mat-raised-button
+              color="primary">Refill</button>
+    </section>
+  </content>
+* <footer>Price: {{ card.item.price }} Euros</footer>
+</angular-business-product>
+```
+
+---
+
+> Recap:
+
+# 1 Plantillas de contenido dinámico
+
+## Un componente común
+## Implementaciones distintas
+
+---
+
+class: impact
+
+# 2 Atributos custom con Directivas
+
+## Generación de directivas
+## Consumo de directivas
+
+
+---
+
+```yaml
 As a: customer,
-  I want: to see a product price in euros an dollars
+  I want: to see a product card with price
   so that: i can decide to purchase it or not
 ```
 
 ---
 
-class: impact
+## 2.1 Generación de directivas
 
-# 1 Plantillas de contenido dinámico
+```terminal
+ng g directive shared/out-of-stock --project=warehouse --export
+```
 
-## Un componente común para artículos
-## Implementaciones Shop y Warehouse
+```typescript
+@Directive({
+  selector: '[angularBusinessOutOfStock]'
+})
+export class OutOfStockDirective {
+  private minimalStock = 10;
+  @Input()
+  set angularBusinessOutOfStock(stock: number) {
+    const color = stock <= this.minimalStock ? 'Red' : 'Green';
+    this.el.nativeElement.style.backgroundColor = color;
+  }
+  constructor(private el: ElementRef) {}
+}
+```
 
 ---
 
+## 2.2 Consumo de directivas
+
+```typescript
+@NgModule({
+  declarations: [OutOfStockDirective],
+  imports: [CommonModule, ViewsModule],
+  exports: [ViewsModule, OutOfStockDirective]
+})
+export class SharedModule {}
+```
+
+```html
+<div [angularBusinessOutOfStock]="card.item.stock"
+  data-cy="product-stock">
+  Remains {{ card.item.stock }} <span>units</span>
+</div>
+```
 
 ---
 
 > Recap:
 
-# 1 Plantillas de contenido dinámico
-
----
-
-class: impact
-
 # 2 Atributos custom con Directivas
-
-## Mostrar fuera de stock
-## https://netbasal.com/create-modular-components-with-angular-structural-directives-1a5198d9ab7d
-
----
-ng generate @schematics/angular:directive shared/out-of-stock --project=warehouse --module=shared\shared.module.ts --export
-
-
----
-
-> Recap:
-
-# 2 Atributos custom con Directivas
-
+## Generación de directivas
+## Consumo de directivas
 ---
 
 class: impact
 
 # 3 Funciones de transformación con Pipes
 
-## Precios también en dólares
-## Memoria para no re llamar...
+## Generación de pipes
+## Consumo de pipes
 
 ---
 
-ng generate @schematics/angular:pipe shared/dollar --project=shop --module=shared\shared.module.ts --export
+```yaml
+As a: customer,
+  I want: to see a product price in euros and dollars
+  so that: i can decide to purchase it or not
+```
+
+---
+
+## 3.1 Generación de pipes
+
+
+```terminal
+ng g pipe shared/exRate --project=shop --export
+```
+
+```typescript
+@Pipe({
+  name: 'exRate'
+})
+export class ExRatePipe implements PipeTransform {
+  private euroDollars = 1.13;
+  constructor(private httpClient: HttpClient) {}
+  public transform(euros: number, symbol: string): number | Observable<number> {
+    if (!symbol) {
+      return euros * this.euroDollars;
+    } else {
+      const ratesApi = 'https://api.exchangeratesapi.io/latest?symbols=' + symbol;
+      return this.httpClient.get<any>(ratesApi).pipe(map(resp => euros * resp.rates[symbol]));
+    }
+  }
+}
+```
+
+---
+
+## 3.2 Consumo de pipes
+
+```typescript
+@NgModule({
+  declarations: [ExRatePipe],
+  imports: [CommonModule, FormsModule, ViewsModule, HttpClientModule],
+  exports: [ViewsModule, ExRatePipe]
+})
+export class SharedModule {}
+```
+
+```html
+<div class="mat-caption">
+  Also ${{ card.item.price | exRate | number:'1.0-0'}} or
+  {{ card.item.price | exRate:'GBP' | async | number:'1.0-0'}} £
+</div>
+```
 
 ---
 
 > Recap:
 
 # 3 Funciones de transformación con Pipes
+
+## Generación de pipes
+## Consumo de pipes
 
 ---
 

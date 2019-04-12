@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Pipe({
-  name: 'dollar'
+  name: 'exRate'
 })
-export class DollarPipe implements PipeTransform {
+export class ExRatePipe implements PipeTransform {
   private euroDollars = 1.13;
   constructor(private httpClient: HttpClient) {}
   public transform(euros: number, symbol: string): number | Observable<number> {
