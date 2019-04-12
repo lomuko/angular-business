@@ -27,11 +27,11 @@ class: impact
 ```yaml
 As a: developer,
   I want: to test end to end my app
-  so that: i can be sure of the functions
+  so that: I can be sure of the functions
 
 As a: developer,
   I want: to unit test my app
-  so that: i can be sure of the structure
+  so that: I can be sure of the structure
 ```
 
 ---
@@ -71,6 +71,29 @@ class: impact
 ## Cypress
 
 ## Test e2e
+
+
+---
+
+
+```yaml
+
+As a: customer,
+  I want: to see a product list
+  so that: I feel confident with page
+
+As a: customer,
+  I want: to see at least 6 products
+  so that: I feel confident with data
+
+As a: seller,
+  I want: to see a product list
+  so that: I feel confident with page
+
+As a: seller,
+  I want: to see at least 6 products
+  so that: I feel confident with data
+```
 
 ---
 

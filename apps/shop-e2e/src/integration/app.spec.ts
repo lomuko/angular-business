@@ -4,33 +4,51 @@ describe('Shop Home', () => {
   const numProducts = 6;
   beforeEach(() => cy.visit('/'));
 
-  it('should display welcome message from shop and api', () => {
+  it(`0.2 As a: customer,
+  I want: to see a shop
+  so that: I can buy products`, () => {
+    cy.title().should('eq', 'Shop');
+  });
+
+  it(`0.2 As a: customer,
+  I want: to be greeted
+  so that: I feel at home`, () => {
     getGreeting().contains('Welcome to shop and Welcome to api!!');
   });
 
-  it('should contains a product list working component', () => {
+  it(`2.2 As a: customer,
+  I want: to see a product list
+  so that: I feel confident with page`, () => {
     getListHeader().contains('Product List');
   });
 
-  it(`should contains at least ${numProducts} product cards`, () => {
+  it(`2.2 As a: customer,
+  I want: to see at least ${numProducts} products
+  so that: I feel confident with data`, () => {
     getProductCard()
       .its('length')
       .should('be.at.least', numProducts);
   });
 
-  it(`3.1 should contains product cards with price`, () => {
+  it(`3.1 As a: customer,
+  I want: to see a product card with price in euros
+  so that: i can decide to purchase it or not`, () => {
     getProductPrice()
       .contains('Only')
       .and('contain', '€');
   });
 
-  it(`3.3 should price in dollars`, () => {
+  it(`3.3 As a: customer,
+  I want: to see a product price also in dollars
+  so that: I can compare prices`, () => {
     getProductPriceExRate()
       .contains('Also')
       .and('contain', '$');
   });
 
-  it(`3.3 should price in pounds`, () => {
+  it(`3.3 As a: customer,
+  I want: to see a product price also in pounds
+  so that: I can compare prices`, () => {
     getProductPriceExRate()
       .contains('or')
       .and('contain', '£');

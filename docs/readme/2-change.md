@@ -32,12 +32,16 @@ As a: customer,
   so that: i can browse my list of products
 
 As a: customer,
-  I want: to see shopping cart page
-  so that: i can add products for the list
+  I want: to pick a product
+  so that: I can add units to the shopping cart
 
 As a: customer,
-  I want: to see shopping cart page
-  so that: i can remove producs from the list
+  I want: to remove a product from the shopping cart
+  so that: I can take less units
+
+As a: customer,
+  I want: to see the current units
+  so that: I can know what I'm buying
 ```
 
 

@@ -36,12 +36,12 @@ class: impact
 
 ```yaml
 As a: customer,
-  I want: to see a product card with price
+  I want: to see a product card with price in euros
   so that: i can decide to purchase it or not
 
 As a: seller,
   I want: to see a product card with stock
-  so that: i can ask for more or not
+  so that: I can ask for more or not
 ```
 
 ---
@@ -133,9 +133,14 @@ class: impact
 ---
 
 ```yaml
-As a: customer,
-  I want: to see a product card with price
-  so that: i can decide to purchase it or not
+As a: seller,
+  I want: to see a green mark on products with stock
+  so that: I know I don't do need to refill
+
+As a: seller,
+  I want: to see a red mark on products with out stock
+  so that: I know I need to refill
+
 ```
 
 ---
@@ -201,8 +206,11 @@ class: impact
 
 ```yaml
 As a: customer,
-  I want: to see a product price in euros and dollars
-  so that: i can decide to purchase it or not
+  I want: to see a product price also in dollars
+  so that: I can compare prices
+As a: customer,
+  I want: to see a product price also in pounds
+  so that: I can compare prices
 ```
 
 ---

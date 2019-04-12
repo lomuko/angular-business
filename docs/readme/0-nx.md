@@ -26,17 +26,6 @@ class: impact
 
 ---
 
-```yaml
-As a: customer,
-  I want: to see products home page
-  so that: i can browse for products to buy
-
-As a: seller,
-  I want: to see products home page
-  so that: i can browse for products on stock
-```
-
----
 class: impact
 
 # 1 Nx y el CLI
@@ -123,12 +112,29 @@ class: impact
 
 ## 2.1 Apps
 
+```yaml
+As a: customer,
+  I want: to see a shop
+  so that: I can buy products
+
+As a: seller,
+  I want: to see a warehouse
+  so that: I can take control
+```
 
 ---
 
 ## 2.2 Libs
 
+```yaml
+As a: customer,
+  I want: to be greeted
+  so that: I feel at home
 
+As a: seller,
+  I want: to be greeted
+  so that: I feel at home
+```
 
 ---
 
