@@ -1,14 +1,6 @@
-import {
-  getAddButton,
-  getHeader,
-  getListItems,
-  getProductSelector,
-  getQuantityInput,
-  getRemoveItemButton,
-  getTotalUnitsDd
-} from '../support/shopping-cart.po';
+import { getAddButton, getHeader, getListItems, getProductSelector, getQuantityInput, getRemoveItemButton, getTotalUnitsDd } from '../support/shopping-cart.po';
 
-describe('Shop Shopping-Cart', () => {
+describe('2-Change', () => {
   beforeEach(() => cy.visit('/shopping-cart'));
 
   it(`2.0 As a: customer,

@@ -80,7 +80,7 @@ class: impact
 
 As a: customer,
   I want: to see a product list
-  so that: I feel confident with page
+  so that: I feel confident with the page
 
 As a: customer,
   I want: to see at least 6 products
@@ -88,7 +88,7 @@ As a: customer,
 
 As a: seller,
   I want: to see a product list
-  so that: I feel confident with page
+  so that: I feel confident with the page
 
 As a: seller,
   I want: to see at least 6 products
