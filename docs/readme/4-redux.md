@@ -82,8 +82,8 @@ As a: seller,
   so that: I can refill them
 
 As a: seller,
-  I want: to know how many items are on my warehouse
-  so that: I can know han much I can buy
+  I want: to refill a product
+  so that: I can sell more units
 
 ```
 ```
