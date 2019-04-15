@@ -11,7 +11,8 @@
          [routerLink]="
                  ['/out-of-stock']"
          routerLinkActive="router-link-active">
-        <span matBadge="{{ numberOfProductsOutOfStock$ | async}}"
+        <span data-cy="out_of_stock-badge"
+              matBadge="{{ numberOfProductsOutOfStock$ | async}}"
               matBadgeOverlap="false">Out of Stock.</span>
       </a>
     </mat-nav-list>
