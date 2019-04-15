@@ -1,4 +1,5 @@
-import { getOutOfStockCounter, getProductRefillButton } from '../support/home.po';
+import { getOutOfStockCounter } from '../support/home.po';
+import { getProductRefillButton } from '../support/out-of-stock.po';
 
 describe('4-Redux', () => {
   beforeEach(() => cy.visit('/'));
