@@ -96,7 +96,7 @@ ng g c out-of-stock/out-of-stock --project=warehouse
 ## 2.1 El Store observable
 
 ```
-ng gs core/out-of-stock-store --project=warehouse
+ng g s core/out-of-stock-store --project=warehouse
 ```
 ---
 
