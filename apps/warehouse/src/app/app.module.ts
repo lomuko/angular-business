@@ -7,9 +7,10 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ROUTES } from './app.routes';
 import { CoreModule } from './core/core.module';
+import { OutOfStockComponent } from './OutOfStock/out-of-stock/out-of-stock.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, OutOfStockComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot(ROUTES, { initialNavigation: 'enabled' }),

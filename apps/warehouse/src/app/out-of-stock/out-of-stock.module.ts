@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NgModule } from '@angular/core';
 import { OutOfStockRoutingModule } from './out-of-stock-routing.module';
+import { OutOfStockComponent } from './out-of-stock/out-of-stock.component';
+
 
 @NgModule({
-  declarations: [],
+  declarations: [OutOfStockComponent],
   imports: [
     CommonModule,
     OutOfStockRoutingModule

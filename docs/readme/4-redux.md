@@ -87,8 +87,8 @@ As a: seller,
 
 ```
 ```
-ng g m OutOfStock --project=warehouse --routing
-ng g c OutOfStock/OutOfStock --project=warehouse
+ng g m out-of-stock --project=warehouse --routing
+ng g c out-of-stock/out-of-stock --project=warehouse
 ```
 
 ---
