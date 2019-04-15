@@ -9,7 +9,7 @@
     <mat-nav-list>
       <a mat-list-item
          [routerLink]="['/out-of-stock']"
-         routerLinkActive="router-link-active">Out of Stock.</a>
+         routerLinkActive="router-link-active">Out of Stock.{{ numberOfProductsOutOfStock$ | async}}</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

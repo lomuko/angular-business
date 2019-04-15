@@ -1,8 +1,8 @@
 import { Card, Product } from '@angular-business/models';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ApiProductsService } from '../core/api-products.service';
 
 @Component({
   selector: 'angular-business-home',
@@ -12,10 +12,10 @@ import { map } from 'rxjs/operators';
 export class HomeComponent implements OnInit {
   public cards: Observable<Card[]>;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private apiProductsService: ApiProductsService) {}
 
   public ngOnInit() {
-    this.cards = this.httpClient.get<Product[]>('api/products').pipe(
+    this.cards = this.apiProductsService.getProducts$().pipe(
       map(products => {
         return products.map(product => {
           return {
