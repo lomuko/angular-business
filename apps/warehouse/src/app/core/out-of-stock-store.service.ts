@@ -22,12 +22,15 @@ export class RemoveOoSProduct implements ImAction {
 
 function reducer(state: OutOfStock = OutOfStock_Initial_State, action: ImAction): OutOfStock {
   const result = { ...state };
+  const product = action.payload;
   switch (action.type) {
     case 'Add Out of Stock Product':
-      result.products = [...result.products, action.payload];
+      if (result.products.find(p => p._id === product._id) === undefined) {
+        result.products = [...result.products, product];
+      }
       break;
     case 'Remove Out of Stock Product':
-      result.products = result.products.filter(p => p._id !== action.payload._id);
+      result.products = result.products.filter(p => p._id !== product._id);
       break;
     default:
       break;
@@ -40,16 +43,19 @@ function reducer(state: OutOfStock = OutOfStock_Initial_State, action: ImAction)
 })
 export class OutOfStockStoreService {
   private state: OutOfStock = OutOfStock_Initial_State;
-  private state$: BehaviorSubject<OutOfStock> = new BehaviorSubject({ ...this.state });
+  private state$: BehaviorSubject<OutOfStock> = new BehaviorSubject(this.snapShot());
 
   constructor() {}
 
+  public snapShot(): OutOfStock {
+    return { ...this.state };
+  }
   public select$(): Observable<OutOfStock> {
     return this.state$.asObservable();
   }
 
   public dispatch(action: ImAction) {
     this.state = reducer(this.state, action);
-    this.state$.next({ ...this.state });
+    this.state$.next(this.snapShot());
   }
 }
