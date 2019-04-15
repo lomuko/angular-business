@@ -98,6 +98,7 @@ ng g c out-of-stock/out-of-stock --project=warehouse
 ```
 ng g s core/out-of-stock-store --project=warehouse
 ng g s core/product-stock --project=warehouse
+ng g s core/products --project=warehouse
 ```
 ---
 

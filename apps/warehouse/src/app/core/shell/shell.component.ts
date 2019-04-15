@@ -15,7 +15,12 @@ export class ShellComponent {
     .pipe(map(result => result.matches));
   public numberOfProductsOutOfStock$: Observable<number>;
 
-  constructor(private breakpointObserver: BreakpointObserver, private outOfStockStoreService: OutOfStockStoreService) {
-    this.numberOfProductsOutOfStock$ = this.outOfStockStoreService.select$().pipe(map(state => state.products.length));
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private outOfStockStoreService: OutOfStockStoreService
+  ) {
+    this.numberOfProductsOutOfStock$ = this.outOfStockStoreService
+      .select$()
+      .pipe(map(state => state.products.length));
   }
 }
