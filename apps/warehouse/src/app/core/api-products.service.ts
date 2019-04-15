@@ -1,28 +1,16 @@
 import { Product } from '@angular-business/models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs/operators';
-import { environment } from '../../environments/environment';
-import { AddOoSProduct, OutOfStockStoreService } from './out-of-stock-store.service';
 @Injectable({
   providedIn: 'root'
 })
 export class ApiProductsService {
-  private readonly minimalStock = environment.minimalStock;
   private readonly url = 'api/products';
 
-  constructor(private httpClient: HttpClient, private outOfStockStoreService: OutOfStockStoreService) {}
+  constructor(private httpClient: HttpClient) {}
+
   public getProducts$() {
-    return this.httpClient.get<Product[]>(this.url).pipe(
-      tap(products => {
-        products.forEach(product => {
-          if (product.stock <= this.minimalStock) {
-            const addOutOfStockAction = new AddOoSProduct(product);
-            this.outOfStockStoreService.dispatch(addOutOfStockAction);
-          }
-        });
-      })
-    );
+    return this.httpClient.get<Product[]>(this.url);
   }
 
   public putProduct$(product: Product) {

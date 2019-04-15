@@ -1,7 +1,7 @@
 import { Categories } from '../product.interface';
 
 export const shoppingCartMock = {
-  _id: 'aRandomIdentificator',
+  _id: 'aRandom_Id',
   items: [
     {
       product: {

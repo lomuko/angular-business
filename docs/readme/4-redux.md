@@ -89,6 +89,8 @@ As a: seller,
 ```
 ng g m out-of-stock --project=warehouse --routing
 ng g c out-of-stock/out-of-stock --project=warehouse
+ng g s core/api-products --project=warehouse
+ng g s core/products --project=warehouse
 ```
 
 ---
@@ -97,8 +99,7 @@ ng g c out-of-stock/out-of-stock --project=warehouse
 
 ```
 ng g s core/out-of-stock-store --project=warehouse
-ng g s core/product-stock --project=warehouse
-ng g s core/products --project=warehouse
+
 ```
 ---
 

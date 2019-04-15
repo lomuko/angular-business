@@ -2,7 +2,7 @@ import { Card, Product } from '@angular-business/models';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ApiProductsService } from '../core/api-products.service';
+import { ProductsService } from '../core/products.service';
 
 @Component({
   selector: 'angular-business-home',
@@ -12,10 +12,10 @@ import { ApiProductsService } from '../core/api-products.service';
 export class HomeComponent implements OnInit {
   public cards: Observable<Card[]>;
 
-  constructor(private apiProductsService: ApiProductsService) {}
+  constructor(private productsService: ProductsService) {}
 
   public ngOnInit() {
-    this.cards = this.apiProductsService.getProducts$().pipe(
+    this.cards = this.productsService.getProducts$().pipe(
       map(products => {
         return products.map(product => {
           return {
@@ -30,6 +30,6 @@ export class HomeComponent implements OnInit {
     );
   }
   public refillProduct(product: Product) {
-    console.log('Refilling', product);
+    this.productsService.refill(product);
   }
 }

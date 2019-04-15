@@ -10,6 +10,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'warehouse';
   constructor(private httpClient: HttpClient) {
-    this.httpClient.get<Greetings>('/api/').subscribe((data: Greetings) => (this.title += ' and ' + data.message));
+    this.httpClient
+      .get<Greetings>('/api/')
+      .subscribe((data: Greetings) => (this.title += ' and ' + data.message));
   }
 }
