@@ -4,11 +4,11 @@
     "es"
   ],
   "spellright.documentTypes": [
-    "markdown",
     "latex",
     "plaintext",
     "typescript",
-    "yaml"
+    "yaml",
+    "markdown"
   ],
   "workbench.colorCustomizations": {
     "editorError.foreground": "#ff9900",
