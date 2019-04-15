@@ -86,6 +86,10 @@ As a: seller,
   so that: I can know han much I can buy
 
 ```
+```
+ng g m OutOfStock --project=warehouse --routing
+ng g c OutOfStock/OutOfStock --project=warehouse
+```
 
 ---
 
