@@ -1,7 +1,14 @@
 import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatIconModule, MatListModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
+import {
+  MatBadgeModule,
+  MatButtonModule,
+  MatIconModule,
+  MatListModule,
+  MatSidenavModule,
+  MatToolbarModule
+} from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { ShellComponent } from './shell/shell.component';
 
@@ -10,6 +17,7 @@ import { ShellComponent } from './shell/shell.component';
   imports: [
     CommonModule,
     LayoutModule,
+    MatBadgeModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
