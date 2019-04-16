@@ -24,5 +24,7 @@ class: impact
 
 # [3-Template](https://academiabinaria.github.io/angular-business/3-template.html)
 
+# [4-Redux](https://academiabinaria.github.io/angular-business/4-redux.html)
+
 ---
 
