@@ -43,16 +43,24 @@ As a: developer,
   so that: I can debug and predict behaviour
 ```
 
+> Redux no hace rápido lo simple, sino mantenible lo complejo
+
 ---
 
 ## 1.1 Principios de Redux
 
-
+- **Single Source Of Truth**: Cada pieza de información se almacena en un único lugar, independientemente de dónde sea creada, modificada o requerida.
+- **Read Only State**: La información será de sólo lectura y sólo podrá modificarse a través de conductos oficiales.
+- **Changes By Pure Functions**: Los cambios tienen que poder ser replicados, cancelados y auditados; lo mejor, usar una función pura.
 
 ---
 
 ## 1.2 Elementos de Redux
 
+- **Store**: El sistema que mantiene el estado. Despacha acciones de mutado sobre el mismo y comunica cambios enviando copias de sólo lectura a los subscriptores.
+- **State**: Árbol de objetos que contienen la única copia válida de la información. Representa el valor del almacén en un momento determinado.
+- **Actions**: Objetos identificados por un tipo y cargados con un *payload*. Transmiten una intención de mutación sobre el estado del *store*.
+- **Reducers** : Son funciones puras, que ostentan la exclusividad de poder mutar el estado. Reciben dos argumentos: el estado actual y una acción con su tipo y su carga. Clonan el estado, realizan los cambios oportunos y devuelven el estado mutado.
 
 ---
 
@@ -70,9 +78,9 @@ class: impact
 # 2 Implementación de un Store con RxJs
 
 ## El Store observable
-## Las acciones
-## El reductor
-## Tipado estricto
+## El envío de acciones
+## La función reductora de estado
+## La selección de suscripciones
 
 ---
 
@@ -95,23 +103,162 @@ ng g s core/products --project=warehouse
 
 ---
 
+```typescript
+export class ApiProductsService {
+  private readonly url = 'api/products';
+
+  constructor(private httpClient: HttpClient) {}
+
+  public getProducts$() {
+    return this.httpClient.get<Product[]>(this.url);
+  }
+
+  public putProduct$(product: Product) {
+    return this.httpClient.put(this.url, product);
+  }
+}
+```
+
+---
+
 ## 2.1 El Store observable
 
+Single-file Redux store
 ```
 ng g s core/out-of-stock-store --project=warehouse
 
 ```
+
+```typescript
+export interface OutOfStock {
+  products: Product[];
+}
+export const OutOfStock_Initial_State: OutOfStock = { products: [] };
+```
+
 ---
 
-## 2.2 Las acciones
+```typescript
+export class OutOfStockStoreService {
+  private state: OutOfStock = OutOfStock_Initial_State;
+  private state$: BehaviorSubject<OutOfStock> = new BehaviorSubject(this.snapShot());
+
+  constructor() {}
+
+  public snapShot(): OutOfStock {
+    return { ...this.state };
+  }
+  public select$(): Observable<OutOfStock> {
+    return this.state$.asObservable();
+  }
+  public dispatch(action: ImAction) {
+    this.state = reducer(this.state, action);
+    this.state$.next(this.snapShot());
+  }
+}
+```
+
 
 ---
 
-## 2.3 El Reductor
+## 2.2 El envío de acciones
+
+
+```typescript
+export interface ImAction {
+  type: string;
+  payload: any;
+}
+export class AddOoSProduct implements ImAction {
+  public readonly type = 'Add Out of Stock Product';
+  constructor(public readonly payload: Product) {}
+}
+export class RemoveOoSProduct implements ImAction {
+  public readonly type = 'Remove Out of Stock Product';
+  constructor(public readonly payload: Product) {}
+}
+```
 
 ---
 
-## 2.4 Tipado estricto
+```typescript
+export class ProductsService {
+  private readonly minimalStock = environment.minimalStock;
+  constructor(
+    private apiProductsService: ApiProductsService,
+    private outOfStockStoreService: OutOfStockStoreService
+  ) {}
+  public getProducts$() {
+    return this.apiProductsService.getProducts$().pipe(
+      tap(products => {
+        products.forEach(product => {
+          if (product.stock <= this.minimalStock) {
+            const addOutOfStockAction = new AddOoSProduct(product);
+            this.outOfStockStoreService.dispatch(addOutOfStockAction);
+          }
+        });
+      })
+    );
+  }
+  public refill(product: Product) {
+    product.stock += environment.minimalStock;
+    this.apiProductsService.putProduct$(product).subscribe(() => {
+      const removeOutOfStockAction = new RemoveOoSProduct(product);
+      this.outOfStockStoreService.dispatch(removeOutOfStockAction);
+    });
+  }
+}
+```
+
+---
+
+## 2.3 La función reductora de estado
+
+```typescript
+function reducer(state: OutOfStock = OutOfStock_Initial_State, action: ImAction): OutOfStock {
+  const result = { ...state };
+  const product = action.payload;
+  switch (action.type) {
+    case 'Add Out of Stock Product':
+      if (result.products.find(p => p._id === product._id) === undefined) {
+        result.products = [...result.products, product];
+      }
+      break;
+    case 'Remove Out of Stock Product':
+      result.products = result.products.filter(p => p._id !== product._id);
+      break;
+    default:
+      break;
+  }
+  return result;
+}
+```
+
+---
+
+## 2.4 La selección de suscripciones
+
+```typescript
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private outOfStockStoreService: OutOfStockStoreService
+  ) {
+    this.numberOfProductsOutOfStock$ = this.outOfStockStoreService
+      .select$()
+      .pipe(map(state => state.products.length));
+  }
+```
+
+--
+
+```typescript
+ public ngOnInit() {
+  this.productsOutOfStock$ = this.outOfStockStoreService
+    .select$()
+    .pipe(map(store => store.products));
+  this.productsService.getProducts$().subscribe();
+}
+```
 
 ---
 
