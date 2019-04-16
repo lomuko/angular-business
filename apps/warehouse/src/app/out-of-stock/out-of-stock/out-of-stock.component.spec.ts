@@ -1,5 +1,6 @@
+import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MatIconModule, MatListModule } from '@angular/material';
 import { OutOfStockComponent } from './out-of-stock.component';
 
 describe('OutOfStockComponent', () => {
@@ -8,9 +9,9 @@ describe('OutOfStockComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OutOfStockComponent ]
-    })
-    .compileComponents();
+      declarations: [OutOfStockComponent],
+      imports: [MatListModule, MatIconModule, HttpClientModule]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
