@@ -278,10 +278,10 @@ function reducer(state: OutOfStock = OutOfStock_Initial_State, action: ImAction)
 # Redux con NgRx
 
 ## Instalación y configuración
-## State y reducers
 ## Actions
-## Efectos secundarios
-## Selectores y fachadas
+## State reducer
+## Selectors
+## Effects
 
 
 > **Blog de apoyo:** [Detección del cambio en Angular](https://academia-binaria.com/deteccion-del-cambio-en-Angular/)
