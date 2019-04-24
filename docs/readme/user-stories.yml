@@ -46,3 +46,21 @@ As a: seller,
 As a: customer,
   I want: to see a product price in euros an dollars
   so that: i can decide to purchase it or not
+
+--- # 4 redux
+As a: seller,
+  I want: to know how many products are out of stock
+  so that: I can refill them
+
+As a: seller,
+  I want: to refill a product
+  so that: I can sell more units
+
+--- # 5 ngrx
+As a: customer,
+  I want: to see the total units always updated
+  so that: I know how many items I will buy
+
+As a: customer,
+  I want: to add items to my shopping cart
+  so that: I can buy them
