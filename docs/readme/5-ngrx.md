@@ -79,6 +79,11 @@ ng add @ngrx/store@next --project shop --statePath store --stateInterface RootSt
 
 ## 1.2 Registro y configuración
 
+```typescript
+StoreModule.forRoot(rootReducers, { metaReducers })
+export const rootReducers: ActionReducerMap<RootState> = {};
+```
+
 ---
 
 ## 1.3 Router y DevTools

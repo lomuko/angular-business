@@ -1,13 +1,16 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  BrowserAnimationsModule,
+  NoopAnimationsModule
+} from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
 import { ROUTES } from './app.routes';
 import { CoreModule } from './core/core.module';
-import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './store';
+import { metaReducers, rootReducers } from './store';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +21,7 @@ import { reducers, metaReducers } from './store';
     BrowserAnimationsModule,
     NoopAnimationsModule,
     CoreModule,
-    StoreModule.forRoot(reducers, { metaReducers })
+    StoreModule.forRoot(rootReducers, { metaReducers })
   ],
   providers: [],
   bootstrap: [AppComponent]
