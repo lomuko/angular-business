@@ -88,6 +88,17 @@ export const rootReducers: ActionReducerMap<RootState> = {};
 
 ## 1.3 Router y DevTools
 
+```
+ng add @ngrx/router-store@next --project shop
+ng add @ngrx/store-devtools@next --project shop
+```
+
+```typescript
+export interface RootState {
+  router: RouterReducerState<any>;
+}
+```
+
 ---
 
 > Recap:
