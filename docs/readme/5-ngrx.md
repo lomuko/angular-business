@@ -72,6 +72,9 @@ As a: customer,
 
 ## 1.1 Instalación de NgRx
 
+```
+ng add @ngrx/store@next --project shop --statePath store --stateInterface RootState
+```
 ---
 
 ## 1.2 Registro y configuración
