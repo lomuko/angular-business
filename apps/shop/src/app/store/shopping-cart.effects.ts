@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { tap } from 'rxjs/operators';
-import { addShoppingCartItem } from './shopping-cart.actions';
+import { of } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { CartService } from '../cart.service';
+import {
+  addShoppingCartItem,
+  saveShoppingCart,
+  shoppingCartErrorSaving,
+  shoppingCartSaved
+} from './shopping-cart.actions';
 
 @Injectable()
 export class ShoppingCartEffects {
@@ -16,8 +23,9 @@ export class ShoppingCartEffects {
       ),
     { dispatch: false }
   );
+  public saveShoppingCart$ = createEffect(this.saveShoppingCart.bind(this));
 
-  constructor(private actions$: Actions) {}
+  constructor(private actions$: Actions, private cartService: CartService) {}
 
   private logAddProductAction() {
     return this.actions$.pipe(
@@ -25,6 +33,20 @@ export class ShoppingCartEffects {
       tap(action => console.log('action_Inline:', action))
     );
   }
-}
 
-//EffectsModule.forRoot([ShoppingCartEffects])
+  private saveShoppingCart() {
+    return this.actions$.pipe(
+      ofType(saveShoppingCart),
+      switchMap(action =>
+        this.cartService
+          .postShoppingCart(action.payload)
+          .pipe(
+            map(
+              result => shoppingCartSaved({ payload: result }),
+              catchError(error => of(shoppingCartErrorSaving({ payload: error.message })))
+            )
+          )
+      )
+    );
+  }
+}

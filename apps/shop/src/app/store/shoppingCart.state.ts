@@ -4,7 +4,7 @@ import { RootState } from './root.state';
 
 export const initialState: ShoppingCart = { _id: '', items: [], client: '', status: '' };
 
-const shoppingCart = (state: RootState) => state.shoppingCart;
+export const shoppingCart = (state: RootState) => state.shoppingCart;
 
 export const shoppingCartItems = createSelector(
   shoppingCart,

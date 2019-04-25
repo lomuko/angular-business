@@ -2,9 +2,10 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { RootState } from '../../store/root.state';
-import { shoppingCartItemsCount } from '../../store/shoppingCart.state';
+import { saveShoppingCart } from '../../store/shopping-cart.actions';
+import { shoppingCart, shoppingCartItemsCount } from '../../store/shoppingCart.state';
 
 @Component({
   selector: 'angular-business-shell',
@@ -19,5 +20,18 @@ export class ShellComponent {
 
   constructor(private breakpointObserver: BreakpointObserver, private store: Store<RootState>) {
     this.shoppingCartItemsCount$ = this.store.pipe(select(shoppingCartItemsCount));
+  }
+
+  public saveShoppingCart() {
+    this.store
+      .pipe(
+        select(shoppingCart),
+        take(1)
+      )
+      .subscribe(current => {
+        const action = saveShoppingCart({ payload: current });
+        this.store.dispatch(action);
+        console.log('Saving', current);
+      });
   }
 }

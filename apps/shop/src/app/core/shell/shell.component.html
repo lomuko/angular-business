@@ -10,6 +10,11 @@
       <a mat-list-item
          [routerLink]="['/shopping-cart']"
          routerLinkActive="router-link-active">Shopping Cart. {{ shoppingCartItemsCount$ | async}}</a>
+      <mat-list-item>
+        <button (click)="saveShoppingCart()"
+                mat-raised-button
+                color="accent">Save Cart</button>
+      </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

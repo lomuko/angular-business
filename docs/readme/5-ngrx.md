@@ -291,6 +291,7 @@ class: impact
 ## Install
 ## Efecto básico
 ## Register
+## Api async effects
 
 ---
 
@@ -332,9 +333,88 @@ export class ShoppingCartEffects {
 }
 ```
 
+
 ---
 
 ## Register
+
+```typescript
+EffectsModule.forRoot([ShoppingCartEffects]),
+```
+
+---
+
+## Api async effects
+
+```typescript
+export const saveShoppingCart = createAction(
+  '[ShoppingCart Effects] Save Shopping Cart',
+  props<{ payload: ShoppingCart }>()
+);
+
+export const shoppingCartSaved = createAction(
+  '[ShoppingCart Effects] Shopping Cart Saved',
+  props<{ payload: ShoppingCart }>()
+);
+
+export const shoppingCartErrorSaving = createAction(
+  '[ShoppingCart Effects] Shopping Cart Error Saved',
+  props<{ payload: string }>()
+);
+```
+
+---
+
+```typescript
+public saveShoppingCart$ = createEffect(this.saveShoppingCart.bind(this));
+
+private saveShoppingCart() {
+  return this.actions$.pipe(
+    ofType(saveShoppingCart),
+    switchMap(action =>
+      this.cartService
+        .postShoppingCart(action.payload)
+        .pipe(
+          map(
+            result => shoppingCartSaved({ payload: result }),
+            catchError(error => of(shoppingCartErrorSaving({ payload: error.message })))
+          )
+        )
+    )
+  );
+}
+
+```
+
+---
+
+```typescript
+export const shoppingCartReducer = createReducer(
+  initialState,
+  on(shoppingCartSaved, onShoppingCartSaved)
+);
+
+function onShoppingCartSaved(state: ShoppingCart, { payload }) {
+  return payload;
+}
+```
+
+---
+
+```typescript
+public saveShoppingCart() {
+  this.store
+    .pipe(
+      select(shoppingCart),
+      take(1)
+    )
+    .subscribe(current => {
+      const action = saveShoppingCart({ payload: current });
+      this.store.dispatch(action);
+      console.log('Saving', current);
+    });
+}
+```
 
 ---
 
@@ -345,6 +425,7 @@ export class ShoppingCartEffects {
 ## Install
 ## Efecto básico
 ## Register
+## Api async effects
 
 ---
 
