@@ -57,12 +57,12 @@ As a: developer,
 
 ```yaml
 As a: customer,
-  I want: to see the total units always updated
-  so that: I know how many items I will buy
-
-As a: customer,
   I want: to add items to my shopping cart
   so that: I can buy them
+
+As a: customer,
+  I want: to see the total units always updated
+  so that: I know how many items I will buy
 
 ```
 
@@ -115,9 +115,36 @@ class: impact
 
 # 2 Actions
 
-## ...
+## Create
+## Dispatch
 
 ---
+
+## Create
+
+```typescript
+import { ShoppingCartItem } from '@angular-business/models';
+import { createAction, props } from '@ngrx/store';
+
+export const addShoppingCartItem = createAction(
+  '[Product Catalog] Add to Shopping Cart',
+  props<{ payload: ShoppingCartItem }>()
+);
+```
+
+---
+
+## Dispatch
+
+```typescript
+constructor(private store: Store<RootState>) {}
+
+public buyProduct(product: Product) {
+  const payload = { product: product, quantity: 1 };
+  const action = addShoppingCartItem({ payload });
+  this.store.dispatch(action);
+}
+```
 
 
 ---
@@ -126,7 +153,8 @@ class: impact
 
 # 2 Actions
 
-## ...
+## Create
+## Dispatch
 
 ---
 
