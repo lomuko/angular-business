@@ -288,9 +288,53 @@ class: impact
 
 # 5 Effects
 
-## ...
+## Install
+## Efecto básico
+## Register
 
 ---
+
+## Install
+
+```
+yarn add @ngrx/effects
+```
+
+---
+
+## Efecto básico
+
+```typescript
+@Injectable()
+export class ShoppingCartEffects {
+  public logAddProduct$ = createEffect(
+    this.logAddProductAction.bind(this),
+    { dispatch: false }
+  );
+
+  public logAddProduct_Inline$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(addShoppingCartItem),
+        tap(action => console.log('action_Inline:', action))
+      ),
+    { dispatch: false }
+  );
+
+  constructor(private actions$: Actions) {}
+
+  private logAddProductAction() {
+    return this.actions$.pipe(
+      ofType(addShoppingCartItem),
+      tap(action => console.log('action:', action))
+    );
+  }
+}
+```
+
+---
+
+## Register
 
 ---
 
@@ -298,7 +342,9 @@ class: impact
 
 # 5 Effects
 
-## ...
+## Install
+## Efecto básico
+## Register
 
 ---
 

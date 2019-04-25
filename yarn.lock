@@ -734,6 +734,11 @@
     deprecate "1.0.0"
     optional "0.1.4"
 
+"@ngrx/effects@^8.0.0-beta.1":
+  version "8.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-8.0.0-beta.1.tgz#f81e6c12140f91b536a63b8945c6d10a24a610d7"
+  integrity sha512-VpDOrWPLciEumlV4rKygIp6EUMkY5q/+px6JbzVIFyUVxJJW58QkiADqt8s1Zqz4+9oQXrgWnKc1h3qaLW10OQ==
+
 "@ngrx/router-store@^8.0.0-beta.1":
   version "8.0.0-beta.1"
   resolved "https://registry.yarnpkg.com/@ngrx/router-store/-/router-store-8.0.0-beta.1.tgz#84d25c95ea5b3df08c31caa67acb778edcb43d25"
