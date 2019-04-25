@@ -162,9 +162,67 @@ class: impact
 
 # 3 State reducer
 
-## ...
+## State
+## Create function
+## Register in Store
+---
+
+## State
+
+```typescript
+export interface RootState {
+  router: RouterReducerState<any>;
+  shoppingCart: ShoppingCart;
+}
+```
+---
+
+## Create function
+
+```typescript
+const initialState: ShoppingCart = { _id: '', items: [], client: '', status: '' };
+export const shoppingCartReducer = createReducer(
+  initialState,
+  on(addShoppingCartItem, onAddShoppingCartItem)
+);
+
+function onAddShoppingCartItem(state: ShoppingCart, { payload }) {
+  return { ...state, items: [...state.items, payload] };
+}
+```
+
+--
+
+```typescript
+const initialState: ShoppingCart = { _id: '', items: [], client: '', status: '' };
+export const shoppingCartReducer = createReducer(
+  initialState,
+  on(addShoppingCartItem, (state, { payload }) => ({
+    ...state,
+    items: [...state.items, payload]
+  }))
+);
+```
 
 ---
+## Register in Store
+
+### Adding to Root Store
+
+```typescript
+export const rootReducers: ActionReducerMap<RootState> = {
+  router: routerReducer,
+  shoppingCart: shoppingCartReducer
+};
+```
+
+### Creating a new Feature Store
+
+--
+
+```typescript
+StoreModule.forFeature('shoppingCart', shoppingCartReducer)
+```
 
 ---
 
@@ -172,7 +230,9 @@ class: impact
 
 # 3 State reducer
 
-## ...
+## State
+## Create function
+## Register in Store
 
 ---
 
