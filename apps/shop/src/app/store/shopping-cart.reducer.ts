@@ -1,8 +1,7 @@
 import { ShoppingCart } from '@angular-business/models';
 import { createReducer, on } from '@ngrx/store';
 import { addShoppingCartItem } from './shopping-cart.actions';
-
-export const initialState: ShoppingCart = { _id: '', items: [], client: '', status: '' };
+import { initialState } from './shoppingCart.state';
 
 export const shoppingCartReducer = createReducer(
   initialState,

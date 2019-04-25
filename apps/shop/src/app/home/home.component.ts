@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { RootState } from '../store/RootState';
+import { RootState } from '../store/root.state';
 import { addShoppingCartItem } from '../store/shopping-cart.actions';
 
 @Component({

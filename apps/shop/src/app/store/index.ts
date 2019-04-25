@@ -1,7 +1,7 @@
 import { routerReducer } from '@ngrx/router-store';
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { environment } from '../../environments/environment';
-import { RootState } from './RootState';
+import { RootState } from './root.state';
 import { shoppingCartReducer } from './shopping-cart.reducer';
 
 export const rootReducers: ActionReducerMap<RootState> = {

@@ -9,7 +9,7 @@
     <mat-nav-list>
       <a mat-list-item
          [routerLink]="['/shopping-cart']"
-         routerLinkActive="router-link-active">Shopping Cart.</a>
+         routerLinkActive="router-link-active">Shopping Cart. {{ shoppingCartItemsCount$ | async}}</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

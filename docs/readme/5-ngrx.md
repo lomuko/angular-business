@@ -240,9 +240,38 @@ class: impact
 
 # 4 Selectors
 
-## ...
+## Create selector
+## Selecting data
 
 ---
+
+## Create selector
+
+```typescript
+const shoppingCart = (state: RootState) => state.shoppingCart;
+
+export const shoppingCartItems = createSelector(
+  shoppingCart,
+  (state: ShoppingCart) => state.items
+);
+
+export const shoppingCartItemsCount = createSelector(
+  shoppingCart,
+  (state: ShoppingCart) => state.items.length
+);
+```
+
+---
+
+## Selecting data
+
+```typescript
+public shoppingCartItemsCount$: Observable<number>;
+
+constructor(private store: Store<RootState>) {
+  this.shoppingCartItemsCount$ = this.store.pipe(select(shoppingCartItemsCount));
+}
+```
 
 ---
 
@@ -250,7 +279,8 @@ class: impact
 
 # 4 Selectors
 
-## ...
+## Create selector
+## Selecting data
 
 ---
 
