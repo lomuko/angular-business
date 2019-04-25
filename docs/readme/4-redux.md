@@ -94,6 +94,7 @@ As a: seller,
   so that: I can sell more units
 
 ```
+
 ```
 ng g m out-of-stock --project=warehouse --routing
 ng g c out-of-stock/out-of-stock --project=warehouse

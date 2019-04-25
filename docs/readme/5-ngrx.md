@@ -57,20 +57,13 @@ As a: developer,
 
 ```yaml
 As a: customer,
-  I want: to know how many items are in my basket
-  so that: I can decide
+  I want: to see the total units always updated
+  so that: I know how many items I will buy
 
 As a: customer,
   I want: to add items to my shopping cart
   so that: I can buy them
 
-As a: customer,
-  I want: to remove items from my shopping cart
-  so that: I can leave them
-
-As a: customer,
-  I want: to do the checkout
-  so that: I can get the order
 ```
 
 > NgRx no hace rápido a Redux, sino mantenible el boilerplate
@@ -79,13 +72,32 @@ As a: customer,
 
 ## 1.1 Instalación de NgRx
 
+```
+ng add @ngrx/store@next --project shop --statePath store --stateInterface RootState
+```
 ---
 
 ## 1.2 Registro y configuración
 
+```typescript
+StoreModule.forRoot(rootReducers, { metaReducers })
+export const rootReducers: ActionReducerMap<RootState> = {};
+```
+
 ---
 
 ## 1.3 Router y DevTools
+
+```
+ng add @ngrx/router-store@next --project shop
+ng add @ngrx/store-devtools@next --project shop
+```
+
+```typescript
+export interface RootState {
+  router: RouterReducerState<any>;
+}
+```
 
 ---
 
