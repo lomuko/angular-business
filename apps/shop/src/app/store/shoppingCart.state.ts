@@ -15,3 +15,8 @@ export const shoppingCartItemsCount = createSelector(
   shoppingCart,
   (state: ShoppingCart) => state.items.length
 );
+
+export const shoppingCartError = createSelector(
+  shoppingCart,
+  (state: ShoppingCart) => state.error
+);

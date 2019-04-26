@@ -4,8 +4,12 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { RootState } from '../../store/root.state';
-import { saveShoppingCart } from '../../store/shopping-cart.actions';
-import { shoppingCart, shoppingCartItemsCount } from '../../store/shoppingCart.state';
+import { loadShoppingCart, saveShoppingCart } from '../../store/shopping-cart.actions';
+import {
+  shoppingCart,
+  shoppingCartError,
+  shoppingCartItemsCount
+} from '../../store/shoppingCart.state';
 
 @Component({
   selector: 'angular-business-shell',
@@ -17,9 +21,13 @@ export class ShellComponent {
     .observe(Breakpoints.Handset)
     .pipe(map(result => result.matches));
   public shoppingCartItemsCount$: Observable<number>;
+  public shoppingCartError$: Observable<string>;
 
   constructor(private breakpointObserver: BreakpointObserver, private store: Store<RootState>) {
+    const action = loadShoppingCart({});
+    this.store.dispatch(action);
     this.shoppingCartItemsCount$ = this.store.pipe(select(shoppingCartItemsCount));
+    this.shoppingCartError$ = this.store.pipe(select(shoppingCartError));
   }
 
   public saveShoppingCart() {
@@ -29,7 +37,7 @@ export class ShellComponent {
         take(1)
       )
       .subscribe(current => {
-        const action = saveShoppingCart({ payload: current });
+        const action = saveShoppingCart({ shoppingCart: current });
         this.store.dispatch(action);
         console.log('Saving', current);
       });

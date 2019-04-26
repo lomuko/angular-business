@@ -5,16 +5,16 @@ import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { CartService } from '../cart.service';
 import {
   addShoppingCartItem,
+  loadShoppingCart,
   saveShoppingCart,
+  shoppingCartErrorLoading,
   shoppingCartErrorSaving,
+  shoppingCartLoaded,
   shoppingCartSaved
 } from './shopping-cart.actions';
 
 @Injectable()
 export class ShoppingCartEffects {
-  public logAddProduct$ = createEffect(this.logAddProductAction.bind(this), {
-    dispatch: false
-  });
   public logAddProduct_Inline$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -23,6 +23,12 @@ export class ShoppingCartEffects {
       ),
     { dispatch: false }
   );
+
+  public logAddProduct$ = createEffect(this.logAddProductAction.bind(this), {
+    dispatch: false
+  });
+
+  public loadShoppingCart$ = createEffect(this.loadShoppingCart.bind(this));
   public saveShoppingCart$ = createEffect(this.saveShoppingCart.bind(this));
 
   constructor(private actions$: Actions, private cartService: CartService) {}
@@ -34,18 +40,29 @@ export class ShoppingCartEffects {
     );
   }
 
+  private loadShoppingCart() {
+    return this.actions$.pipe(
+      ofType(loadShoppingCart),
+      switchMap(() =>
+        this.cartService.getShoppingCart().pipe(
+          map(result => shoppingCartLoaded({ shoppingCart: result })),
+          catchError(error => {
+            console.log('effect got error', error);
+            return of(shoppingCartErrorLoading({ error: error.message }));
+          })
+        )
+      )
+    );
+  }
+
   private saveShoppingCart() {
     return this.actions$.pipe(
       ofType(saveShoppingCart),
       switchMap(action =>
-        this.cartService
-          .postShoppingCart(action.payload)
-          .pipe(
-            map(
-              result => shoppingCartSaved({ payload: result }),
-              catchError(error => of(shoppingCartErrorSaving({ payload: error.message })))
-            )
-          )
+        this.cartService.postShoppingCart(action.shoppingCart).pipe(
+          map(result => shoppingCartSaved({ shoppingCart: result })),
+          catchError(error => of(shoppingCartErrorSaving({ error: error.message })))
+        )
       )
     );
   }

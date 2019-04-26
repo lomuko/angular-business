@@ -6,17 +6,32 @@ export const addShoppingCartItem = createAction(
   props<{ payload: ShoppingCartItem }>()
 );
 
+export const loadShoppingCart = createAction(
+  '[Application Start] Load Shopping Cart',
+  props<{}>()
+);
+
+export const shoppingCartLoaded = createAction(
+  '[ShoppingCart Effects] Shopping Cart Loaded',
+  props<{ shoppingCart: ShoppingCart }>()
+);
+
+export const shoppingCartErrorLoading = createAction(
+  '[ShoppingCart Effects] Shopping Cart Error Loading',
+  props<{ error: string }>()
+);
+
 export const saveShoppingCart = createAction(
-  '[ShoppingCart Effects] Save Shopping Cart',
-  props<{ payload: ShoppingCart }>()
+  '[Navigation Section] Save Shopping Cart',
+  props<{ shoppingCart: ShoppingCart }>()
 );
 
 export const shoppingCartSaved = createAction(
   '[ShoppingCart Effects] Shopping Cart Saved',
-  props<{ payload: ShoppingCart }>()
+  props<{ shoppingCart: ShoppingCart }>()
 );
 
 export const shoppingCartErrorSaving = createAction(
-  '[ShoppingCart Effects] Shopping Cart Error Saved',
-  props<{ payload: string }>()
+  '[ShoppingCart Effects] Shopping Cart Error Saving',
+  props<{ error: string }>()
 );

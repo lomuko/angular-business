@@ -5,4 +5,5 @@ export interface ShoppingCart {
   items: ShoppingCartItem[];
   client: string;
   status: string;
+  error?: string;
 }
