@@ -1,3 +1,4 @@
+import { ShoppingCart } from '@angular-business/models';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
@@ -6,8 +7,8 @@ import { map, take } from 'rxjs/operators';
 import { RootState } from '../../store/root.state';
 import { loadShoppingCart, saveShoppingCart } from '../../store/shopping-cart.actions';
 import {
-  shoppingCart,
   shoppingCartError,
+  shoppingCartFeature,
   shoppingCartItemsCount
 } from '../../store/shoppingCart.state';
 
@@ -24,22 +25,29 @@ export class ShellComponent {
   public shoppingCartError$: Observable<string>;
 
   constructor(private breakpointObserver: BreakpointObserver, private store: Store<RootState>) {
-    const action = loadShoppingCart({});
-    this.store.dispatch(action);
+    this.loadShoppingCart();
     this.shoppingCartItemsCount$ = this.store.pipe(select(shoppingCartItemsCount));
     this.shoppingCartError$ = this.store.pipe(select(shoppingCartError));
   }
 
+  public loadShoppingCart() {
+    const action = loadShoppingCart({});
+    this.store.dispatch(action);
+  }
+
   public saveShoppingCart() {
-    this.store
-      .pipe(
-        select(shoppingCart),
-        take(1)
-      )
-      .subscribe(current => {
-        const action = saveShoppingCart({ shoppingCart: current });
-        this.store.dispatch(action);
-        console.log('Saving', current);
-      });
+    this.getCurrentShoppingCart$().subscribe(current => this.saveCurrentShoppingCart(current));
+  }
+
+  private getCurrentShoppingCart$() {
+    return this.store.pipe(
+      select(shoppingCartFeature),
+      take(1)
+    );
+  }
+
+  private saveCurrentShoppingCart(current: ShoppingCart) {
+    const action = saveShoppingCart({ shoppingCartToSave: current });
+    this.store.dispatch(action);
   }
 }

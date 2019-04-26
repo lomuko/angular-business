@@ -34,8 +34,7 @@ export class HomeComponent implements OnInit {
   }
   public buyProduct(product: Product) {
     const payload = { product: product, quantity: 1 };
-    const action = addShoppingCartItem({ payload });
+    const action = addShoppingCartItem({ newShoppingCartItem: payload });
     this.store.dispatch(action);
-    console.log('Buying', product);
   }
 }

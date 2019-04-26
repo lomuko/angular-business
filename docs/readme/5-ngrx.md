@@ -53,18 +53,6 @@ As a: developer,
   so that: I can make asynchronous calls
 ```
 
----
-
-```yaml
-As a: customer,
-  I want: to add items to my shopping cart
-  so that: I can buy them
-
-As a: customer,
-  I want: to see the total units always updated
-  so that: I know how many items I will buy
-
-```
 
 > NgRx no hace rápido a Redux, sino mantenible el boilerplate
 
@@ -72,9 +60,10 @@ As a: customer,
 
 ## 1.1 Instalación de NgRx
 
-```
+```terminal
 ng add @ngrx/store@next --project shop --statePath store --stateInterface RootState
 ```
+
 ---
 
 ## 1.2 Registro y configuración
@@ -82,6 +71,7 @@ ng add @ngrx/store@next --project shop --statePath store --stateInterface RootSt
 ```typescript
 StoreModule.forRoot(rootReducers, { metaReducers })
 export const rootReducers: ActionReducerMap<RootState> = {};
+export interface RootState{}
 ```
 
 ---
@@ -120,6 +110,19 @@ class: impact
 
 ---
 
+```yaml
+As a: customer,
+  I want: to add items to my shopping cart
+  so that: I can buy them
+
+As a: customer,
+  I want: to see the total units always updated
+  so that: I know how many items I will buy
+
+```
+
+---
+
 ## Create
 
 ```typescript
@@ -128,7 +131,7 @@ import { createAction, props } from '@ngrx/store';
 
 export const addShoppingCartItem = createAction(
   '[Product Catalog] Add to Shopping Cart',
-  props<{ payload: ShoppingCartItem }>()
+  props<{ newShoppingCartItem: ShoppingCartItem }>()
 );
 ```
 
@@ -141,7 +144,7 @@ constructor(private store: Store<RootState>) {}
 
 public buyProduct(product: Product) {
   const payload = { product: product, quantity: 1 };
-  const action = addShoppingCartItem({ payload });
+  const action = addShoppingCartItem({ newShoppingCartItem: payload });
   this.store.dispatch(action);
 }
 ```
@@ -170,38 +173,28 @@ class: impact
 ## State
 
 ```typescript
+// root.state.ts
 export interface RootState {
   router: RouterReducerState<any>;
   shoppingCart: ShoppingCart;
 }
+// shoppingCart.state.ts
+export const initialState: ShoppingCart = { _id: '', items: [], client: '', status: '' };
 ```
 ---
 
 ## Create function
 
 ```typescript
-const initialState: ShoppingCart = { _id: '', items: [], client: '', status: '' };
+// create a reducer function
 export const shoppingCartReducer = createReducer(
   initialState,
   on(addShoppingCartItem, onAddShoppingCartItem)
 );
-
-function onAddShoppingCartItem(state: ShoppingCart, { payload }) {
-  return { ...state, items: [...state.items, payload] };
+// respond to an action
+function onAddShoppingCartItem(state: ShoppingCart, { newShoppingCartItem }) {
+  return { ...state, items: [...state.items, newShoppingCartItem] };
 }
-```
-
---
-
-```typescript
-const initialState: ShoppingCart = { _id: '', items: [], client: '', status: '' };
-export const shoppingCartReducer = createReducer(
-  initialState,
-  on(addShoppingCartItem, (state, { payload }) => ({
-    ...state,
-    items: [...state.items, payload]
-  }))
-);
 ```
 
 ---
@@ -216,7 +209,7 @@ export const rootReducers: ActionReducerMap<RootState> = {
 };
 ```
 
-### Creating a new Feature Store
+> Alternative : Create a new Feature Store
 
 --
 
@@ -248,15 +241,15 @@ class: impact
 ## Create selector
 
 ```typescript
-const shoppingCart = (state: RootState) => state.shoppingCart;
+export const shoppingCartFeature = (state: RootState) => state.shoppingCart;
 
 export const shoppingCartItems = createSelector(
-  shoppingCart,
+  shoppingCartFeature,
   (state: ShoppingCart) => state.items
 );
 
 export const shoppingCartItemsCount = createSelector(
-  shoppingCart,
+  shoppingCartFeature,
   (state: ShoppingCart) => state.items.length
 );
 ```
@@ -266,6 +259,8 @@ export const shoppingCartItemsCount = createSelector(
 ## Selecting data
 
 ```typescript
+//shell.component.ts
+
 public shoppingCartItemsCount$: Observable<number>;
 
 constructor(private store: Store<RootState>) {
@@ -290,8 +285,8 @@ class: impact
 
 ## Install
 ## Efecto básico
-## Register
 ## Api async effects
+## More Api async effects
 
 ---
 
@@ -306,19 +301,24 @@ yarn add @ngrx/effects
 ## Efecto básico
 
 ```typescript
+//shopping-cart.effects.ts
 @Injectable()
 export class ShoppingCartEffects {
-  public logAddProduct$ = createEffect(
-    this.logAddProductAction.bind(this),
-    { dispatch: false }
-  );
-
-  public logAddProduct_Inline$ = createEffect(
+   // Create an Observable of actions,
+   // with the pipe functions in line
+   public logAddProduct_Inline$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(addShoppingCartItem),
         tap(action => console.log('action_Inline:', action))
       ),
+    { dispatch: false }
+  );
+
+  // Create an Observable of actions,
+  // with the pipe functions as class methods
+  public logAddProduct$ = createEffect(
+    this.logAddProductAction.bind(this),
     { dispatch: false }
   );
 
@@ -333,12 +333,12 @@ export class ShoppingCartEffects {
 }
 ```
 
-
 ---
 
-## Register
+### Register
 
 ```typescript
+// app.module.ts
 EffectsModule.forRoot([ShoppingCartEffects]),
 ```
 
@@ -347,72 +347,149 @@ EffectsModule.forRoot([ShoppingCartEffects]),
 ## Api async effects
 
 ```typescript
-export const saveShoppingCart = createAction(
-  '[ShoppingCart Effects] Save Shopping Cart',
-  props<{ payload: ShoppingCart }>()
+// shopping-cart.actions.ts
+export const loadShoppingCart = createAction(
+  '[Application Start] Load Shopping Cart',
+  props<{}>()
 );
 
-export const shoppingCartSaved = createAction(
-  '[ShoppingCart Effects] Shopping Cart Saved',
-  props<{ payload: ShoppingCart }>()
+export const shoppingCartLoaded = createAction(
+  '[ShoppingCart Effects] Shopping Cart Loaded',
+  props<{ loadedShoppingCart: ShoppingCart }>()
 );
 
-export const shoppingCartErrorSaving = createAction(
-  '[ShoppingCart Effects] Shopping Cart Error Saved',
-  props<{ payload: string }>()
+export const shoppingCartErrorLoading = createAction(
+  '[ShoppingCart Effects] Shopping Cart Error Loading',
+  props<{ error: string }>()
 );
 ```
 
 ---
 
 ```typescript
+//shopping-cart.effects.ts
+
+public loadShoppingCart$ = createEffect(this.loadShoppingCart.bind(this));
+
+private loadShoppingCart() {
+  return this.actions$.pipe(
+    ofType(loadShoppingCart),
+    switchMap(() =>
+      this.cartService.getShoppingCart().pipe(
+        map(result => shoppingCartLoaded({ loadedShoppingCart: result })),
+        catchError(error => of(shoppingCartErrorLoading({ error: error.message })))
+      )
+    )
+  );
+}
+```
+
+---
+
+```typescript
+// shopping-cart.reducer.ts
+export const shoppingCartReducer = createReducer(
+  initialState,
+   on(shoppingCartLoaded, onShoppingCartLoaded),
+   on(shoppingCartErrorLoading, onApiError)
+);
+
+function onShoppingCartLoaded(state: ShoppingCart, { loadedShoppingCart }) {
+  return loadedShoppingCart;
+}
+function onApiError(state: ShoppingCart, { error }) {
+  return { ...state, error: error };
+}
+```
+
+---
+
+```typescript
+// shell.component.ts
+public loadShoppingCart(){
+  const action = loadShoppingCart({});
+  this.store.dispatch(action);
+}
+```
+
+---
+
+## More Api async effects
+
+```typescript
+// shopping-cart.actions.ts
+export const saveShoppingCart = createAction(
+  '[Navigation Section] Save Shopping Cart',
+  props<{ shoppingCartToSave: ShoppingCart }>()
+);
+
+export const shoppingCartSaved = createAction(
+  '[ShoppingCart Effects] Shopping Cart Saved',
+  props<{ savedShoppingCart: ShoppingCart }>()
+);
+
+export const shoppingCartErrorSaving = createAction(
+  '[ShoppingCart Effects] Shopping Cart Error Saving',
+  props<{ error: string }>()
+);
+```
+
+---
+
+```typescript
+//shopping-cart.effects.ts
+
 public saveShoppingCart$ = createEffect(this.saveShoppingCart.bind(this));
 
 private saveShoppingCart() {
   return this.actions$.pipe(
     ofType(saveShoppingCart),
     switchMap(action =>
-      this.cartService
-        .postShoppingCart(action.payload)
-        .pipe(
-          map(
-            result => shoppingCartSaved({ payload: result }),
-            catchError(error => of(shoppingCartErrorSaving({ payload: error.message })))
-          )
-        )
+      this.cartService.postShoppingCart(action.shoppingCartToSave).pipe(
+        map(result => shoppingCartSaved({ savedShoppingCart: result })),
+        catchError(error => of(shoppingCartErrorSaving({ error: error.message })))
+      )
     )
   );
 }
-
 ```
 
 ---
 
 ```typescript
+// shopping-cart.reducer.ts
 export const shoppingCartReducer = createReducer(
   initialState,
-  on(shoppingCartSaved, onShoppingCartSaved)
+  on(shoppingCartSaved, onShoppingCartSaved),
+  on(shoppingCartErrorSaving, onApiError)
 );
 
-function onShoppingCartSaved(state: ShoppingCart, { payload }) {
-  return payload;
+function onShoppingCartSaved(state: ShoppingCart, { savedShoppingCart }) {
+  return savedShoppingCart;
+}
+function onApiError(state: ShoppingCart, { error }) {
+  return { ...state, error: error };
 }
 ```
 
 ---
 
 ```typescript
+// shell.component.ts
 public saveShoppingCart() {
-  this.store
-    .pipe(
-      select(shoppingCart),
-      take(1)
-    )
-    .subscribe(current => {
-      const action = saveShoppingCart({ payload: current });
-      this.store.dispatch(action);
-      console.log('Saving', current);
-    });
+  this.getCurrentShoppingCart$().subscribe(current => this.saveCurrentShoppingCart(current));
+}
+
+private getCurrentShoppingCart$() {
+  return this.store.pipe(
+    select(shoppingCartFeature),
+    take(1)
+  );
+}
+
+private saveCurrentShoppingCart(current: ShoppingCart) {
+  const action = saveShoppingCart({ shoppingCartToSave: current });
+  this.store.dispatch(action);
 }
 ```
 
@@ -424,8 +501,8 @@ public saveShoppingCart() {
 
 ## Install
 ## Efecto básico
-## Register
 ## Api async effects
+## More Api async effects
 
 ---
 

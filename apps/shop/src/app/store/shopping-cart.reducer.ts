@@ -13,21 +13,21 @@ export const shoppingCartReducer = createReducer(
   initialState,
   on(addShoppingCartItem, onAddShoppingCartItem),
   on(shoppingCartLoaded, onShoppingCartLoaded),
-  on(shoppingCartSaved, onShoppingCartSaved),
   on(shoppingCartErrorLoading, onApiError),
+  on(shoppingCartSaved, onShoppingCartSaved),
   on(shoppingCartErrorSaving, onApiError)
 );
 
-function onAddShoppingCartItem(state: ShoppingCart, { payload }) {
-  return { ...state, items: [...state.items, payload] };
+function onAddShoppingCartItem(state: ShoppingCart, { newShoppingCartItem }) {
+  return { ...state, items: [...state.items, newShoppingCartItem] };
 }
 
-function onShoppingCartSaved(state: ShoppingCart, { shoppingCart }) {
-  return shoppingCart;
+function onShoppingCartLoaded(state: ShoppingCart, { loadedShoppingCart }) {
+  return loadedShoppingCart;
 }
 
-function onShoppingCartLoaded(state: ShoppingCart, { shoppingCart }) {
-  return shoppingCart;
+function onShoppingCartSaved(state: ShoppingCart, { savedShoppingCart }) {
+  return savedShoppingCart;
 }
 
 function onApiError(state: ShoppingCart, { error }) {
