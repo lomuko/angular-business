@@ -1,5 +1,5 @@
 import { ShoppingCart } from '@angular-business/models';
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
 import { ShoppingCartService } from './shopping-cart.service';
 
 @Controller('shopping-cart')
@@ -14,5 +14,11 @@ export class ShoppingCartController {
   @Post()
   setShoppingCart(@Body() shoppingCart: ShoppingCart) {
     return this.shoppingCartService.setShoppingCart(shoppingCart);
+  }
+
+  @Delete()
+  @Get('clear')
+  clearShoppingCart(): ShoppingCart {
+    return this.shoppingCartService.clearShoppingCart();
   }
 }

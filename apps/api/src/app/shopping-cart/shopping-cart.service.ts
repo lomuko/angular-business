@@ -3,6 +3,7 @@ import { ShoppingCart } from '../../../../../libs/models/src';
 
 @Injectable()
 export class ShoppingCartService {
+
   private shoppingCart: ShoppingCart;
 
   getShoppingCart(): ShoppingCart {
@@ -21,5 +22,10 @@ export class ShoppingCartService {
     this.shoppingCart = shoppingCart;
     this.shoppingCart.status = `updated at ${new Date().toISOString()}`;
     return this.shoppingCart;
+  }
+
+  clearShoppingCart(): null {
+    this.shoppingCart = null;
+    return null;
   }
 }

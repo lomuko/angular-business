@@ -6,7 +6,10 @@ import {
 
 describe('5-NgRx', () => {
   const numProducts = 6;
-  beforeEach(() => cy.visit('/'));
+  beforeEach(() => {
+    cy.request('DELETE', 'http://localhost:3333/api/shopping-cart');
+    cy.visit('/');
+  });
 
   it(`5.1 As a: customer,
   I want: to add items to my shopping cart,
