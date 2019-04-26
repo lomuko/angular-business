@@ -9,10 +9,12 @@
     <mat-nav-list>
       <a mat-list-item
          [routerLink]="['/shopping-cart']"
-         routerLinkActive="router-link-active">Shopping Cart. {{ shoppingCartItemsCount$ | async}}</a>
+         routerLinkActive="router-link-active">Shopping Cart. <span
+              data-cy="shoppingCartItemsCount-span">{{ shoppingCartItemsCount$ | async}}</span></a>
       <mat-list-item>
         <button (click)="saveShoppingCart()"
                 mat-raised-button
+                data-cy="shopping_cart-save-button"
                 color="accent">Save Cart</button>
       </mat-list-item>
     </mat-nav-list>

@@ -346,6 +346,15 @@ EffectsModule.forRoot([ShoppingCartEffects]),
 
 ## Api async effects
 
+```yaml
+As a: customer,
+  I want: to load my shopping cart from server
+  so that: I can see it anywhere
+```
+
+---
+
+
 ```typescript
 // shopping-cart.actions.ts
 export const loadShoppingCart = createAction(
@@ -415,6 +424,15 @@ public loadShoppingCart(){
 ---
 
 ## More Api async effects
+
+```yaml
+As a: customer,
+  I want: to save my shopping cart to server
+  so that: I can see it anywhere
+```
+
+---
+
 
 ```typescript
 // shopping-cart.actions.ts
