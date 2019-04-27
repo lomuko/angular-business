@@ -10,3 +10,5 @@ export const rootReducers: ActionReducerMap<RootState> = {
 };
 
 export const metaReducers: MetaReducer<RootState>[] = !environment.production ? [] : [];
+
+// https://github.com/manfredsteyer/ENT_03_2019/blob/ngrx-creators/projects/flight-app/src/app/flight-booking/%2Bstate/flight-booking-facade.ts
