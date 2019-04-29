@@ -86,6 +86,9 @@ npm install -g angular-http-server
 angular-http-server --open -p 9000 --path ./dist/apps/warehouse
 ```
 
+//https://medium.com/poka-techblog/turn-your-angular-app-into-a-pwa-in-4-easy-steps-543510a9b626
+
+
 ---
 
 > Recap:
@@ -102,48 +105,64 @@ class: impact
 
 # 2 Configuración de caché
 
-## Create
-## Dispatch
+## Assets
+## API
 
 ---
 
 ```yaml
-As a: customer,
-  I want: to add items to my shopping cart
-  so that: I can buy them
+As a: system-operator,
+  I want: receive less requests
+  so that: servers perform better with less cost
 
-As a: customer,
-  I want: to see the total units always updated
-  so that: I know how many items I will buy
+As: user,
+  I want to: make the most of my equipment
+  so that: use less my internet connection
+
+As: user,
+  I want: a fluid interface
+  so that: I can be more productive
+
+As: user,
+  I want: to see some data offline
+  so that: I don't have to be concerned about my connection
 
 ```
 
 ---
 
-## Create
+## Assets
 
 ```typescript
-import { ShoppingCartItem } from '@angular-business/models';
-import { createAction, props } from '@ngrx/store';
 
-export const addShoppingCartItem = createAction(
-  '[Product Catalog] Add to Shopping Cart',
-  props<{ newShoppingCartItem: ShoppingCartItem }>()
-);
 ```
 
 ---
 
-## Dispatch
+## API
 
 ```typescript
-constructor(private store: Store<RootState>) {}
-
-public buyProduct(product: Product) {
-  const payload = { product: product, quantity: 1 };
-  const action = addShoppingCartItem({ newShoppingCartItem: payload });
-  this.store.dispatch(action);
-}
+ // "dataGroups": [
+  //   {
+  //     "name": "cache-first",
+  //     "urls": ["http://localhost:3333/api"],
+  //     "cacheConfig": {
+  //       "strategy": "performance",
+  //       "maxSize": 10,
+  //       "maxAge": "1d"
+  //     }
+  //   },
+  //   {
+  //     "name": "api-first",
+  //     "urls": ["http://localhost:3333/api/products"],
+  //     "cacheConfig": {
+  //       "strategy": "freshness",
+  //       "maxSize": 100,
+  //       "maxAge": "1h",
+  //       "timeout": "5s"
+  //     }
+  //   }
+  // ]
 ```
 
 

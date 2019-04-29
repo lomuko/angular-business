@@ -2,24 +2,31 @@
   "index": "/index.html",
   "assetGroups": [
     {
-      "name": "app",
+      "name": "app-without-lazy",
       "installMode": "prefetch",
       "resources": {
         "files": [
           "/favicon.ico",
           "/index.html",
           "/*.css",
-          "/*.js"
+          "/common*.js",
+          "/main*.js",
+          "/ngsw*.js",
+          "/*woker*.js",
+          "/*polyfills*.js",
+          "/runtime*.js"
         ]
       }
-    }, {
-      "name": "assets",
+    },
+    {
+      "name": "assets-and-lazy-modules",
       "installMode": "lazy",
       "updateMode": "prefetch",
       "resources": {
         "files": [
           "/assets/**",
-          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
+          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)",
+          "/*.js"
         ]
       }
     }
