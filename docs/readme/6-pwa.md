@@ -18,88 +18,89 @@ class: impact
 
     # 1. Angular Service Worker con el CLI
     # 2. Configuración de caché
-    # 3.Actualizaciones y notificaciones
+    # 3. Actualizaciones y notificaciones
+    # 4. Shell
 
 
 ---
+
+
 
 class: impact
 
 # 1 Angular Service Worker con el CLI
 
-##
+## Instalación
+## Modificaciones automáticas
+## Paquetes recomendados
 
 ---
 
-```yaml
-As a: developer,
-  I want: to use logging tools
-  so that: I can debug the application better
-
-As a: devoloper,
-  I want: to type the actions
-  so that: I can get help while developing
-
-As a: developer,
-  I want: to use query my state
-  so that: I can be notified
-
-As a: developer,
-  I want: to use chain actions
-  so that: I can make asynchronous calls
-```
-
-
-> NgRx no hace rápido a Redux, sino mantenible el boilerplate
-
----
-
-## 1.1 Instalación de NgRx
+## 1.1 Instalación de de PWA
 
 ```terminal
-ng add @ngrx/store@next --project shop --statePath store --stateInterface RootState
+ng add @angular/pwa --project warehouse
+ "@angular/service-worker": "^7.2.12",
 ```
 
 ---
 
-## 1.2 Registro y configuración
+## 1.2 Modificaciones automáticas
 
+### angular json
 ```typescript
-StoreModule.forRoot(rootReducers, { metaReducers })
-export const rootReducers: ActionReducerMap<RootState> = {};
-export interface RootState{}
+architect.build.options.assetes: [..."apps/warehouse/src/manifest.json"]
+architect.configuration.production.serviceWorker: true
+architect.configuration.production.ngswConfigPath: "apps/warehouse/ngsw-config.json"
 ```
 
+--
+
+### index.html
+```html
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1976d2">
+  <noscript>Please enable JavaScript to continue using this application.</noscript>
+```
+
+--
+
+app.module.ts
+```typescript
+ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+```
+
+### otros
+- ngsw-config.json
+- manifest.json
+- /assets/icons
 ---
 
-## 1.3 Router y DevTools
+## 1.3 Paquetes recomendados
 
 ```
-ng add @ngrx/router-store@next --project shop
-ng add @ngrx/store-devtools@next --project shop
-```
-
-```typescript
-export interface RootState {
-  router: RouterReducerState<any>;
-}
+npm install -g ngx-pwa-icons
+/warehouse/icon.png
+ngx-pwa-icons
+npm install -g angular-http-server
+angular-http-server --open -p 9000 --path ./dist/apps/warehouse
 ```
 
 ---
 
 > Recap:
 
-# 1 Instalación y configuración
+# 1 Angular Service Worker con el CLI
 
-## Instalación de NgRx
-## Registro y configuración
-## Router y DevTools
+## Instalación
+## Modificaciones automáticas
+## Paquetes recomendados
 
 ---
 
 class: impact
 
-# 2 Actions
+# 2 Configuración de caché
 
 ## Create
 ## Dispatch

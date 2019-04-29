@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  minimalStock: 10
+  minimalStock: 10,
+  apiUrl: 'http://localhost:3333'
 };
 
 /*
