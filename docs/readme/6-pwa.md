@@ -79,10 +79,11 @@ ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production
 ## 1.3 Paquetes recomendados
 
 ```
-npm install -g ngx-pwa-icons
+yarn add -D ngx-pwa-icons
 /warehouse/icon.png
-ngx-pwa-icons
-npm install -g angular-http-server
+yarn ngx-pwa-icons
+yarn add -D angular-http-server
+"angular-http-server": "angular-http-server"
 angular-http-server --open -p 9000 --path ./dist/apps/warehouse
 ```
 

@@ -30,5 +30,30 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "cache-first",
+      "urls": [
+        "http://localhost:3333/api"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 10,
+        "maxAge": "1d"
+      }
+    },
+    {
+      "name": "api-first",
+      "urls": [
+        "http://localhost:3333/api/products"
+      ],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 100,
+        "maxAge": "1h",
+        "timeout": "5s"
+      }
+    }
   ]
 }
