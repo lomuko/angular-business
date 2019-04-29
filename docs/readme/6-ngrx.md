@@ -1,4 +1,4 @@
-title: 5-NgRx
+title: 6-PWA
 class: animation-fade
 layout: true
 
@@ -16,22 +16,18 @@ class: impact
 
 ---
 
-    # 1. Instalación y configuración
-    # 2. Actions
-    # 3. State reducer
-    # 4. Selectors
-    # 5. Effects
+    # 1. Angular Service Worker con el CLI
+    # 2. Configuración de caché
+    # 3.Actualizaciones y notificaciones
 
 
 ---
 
 class: impact
 
-# 1 Instalación y configuración
+# 1 Angular Service Worker con el CLI
 
-## Instalación de NgRx
-## Registro y configuración
-## Router y DevTools
+##
 
 ---
 
@@ -533,11 +529,11 @@ private saveCurrentShoppingCart(current: ShoppingCart) {
 
 > Next:
 
-# Deploy Progressive Web Apps
+# Server Side Rendering
 
-## Angular Service Worker con el CLI
-## Configuración de caché
-## Actualizaciones y notificaciones
+## Angular Universal
+## Despliegue con Node Express
+## Variantes: shell y pre-rendering
 
 
 > **Blog de apoyo:** [Detección del cambio en Angular](https://academia-binaria.com/deteccion-del-cambio-en-Angular/)
