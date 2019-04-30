@@ -19,8 +19,6 @@ class: impact
     # 1. Angular Service Worker con el CLI
     # 2. Configuración de caché
     # 3. Actualizaciones y notificaciones
-    # 4. Shell
-
 
 ---
 
@@ -250,34 +248,6 @@ private subscribeToNotifications() {
 
 ## Actualización de versiones
 ## Notificaciones Push
-
----
-
-class: impact
-
-# 4 Shell
-
-## Una ruta para amenizar la carga
-## Materialización durante la compilación
-
-
----
-
-## Una ruta para amenizar la carga
-
-
----
-
-## Materialización durante la compilación
-
----
-
-> Recap:
-
-# 4 Shell
-
-## Una ruta para amenizar la carga
-## Materialización durante la compilación
 
 ---
 
