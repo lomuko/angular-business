@@ -111,59 +111,72 @@ class: impact
 
 ---
 
-```yaml
-As a: system-operator,
-  I want: receive less requests
-  so that: servers perform better with less cost
-
-As: user,
-  I want to: make the most of my equipment
-  so that: use less my internet connection
-
-As: user,
-  I want: a fluid interface
-  so that: I can be more productive
-
-As: user,
-  I want: to see some data offline
-  so that: I don't have to be concerned about my connection
-
-```
-
----
-
 ## Assets
 
-```typescript
-
+```json
+"assetGroups": [
+  {
+    "name": "app-without-lazy",
+    "installMode": "prefetch",
+    "resources": {
+      "files": [
+        "/favicon.ico",
+        "/index.html",
+        "/*.css",
+        "/common*.js",
+        "/main*.js",
+        "/ngsw*.js",
+        "/*woker*.js",
+        "/*polyfills*.js",
+        "/runtime*.js"
+      ]
+    }
+  },
+  {
+    "name": "assets-and-lazy-modules",
+    "installMode": "lazy",
+    "updateMode": "prefetch",
+    "resources": {
+      "files": [
+        "/assets/**",
+        "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)",
+        "/*.js"
+      ]
+    }
+  }
+]
 ```
 
 ---
 
 ## API
 
-```typescript
- // "dataGroups": [
-  //   {
-  //     "name": "cache-first",
-  //     "urls": ["http://localhost:3333/api"],
-  //     "cacheConfig": {
-  //       "strategy": "performance",
-  //       "maxSize": 10,
-  //       "maxAge": "1d"
-  //     }
-  //   },
-  //   {
-  //     "name": "api-first",
-  //     "urls": ["http://localhost:3333/api/products"],
-  //     "cacheConfig": {
-  //       "strategy": "freshness",
-  //       "maxSize": 100,
-  //       "maxAge": "1h",
-  //       "timeout": "5s"
-  //     }
-  //   }
-  // ]
+```json
+ "dataGroups": [
+  {
+    "name": "cache-first",
+    "urls": [
+      "http://localhost:3333/api"
+    ],
+    "cacheConfig": {
+      "strategy": "performance",
+      "maxSize": 10,
+      "maxAge": "1d"
+    }
+  },
+  {
+    "name": "api-first",
+    "urls": [
+      "http://localhost:3333/api/products"
+    ],
+    "cacheConfig": {
+      "strategy": "freshness",
+      "maxSize": 100,
+      "maxAge": "1h",
+      "timeout": "5s"
+    }
+  }
+]
 ```
 
 
@@ -171,380 +184,100 @@ As: user,
 
 > Recap:
 
-# 2 Actions
+# 2 Configuración de caché
 
-## Create
-## Dispatch
+## Assets
+## API
 
 ---
 
 class: impact
 
-# 3 State reducer
+# 3 Actualizaciones y notificaciones
 
-## State
-## Create function
-## Register in Store
----
-
-## State
-
-```typescript
-// root.state.ts
-export interface RootState {
-  router: RouterReducerState<any>;
-  shoppingCart: ShoppingCart;
-}
-// shoppingCart.state.ts
-export const initialState: ShoppingCart = { _id: '', items: [], client: '', status: '' };
-```
----
-
-## Create function
-
-```typescript
-// create a reducer function
-export const shoppingCartReducer = createReducer(
-  initialState,
-  on(addShoppingCartItem, onAddShoppingCartItem)
-);
-// respond to an action
-function onAddShoppingCartItem(state: ShoppingCart, { newShoppingCartItem }) {
-  return { ...state, items: [...state.items, newShoppingCartItem] };
-}
-```
+## Actualización de versiones
+## Notificaciones Push
 
 ---
-## Register in Store
 
-### Adding to Root Store
+## Actualización de versiones
 
 ```typescript
-export const rootReducers: ActionReducerMap<RootState> = {
-  router: routerReducer,
-  shoppingCart: shoppingCartReducer
+public appData: = {
+  version: '0.0.1',
+  changelog: 'Better Updating Mode'
 };
-```
-
-> Alternative : Create a new Feature Store
-
---
-
-```typescript
-StoreModule.forFeature('shoppingCart', shoppingCartReducer)
-```
-
----
-
-> Recap:
-
-# 3 State reducer
-
-## State
-## Create function
-## Register in Store
-
----
-
-class: impact
-
-# 4 Selectors
-
-## Create selector
-## Selecting data
-## Fachadas
-
----
-
-## Create selector
-
-```typescript
-export const shoppingCartFeature = (state: RootState) => state.shoppingCart;
-
-export const shoppingCartItems = createSelector(
-  shoppingCartFeature,
-  (state: ShoppingCart) => state.items
-);
-
-export const shoppingCartItemsCount = createSelector(
-  shoppingCartFeature,
-  (state: ShoppingCart) => state.items.length
-);
-```
-
----
-
-## Selecting data
-
-```typescript
-//shell.component.ts
-
-public shoppingCartItemsCount$: Observable<number>;
-
-constructor(private store: Store<RootState>) {
-  this.shoppingCartItemsCount$ = this.store.pipe(select(shoppingCartItemsCount));
-}
-```
-
----
-
-## Fachadas
-
-
----
-
-> Recap:
-
-# 4 Selectors
-
-## Create selector
-## Selecting data
-## Fachadas
-
----
-
-class: impact
-
-# 5 Effects
-
-## Install
-## Efecto básico
-## Api async effects
-## More Api async effects
-
----
-
-## Install
-
-```
-yarn add @ngrx/effects
-```
-
----
-
-## Efecto básico
-
-```typescript
-//shopping-cart.effects.ts
-@Injectable()
-export class ShoppingCartEffects {
-   // Create an Observable of actions,
-   // with the pipe functions in line
-   public logAddProduct_Inline$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(addShoppingCartItem),
-        tap(action => console.log('action_Inline:', action))
-      ),
-    { dispatch: false }
-  );
-
-  // Create an Observable of actions,
-  // with the pipe functions as class methods
-  public logAddProduct$ = createEffect(
-    this.logAddProductAction.bind(this),
-    { dispatch: false }
-  );
-
-  constructor(private actions$: Actions) {}
-
-  private logAddProductAction() {
-    return this.actions$.pipe(
-      ofType(addShoppingCartItem),
-      tap(action => console.log('action:', action))
-    );
+constructor(private swUpdate: SwUpdate) {
+  if (this.swUpdate.isEnabled) {
+    this.swUpdate.available.subscribe(event => {
+      if (event.current.appData) {
+        this.appData = event.current.appData;
+      }
+      let msg = `New version ${this.appData.version} available. ${this.appData.changelog}.`;
+      msg += 'Load New Version?';
+      if (confirm(msg)) {
+        window.location.reload();
+      }
+    });
   }
 }
 ```
 
+```json
+"appData": {
+  "version": "1.0.0",
+  "changelog": "Added better update mode"
+}
+```
 ---
 
-### Register
+## Notificaciones Push
 
 ```typescript
-// app.module.ts
-EffectsModule.forRoot([ShoppingCartEffects]),
-```
-
----
-
-## Api async effects
-
-```yaml
-As a: customer,
-  I want: to load my shopping cart from server
-  so that: I can see it anywhere
-```
-
----
-
-
-```typescript
-// shopping-cart.actions.ts
-export const loadShoppingCart = createAction(
-  '[Application Start] Load Shopping Cart',
-  props<{}>()
-);
-
-export const shoppingCartLoaded = createAction(
-  '[ShoppingCart Effects] Shopping Cart Loaded',
-  props<{ loadedShoppingCart: ShoppingCart }>()
-);
-
-export const shoppingCartErrorLoading = createAction(
-  '[ShoppingCart Effects] Shopping Cart Error Loading',
-  props<{ error: string }>()
-);
-```
-
----
-
-```typescript
-//shopping-cart.effects.ts
-
-public loadShoppingCart$ = createEffect(this.loadShoppingCart.bind(this));
-
-private loadShoppingCart() {
-  return this.actions$.pipe(
-    ofType(loadShoppingCart),
-    switchMap(() =>
-      this.cartService.getShoppingCart().pipe(
-        map(result => shoppingCartLoaded({ loadedShoppingCart: result })),
-        catchError(error => of(shoppingCartErrorLoading({ error: error.message })))
-      )
-    )
-  );
+private subscribeToNotifications() {
+  if (this.swPush.isEnabled) {
+    this.swPush.requestSubscription({serverPublicKey: 'VAPID_PUBLIC_KEY'})
+      .then(sub => console.log('send subscription to the server', sub.toJSON()))
+      .catch(err => console.error('Could not subscribe to notifications', err));
+    this.swPush.messages.subscribe(msg => console.log('Received message', msg));
+  }
 }
 ```
 
----
+> Recap:
 
-```typescript
-// shopping-cart.reducer.ts
-export const shoppingCartReducer = createReducer(
-  initialState,
-   on(shoppingCartLoaded, onShoppingCartLoaded),
-   on(shoppingCartErrorLoading, onApiError)
-);
+# 3 Actualizaciones y notificaciones
 
-function onShoppingCartLoaded(state: ShoppingCart, { loadedShoppingCart }) {
-  return loadedShoppingCart;
-}
-function onApiError(state: ShoppingCart, { error }) {
-  return { ...state, error: error };
-}
-```
+## Actualización de versiones
+## Notificaciones Push
 
 ---
 
-```typescript
-// shell.component.ts
-public loadShoppingCart(){
-  const action = loadShoppingCart({});
-  this.store.dispatch(action);
-}
-```
+class: impact
+
+# 4 Shell
+
+## Una ruta para amenizar la carga
+## Materialización durante la compilación
+
 
 ---
 
-## More Api async effects
+## Una ruta para amenizar la carga
 
-```yaml
-As a: customer,
-  I want: to save my shopping cart to server
-  so that: I can see it anywhere
-```
 
 ---
 
-
-```typescript
-// shopping-cart.actions.ts
-export const saveShoppingCart = createAction(
-  '[Navigation Section] Save Shopping Cart',
-  props<{ shoppingCartToSave: ShoppingCart }>()
-);
-
-export const shoppingCartSaved = createAction(
-  '[ShoppingCart Effects] Shopping Cart Saved',
-  props<{ savedShoppingCart: ShoppingCart }>()
-);
-
-export const shoppingCartErrorSaving = createAction(
-  '[ShoppingCart Effects] Shopping Cart Error Saving',
-  props<{ error: string }>()
-);
-```
-
----
-
-```typescript
-//shopping-cart.effects.ts
-
-public saveShoppingCart$ = createEffect(this.saveShoppingCart.bind(this));
-
-private saveShoppingCart() {
-  return this.actions$.pipe(
-    ofType(saveShoppingCart),
-    switchMap(action =>
-      this.cartService.postShoppingCart(action.shoppingCartToSave).pipe(
-        map(result => shoppingCartSaved({ savedShoppingCart: result })),
-        catchError(error => of(shoppingCartErrorSaving({ error: error.message })))
-      )
-    )
-  );
-}
-```
-
----
-
-```typescript
-// shopping-cart.reducer.ts
-export const shoppingCartReducer = createReducer(
-  initialState,
-  on(shoppingCartSaved, onShoppingCartSaved),
-  on(shoppingCartErrorSaving, onApiError)
-);
-
-function onShoppingCartSaved(state: ShoppingCart, { savedShoppingCart }) {
-  return savedShoppingCart;
-}
-function onApiError(state: ShoppingCart, { error }) {
-  return { ...state, error: error };
-}
-```
-
----
-
-```typescript
-// shell.component.ts
-public saveShoppingCart() {
-  this.getCurrentShoppingCart$().subscribe(current => this.saveCurrentShoppingCart(current));
-}
-
-private getCurrentShoppingCart$() {
-  return this.store.pipe(
-    select(shoppingCartFeature),
-    take(1)
-  );
-}
-
-private saveCurrentShoppingCart(current: ShoppingCart) {
-  const action = saveShoppingCart({ shoppingCartToSave: current });
-  this.store.dispatch(action);
-}
-```
+## Materialización durante la compilación
 
 ---
 
 > Recap:
 
-# 5 Effects
+# 4 Shell
 
-## Install
-## Efecto básico
-## Api async effects
-## More Api async effects
+## Una ruta para amenizar la carga
+## Materialización durante la compilación
 
 ---
 

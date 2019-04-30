@@ -1,5 +1,9 @@
 {
   "index": "/index.html",
+  "appData": {
+    "version": "1.3.1",
+    "changelog": "Added better update"
+  },
   "assetGroups": [
     {
       "name": "app-without-lazy",
@@ -34,9 +38,7 @@
   "dataGroups": [
     {
       "name": "cache-first",
-      "urls": [
-        "http://localhost:3333/api"
-      ],
+      "urls": ["http://localhost:3333/api"],
       "cacheConfig": {
         "strategy": "performance",
         "maxSize": 10,
@@ -45,9 +47,7 @@
     },
     {
       "name": "api-first",
-      "urls": [
-        "http://localhost:3333/api/products"
-      ],
+      "urls": ["http://localhost:3333/api/products"],
       "cacheConfig": {
         "strategy": "freshness",
         "maxSize": 100,
