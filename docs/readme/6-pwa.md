@@ -19,6 +19,8 @@ class: impact
     # 1. Angular Service Worker con el CLI
     # 2. Configuración de caché
     # 3. Actualizaciones y notificaciones
+    # 4. Shell
+
 
 ---
 
@@ -248,6 +250,78 @@ private subscribeToNotifications() {
 
 ## Actualización de versiones
 ## Notificaciones Push
+
+---
+
+class: impact
+
+# 4 Shell
+
+## Una animación para amenizar la carga
+
+
+---
+
+## Una animación para amenizar la carga
+
+```html
+<style>
+    .loader {
+      display: flex;
+      height: 50vh;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .spinner {
+      height: 10vh;
+      width: 10vh;
+      border: 5px solid #1976d2;
+      border-top-color: #69f0ae;
+      border-radius: 100%;
+      animation: rotation 0.6s infinite linear 0.25s;
+      opacity: 0;
+    }
+
+    @keyframes rotation {
+      from {
+        opacity: 1;
+        transform: rotate(0deg);
+      }
+
+      to {
+        opacity: 1;
+        transform: rotate(359deg);
+      }
+    }
+  </style>
+```
+--
+
+### Materialización durante la compilación
+
+```html
+<angular-business-root>
+  <div class="loader">
+    <div>
+      <h1>Warehouse</h1>
+      <h3>loading...</h3>
+      <h2>Angular business</h2>
+      <h4>please wait....</h4>
+    </div>
+    <div class="spinner"></div>
+  </div>
+</angular-business-root>
+```
+
+---
+
+> Recap:
+
+# 4 Shell
+
+## Una animación para amenizar la carga
+
 
 ---
 
