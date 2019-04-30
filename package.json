@@ -16,7 +16,7 @@
     "start:api": "ng serve api",
     "build": "ng build",
     "build:warehouse": "ng build warehouse --prod",
-    "serve:warehouse": "yarn angular-http-server --open -p 9004 --path ./dist/apps/warehouse",
+    "serve:warehouse": "yarn angular-http-server --open -p 9006 --path ./dist/apps/warehouse",
     "build-serve:warehouse": "yarn build:warehouse && yarn serve:warehouse",
     "test": "ng test",
     "test:shop": "ng test shop --watch",

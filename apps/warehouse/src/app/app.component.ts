@@ -24,7 +24,7 @@ export class AppComponent {
       .get<Greetings>(environment.apiUrl + '/api')
       .subscribe((data: Greetings) => (this.title += ' and ' + data.message));
     this.checkforUpdates();
-    this.subscribeToNotifications();
+    this.subscribeToServerPush();
   }
 
   private checkforUpdates() {
@@ -42,15 +42,21 @@ export class AppComponent {
     }
   }
 
-  private subscribeToNotifications() {
+  private subscribeToServerPush() {
     if (this.swPush.isEnabled) {
       this.swPush
         .requestSubscription({
           serverPublicKey: 'VAPID_PUBLIC_KEY'
         })
-        .then(sub => console.log('send subscription to the server', sub.toJSON()))
-        .catch(err => console.error('Could not subscribe to notifications', err));
-      this.swPush.messages.subscribe(msg => console.log('Received message', msg));
+        .then(sub => {
+          console.log('send subscription to the server', sub.toJSON());
+          this.subscribeToMessages();
+        })
+        .catch(err => console.warn('Could not subscribe to notifications', err));
     }
+  }
+
+  private subscribeToMessages() {
+    this.swPush.messages.subscribe(msg => console.log('Received message', msg));
   }
 }
