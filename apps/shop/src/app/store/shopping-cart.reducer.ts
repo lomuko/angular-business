@@ -9,6 +9,8 @@ import {
 } from './shopping-cart.actions';
 import { initialState } from './shoppingCart.state';
 
+// To Do: use function reducer
+
 export const shoppingCartReducer = createReducer(
   initialState,
   on(addShoppingCartItem, onAddShoppingCartItem),
