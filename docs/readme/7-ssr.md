@@ -1,4 +1,4 @@
-title: 6-PWA
+title: 7-SSR
 class: animation-fade
 layout: true
 
@@ -12,7 +12,7 @@ class: impact
 
 # {{title}}
 
-## Progressive Web Applications
+## Server Side rendering
 
 ---
 
@@ -338,3 +338,5 @@ class: impact
 
 > > By [Alberto Basalo](https://twitter.com/albertobasalo)
 
+
+ng generate @schematics/angular:universal --clientProject=shop --appId=shopApp
