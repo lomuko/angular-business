@@ -9,9 +9,24 @@ import {
 } from './shopping-cart.actions';
 import { initialState } from './shoppingCart.state';
 
-// To Do: use function reducer
+export function shoppingCartReducer(state: ShoppingCart, action) {
+  switch (action.type) {
+    case addShoppingCartItem.type:
+      return { ...state, items: [...state.items, action.newShoppingCartItem] };
+    case shoppingCartLoaded.type:
+      return action.loadedShoppingCart;
+    case shoppingCartErrorLoading.type:
+      return { ...state, error: action.error };
+    case shoppingCartSaved.type:
+      return action.savedShoppingCart;
+    case shoppingCartErrorSaving.type:
+      return { ...state, error: action.error };
+    default:
+      break;
+  }
+}
 
-export const shoppingCartReducer = createReducer(
+export const shoppingCartReducer_OLD = createReducer(
   initialState,
   on(addShoppingCartItem, onAddShoppingCartItem),
   on(shoppingCartLoaded, onShoppingCartLoaded),
