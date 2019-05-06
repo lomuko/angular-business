@@ -158,6 +158,37 @@
                   "with": "apps/warehouse/src/environments/environment.prod.ts"
                 }
               ],
+              "outputPath": "dist/apps/warehouse/",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "apps/warehouse/ngsw-config.json"
+            },
+            "production-es": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/warehouse/src/environments/environment.ts",
+                  "with": "apps/warehouse/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputPath": "dist/apps/warehouse/es/",
+              "i18nFile": "apps/warehouse/src/locale/messages.es.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "es",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -188,6 +219,9 @@
           "configurations": {
             "production": {
               "browserTarget": "warehouse:build:production"
+            },
+            "production-es": {
+              "browserTarget": "*project-name*:build:production-es"
             }
           }
         },
