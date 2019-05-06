@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="41aac9cecddc9f345c263d3742192e68e227e413" datatype="html">
+        <source>Menu</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/shell/shell.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="59ff54b78bd59ad62acc6cd59a153770238822df" datatype="html">
+        <source>Out of Stock.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/shell/shell.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8973bc8c23a3f7c42aa9bd447386a3b0d26b74bc" datatype="html">
+        <source>menu</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/shell/shell.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7990d54136c493d157af533fe6891852b306eb27" datatype="html">
+        <source>warehouse</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/shell/shell.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="de0dac7188ab04270cfc534db751465ca525b05e" datatype="html">
+        <source>Welcome to <x id="INTERPOLATION" equiv-text="{{ title }}"/>!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9309d9f97aa58944f0676cf04142e1529d0dd62d" datatype="html">
+        <source>Product List</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="853a422b2d93ac5d892df97ae3b7e89aaa6324b9" datatype="html">
+        <source>
+            Remains <x id="INTERPOLATION" equiv-text="{{ card.item.stock }}"/> units
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a55cddd431935a1de65ebd19200884e813a0aa75" datatype="html">
+        <source>Refill</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/out-of-stock/out-of-stock/out-of-stock.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="377858b4707210b40ef3e645a289552d7c868b3d" datatype="html">
+        <source>Price: <x id="INTERPOLATION" equiv-text="{{ card.item.price }}"/> Euros</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c805e74639cd460fa8f1379e291f74f4edf83abe" datatype="html">
+        <source>Products out Of Stock</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/out-of-stock/out-of-stock/out-of-stock.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="baab160eb5c457bd0ee1f2c37d355ad6539706bc" datatype="html">
+        <source> Remain only <x id="INTERPOLATION" equiv-text="{{product.stock | number}}"/> units </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/out-of-stock/out-of-stock/out-of-stock.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
