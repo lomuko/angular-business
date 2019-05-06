@@ -12,331 +12,125 @@ class: impact
 
 # {{title}}
 
-## Server Side rendering
+## Angular Universal
 
 ---
 
-    # 1. Angular Service Worker con el CLI
-    # 2. Configuración de caché
-    # 3. Actualizaciones y notificaciones
-    # 4. Shell
+    # 1. Angular Universal
+    # 2. Despliegue con Node Express
+    # 3. Variantes: shell y pre-rendering
 
-
----
-
-
-
-class: impact
-
-# 1 Angular Service Worker con el CLI
-
-## Instalación
-## Modificaciones automáticas
-## Paquetes recomendados
-
----
-
-## 1.1 Instalación de de PWA
-
-```terminal
-ng add @angular/pwa --project warehouse
- "@angular/service-worker": "^7.2.12",
-```
-
----
-
-## 1.2 Modificaciones automáticas
-
-### angular json
-```typescript
-architect.build.options.assetes: [..."apps/warehouse/src/manifest.json"]
-architect.configuration.production.serviceWorker: true
-architect.configuration.production.ngswConfigPath: "apps/warehouse/ngsw-config.json"
-```
-
---
-
-### index.html
-```html
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#1976d2">
-  <noscript>Please enable JavaScript to continue using this application.</noscript>
-```
-
---
-
-app.module.ts
-```typescript
-ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
-```
-
-### otros
-- ngsw-config.json
-- manifest.json
-- /assets/icons
----
-
-## 1.3 Paquetes recomendados
-
-```
-yarn add -D ngx-pwa-icons
-/warehouse/icon.png
-yarn ngx-pwa-icons
-yarn add -D angular-http-server
-"angular-http-server": "angular-http-server"
-angular-http-server --open -p 9000 --path ./dist/apps/warehouse
-```
-
-//https://medium.com/poka-techblog/turn-your-angular-app-into-a-pwa-in-4-easy-steps-543510a9b626
-
-
----
-
-> Recap:
-
-# 1 Angular Service Worker con el CLI
-
-## Instalación
-## Modificaciones automáticas
-## Paquetes recomendados
 
 ---
 
 class: impact
 
-# 2 Configuración de caché
+# 1 Angular Universal
 
-## Assets
-## API
-
----
-
-## Assets
-
-```json
-"assetGroups": [
-  {
-    "name": "app-without-lazy",
-    "installMode": "prefetch",
-    "resources": {
-      "files": [
-        "/favicon.ico",
-        "/index.html",
-        "/*.css",
-        "/common*.js",
-        "/main*.js",
-        "/ngsw*.js",
-        "/*woker*.js",
-        "/*polyfills*.js",
-        "/runtime*.js"
-      ]
-    }
-  },
-  {
-    "name": "assets-and-lazy-modules",
-    "installMode": "lazy",
-    "updateMode": "prefetch",
-    "resources": {
-      "files": [
-        "/assets/**",
-        "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)",
-        "/*.js"
-      ]
-    }
-  }
-]
-```
+## Vuelta al servidor
+## Para mejorar el SEO
+## Para mejorar la experiencia en la primera visita
 
 ---
 
-## API
+## 1.1 Vuelta al servidor
 
-```json
- "dataGroups": [
-  {
-    "name": "cache-first",
-    "urls": [
-      "http://localhost:3333/api"
-    ],
-    "cacheConfig": {
-      "strategy": "performance",
-      "maxSize": 10,
-      "maxAge": "1d"
-    }
-  },
-  {
-    "name": "api-first",
-    "urls": [
-      "http://localhost:3333/api/products"
-    ],
-    "cacheConfig": {
-      "strategy": "freshness",
-      "maxSize": 100,
-      "maxAge": "1h",
-      "timeout": "5s"
-    }
-  }
-]
-```
 
+---
+
+## 1.2 Para mejorar el SEO
+
+---
+
+## 1.3 Para mejorar la experiencia en la primera visita
 
 ---
 
 > Recap:
 
-# 2 Configuración de caché
+# 1 Angular Universal
 
-## Assets
-## API
+## Vuelta al servidor
+## Para mejorar el SEO
+## Para mejorar la experiencia en la primera visita
 
 ---
 
 class: impact
 
-# 3 Actualizaciones y notificaciones
+# 2 Despliegue con Node Express
 
-## Actualización de versiones
-## Notificaciones Push
+## Add Express Engine
+## Scripts de compilado y despliegue
+## Control de rutas
 
 ---
 
-## Actualización de versiones
+## 2.1 Add Express Engine
 
-```typescript
-public appData: = {
-  version: '0.0.1',
-  changelog: 'Better Updating Mode'
-};
-constructor(private swUpdate: SwUpdate) {
-  if (this.swUpdate.isEnabled) {
-    this.swUpdate.available.subscribe(event => {
-      if (event.current.appData) {
-        this.appData = event.current.appData;
-      }
-      let msg = `New version ${this.appData.version} available. ${this.appData.changelog}.`;
-      msg += 'Load New Version?';
-      if (confirm(msg)) {
-        window.location.reload();
-      }
-    });
-  }
-}
-```
-
-```json
-"appData": {
-  "version": "1.0.0",
-  "changelog": "Added better update mode"
-}
-```
 ---
 
-## Notificaciones Push
+## 2.2 Scripts de compilado y despliegue
 
-```typescript
-private subscribeToNotifications() {
-  if (this.swPush.isEnabled) {
-    this.swPush.requestSubscription({serverPublicKey: 'VAPID_PUBLIC_KEY'})
-      .then(sub => console.log('send subscription to the server', sub.toJSON()))
-      .catch(err => console.error('Could not subscribe to notifications', err));
-    this.swPush.messages.subscribe(msg => console.log('Received message', msg));
-  }
-}
-```
+---
+
+## 2.3 Control de rutas
+
+---
 
 > Recap:
 
-# 3 Actualizaciones y notificaciones
+# 2 Despliegue con Node Express
 
-## Actualización de versiones
-## Notificaciones Push
+## Add Express Engine
+## Scripts de compilado y despliegue
+## Control de rutas
 
 ---
 
 class: impact
 
-# 4 Shell
+# 3 Variantes: shell y pre-rendering
 
-## Una animación para amenizar la carga
-
+## Cuando el SEO no es problema
+## Shell para mejora de experiencia inicial
+## Pre renderizado de toda la aplicación
 
 ---
 
-## Una animación para amenizar la carga
+## 3.1 Cuando el SEO no es problema
 
-```html
-<style>
-    .loader {
-      display: flex;
-      height: 50vh;
-      justify-content: center;
-      align-items: center;
-    }
+---
 
-    .spinner {
-      height: 10vh;
-      width: 10vh;
-      border: 5px solid #1976d2;
-      border-top-color: #69f0ae;
-      border-radius: 100%;
-      animation: rotation 0.6s infinite linear 0.25s;
-      opacity: 0;
-    }
+## 3.2 Shell para mejora de experiencia inicial
 
-    @keyframes rotation {
-      from {
-        opacity: 1;
-        transform: rotate(0deg);
-      }
+---
 
-      to {
-        opacity: 1;
-        transform: rotate(359deg);
-      }
-    }
-  </style>
-```
---
-
-### Materialización durante la compilación
-
-```html
-<angular-business-root>
-  <div class="loader">
-    <div>
-      <h1>Warehouse</h1>
-      <h3>loading...</h3>
-      <h2>Angular business</h2>
-      <h4>please wait....</h4>
-    </div>
-    <div class="spinner"></div>
-  </div>
-</angular-business-root>
-```
+## 3.3 Pre renderizado de toda la aplicación
 
 ---
 
 > Recap:
 
-# 4 Shell
+# 3 Variantes: shell y pre-rendering
 
-## Una animación para amenizar la carga
+## Cuando el SEO no es problema
+## Shell para mejora de experiencia inicial
+## Pre renderizado de toda la aplicación
 
 
 ---
 
 > Next:
 
-# Server Side Rendering
+# Internacionalización y puesta en producción
 
-## Angular Universal
-## Despliegue con Node Express
-## Variantes: shell y pre-rendering
+## Traducciones
+## Adaptaciones culturales de tiempo y moneda
+## Otras consideraciones para aplicaciones en producción.
 
 
 > **Blog de apoyo:** [Detección del cambio en Angular](https://academia-binaria.com/deteccion-del-cambio-en-Angular/)
 
 > > By [Alberto Basalo](https://twitter.com/albertobasalo)
 
-
-ng generate @schematics/angular:universal --clientProject=shop --appId=shopApp
