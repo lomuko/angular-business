@@ -20,7 +20,7 @@ import { ShoppingCartEffects } from './store/shopping-cart.effects';
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
     RouterModule.forRoot(ROUTES, { initialNavigation: 'enabled' }),
     EffectsModule.forRoot([ShoppingCartEffects]),
