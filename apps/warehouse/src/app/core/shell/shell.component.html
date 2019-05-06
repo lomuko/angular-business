@@ -5,7 +5,8 @@
                [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                [mode]="(isHandset$ | async) ? 'over' : 'side'"
                [opened]="!(isHandset$ | async)">
-    <mat-toolbar [routerLink]="['/']">Menu</mat-toolbar>
+    <mat-toolbar [routerLink]="['/']"
+                 i18n>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item
          [routerLink]="
@@ -13,7 +14,8 @@
          routerLinkActive="router-link-active">
         <span data-cy="out_of_stock-badge"
               matBadge="{{ numberOfProductsOutOfStock$ | async}}"
-              matBadgeOverlap="false">Out of Stock.</span>
+              matBadgeOverlap="false"
+              i18n>Out of Stock.</span>
       </a>
     </mat-nav-list>
   </mat-sidenav>
@@ -24,9 +26,11 @@
               mat-icon-button
               (click)="drawer.toggle()"
               *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        <mat-icon aria-label="Side nav toggle icon"
+                  i18n>menu</mat-icon>
       </button>
-      <span [routerLink]="['/']">warehouse</span>
+      <span [routerLink]="['/']"
+            i18n>warehouse</span>
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>

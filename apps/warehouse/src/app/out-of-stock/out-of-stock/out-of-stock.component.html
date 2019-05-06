@@ -1,15 +1,17 @@
 <mat-action-list>
-  <h3 mat-subheader>Products out Of Stock</h3>
+  <h3 mat-subheader
+      i18n>Products out Of Stock</h3>
   <mat-list-item *ngFor="let product of productsOutOfStock$ | async">
     <mat-icon mat-list-icon>space_bar</mat-icon>
     <h4 mat-line>{{product.description}}</h4>
-    <p mat-line> Reamin only {{product.stock | number}} units </p>
+    <p mat-line
+       i18n> Reamin only {{product.stock | number}} units </p>
     <button mat-list-item
             mat-button
             color="accent"
             data-cy="product_refill-button"
             (click)="refill(product)">
-      <mat-icon mat-list-icon>save_alt</mat-icon> Refill
+      <mat-icon mat-list-icon>save_alt</mat-icon> <span i18n>Refill</span>
     </button>
   </mat-list-item>
 </mat-action-list>
