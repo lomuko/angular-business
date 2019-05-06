@@ -183,6 +183,10 @@
                 {
                   "replace": "apps/warehouse/src/environments/environment.ts",
                   "with": "apps/warehouse/src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "apps/warehouse/src/index.html",
+                  "with": "apps/warehouse/src/index-es.html"
                 }
               ],
               "outputPath": "dist/apps/warehouse/es/",
