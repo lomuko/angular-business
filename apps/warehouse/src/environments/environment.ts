@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   minimalStock: 10,
-  apiUrl: 'http://localhost:3333'
+  apiUrl: 'http://localhost:3333',
+  notes: null
 };
 
 /*

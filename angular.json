@@ -182,7 +182,7 @@
               "fileReplacements": [
                 {
                   "replace": "apps/warehouse/src/environments/environment.ts",
-                  "with": "apps/warehouse/src/environments/environment.prod.ts"
+                  "with": "apps/warehouse/src/environments/environment.prod.es.ts"
                 },
                 {
                   "replace": "apps/warehouse/src/index.html",
