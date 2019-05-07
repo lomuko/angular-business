@@ -1,7 +1,7 @@
 import { Product } from '@angular-business/models';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { OutOfStockStoreService } from '../../core/out-of-stock-store.service';
 import { ProductsService } from '../../core/products.service';
@@ -14,15 +14,17 @@ import { ProductsService } from '../../core/products.service';
 export class OutOfStockComponent implements OnInit {
   public productsOutOfStock$: Observable<Product[]>;
   public notes: string | null;
+  public lastUpdated: Date;
   constructor(
     private outOfStockStoreService: OutOfStockStoreService,
     private productsService: ProductsService
   ) {}
 
   public ngOnInit() {
-    this.productsOutOfStock$ = this.outOfStockStoreService
-      .select$()
-      .pipe(map(store => store.products));
+    this.productsOutOfStock$ = this.outOfStockStoreService.select$().pipe(
+      map(store => store.products),
+      tap(() => (this.lastUpdated = new Date()))
+    );
     this.productsService.getProducts$().subscribe();
     this.notes = environment.notes;
   }

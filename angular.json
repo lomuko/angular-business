@@ -193,6 +193,7 @@
               "i18nFile": "apps/warehouse/src/locale/messages.es.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "es",
+              "baseHref": "",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
