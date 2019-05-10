@@ -1,5 +1,5 @@
 import { ShoppingCart } from '@angular-business/models';
-import { createReducer, on } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
 import {
   addShoppingCartItem,
   shoppingCartErrorLoading,
@@ -9,24 +9,7 @@ import {
 } from './shopping-cart.actions';
 import { initialState } from './shoppingCart.state';
 
-export function shoppingCartReducer(state: ShoppingCart, action) {
-  switch (action.type) {
-    case addShoppingCartItem.type:
-      return { ...state, items: [...state.items, action.newShoppingCartItem] };
-    case shoppingCartLoaded.type:
-      return action.loadedShoppingCart;
-    case shoppingCartErrorLoading.type:
-      return { ...state, error: action.error };
-    case shoppingCartSaved.type:
-      return action.savedShoppingCart;
-    case shoppingCartErrorSaving.type:
-      return { ...state, error: action.error };
-    default:
-      break;
-  }
-}
-
-export const shoppingCartReducer_OLD = createReducer(
+const reducer = createReducer(
   initialState,
   on(addShoppingCartItem, onAddShoppingCartItem),
   on(shoppingCartLoaded, onShoppingCartLoaded),
@@ -35,18 +18,22 @@ export const shoppingCartReducer_OLD = createReducer(
   on(shoppingCartErrorSaving, onApiError)
 );
 
-function onAddShoppingCartItem(state: ShoppingCart, { newShoppingCartItem }) {
-  return { ...state, items: [...state.items, newShoppingCartItem] };
+export function shoppingCartReducer(state: ShoppingCart | undefined, action: Action) {
+  return reducer(state, action);
 }
 
-function onShoppingCartLoaded(state: ShoppingCart, { loadedShoppingCart }) {
-  return loadedShoppingCart;
+function onAddShoppingCartItem(state: ShoppingCart, { payload }) {
+  return { ...state, items: [...state.items, payload] };
 }
 
-function onShoppingCartSaved(state: ShoppingCart, { savedShoppingCart }) {
-  return savedShoppingCart;
+function onShoppingCartLoaded(state: ShoppingCart, { payload }) {
+  return payload;
 }
 
-function onApiError(state: ShoppingCart, { error }) {
-  return { ...state, error: error };
+function onShoppingCartSaved(state: ShoppingCart, { payload }) {
+  return payload;
+}
+
+function onApiError(state: ShoppingCart, { payload }) {
+  return { ...state, error: payload };
 }

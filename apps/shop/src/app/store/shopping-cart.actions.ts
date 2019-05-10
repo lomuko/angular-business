@@ -3,7 +3,7 @@ import { createAction, props } from '@ngrx/store';
 
 export const addShoppingCartItem = createAction(
   '[Product Catalog] Add to Shopping Cart',
-  props<{ newShoppingCartItem: ShoppingCartItem }>()
+  props<{ payload: ShoppingCartItem }>()
 );
 
 export const loadShoppingCart = createAction(
@@ -13,25 +13,25 @@ export const loadShoppingCart = createAction(
 
 export const shoppingCartLoaded = createAction(
   '[ShoppingCart Effects] Shopping Cart Loaded',
-  props<{ loadedShoppingCart: ShoppingCart }>()
+  props<{ payload: ShoppingCart }>()
 );
 
 export const shoppingCartErrorLoading = createAction(
   '[ShoppingCart Effects] Shopping Cart Error Loading',
-  props<{ error: string }>()
+  props<{ payload: string }>()
 );
 
 export const saveShoppingCart = createAction(
   '[Navigation Section] Save Shopping Cart',
-  props<{ shoppingCartToSave: ShoppingCart }>()
+  props<{ payload: ShoppingCart }>()
 );
 
 export const shoppingCartSaved = createAction(
   '[ShoppingCart Effects] Shopping Cart Saved',
-  props<{ savedShoppingCart: ShoppingCart }>()
+  props<{ payload: ShoppingCart }>()
 );
 
 export const shoppingCartErrorSaving = createAction(
   '[ShoppingCart Effects] Shopping Cart Error Saving',
-  props<{ error: string }>()
+  props<{ payload: string }>()
 );

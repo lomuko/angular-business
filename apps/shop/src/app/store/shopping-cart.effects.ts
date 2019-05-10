@@ -45,8 +45,8 @@ export class ShoppingCartEffects {
       ofType(loadShoppingCart),
       switchMap(() =>
         this.cartService.getShoppingCart().pipe(
-          map(result => shoppingCartLoaded({ loadedShoppingCart: result })),
-          catchError(error => of(shoppingCartErrorLoading({ error: error.message })))
+          map(loadedShoopingCart => shoppingCartLoaded({ payload: loadedShoopingCart })),
+          catchError(error => of(shoppingCartErrorLoading({ payload: error.message })))
         )
       )
     );
@@ -56,9 +56,9 @@ export class ShoppingCartEffects {
     return this.actions$.pipe(
       ofType(saveShoppingCart),
       switchMap(action =>
-        this.cartService.postShoppingCart(action.shoppingCartToSave).pipe(
-          map(result => shoppingCartSaved({ savedShoppingCart: result })),
-          catchError(error => of(shoppingCartErrorSaving({ error: error.message })))
+        this.cartService.postShoppingCart(action.payload).pipe(
+          map(savedShoppingCart => shoppingCartSaved({ payload: savedShoppingCart })),
+          catchError(error => of(shoppingCartErrorSaving({ payload: error.message })))
         )
       )
     );

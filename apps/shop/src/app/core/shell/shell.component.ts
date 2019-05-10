@@ -47,7 +47,7 @@ export class ShellComponent {
   }
 
   private saveCurrentShoppingCart(current: ShoppingCart) {
-    const action = saveShoppingCart({ shoppingCartToSave: current });
+    const action = saveShoppingCart({ payload: current });
     this.store.dispatch(action);
   }
 }

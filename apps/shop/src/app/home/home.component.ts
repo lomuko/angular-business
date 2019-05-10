@@ -33,8 +33,7 @@ export class HomeComponent implements OnInit {
     );
   }
   public buyProduct(product: Product) {
-    const payload = { product: product, quantity: 1 };
-    const action = addShoppingCartItem({ newShoppingCartItem: payload });
+    const action = addShoppingCartItem({ payload: { product: product, quantity: 1 } });
     this.store.dispatch(action);
   }
 }

@@ -1,15 +1,8 @@
 {
-  "spellright.language": [
-    "en",
-    "es"
-  ],
-  "spellright.documentTypes": [
-    "latex",
-    "plaintext",
-    "typescript",
-    "yaml",
-    "markdown"
-  ],
+  "spellright.language": ["en", "es"],
+  "spellright.documentTypes": ["latex", "plaintext", "typescript", "yaml", "markdown"],
+  "workbench.colorTheme": "Monokai",
+  "workbench.iconTheme": "material-icon-theme",
   "workbench.colorCustomizations": {
     "editorError.foreground": "#ff9900",
     "editorWarning.foreground": "#BBCBC2",
