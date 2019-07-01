@@ -19,7 +19,8 @@
       "@angular-business/shared": ["libs/shared/src/index.ts"],
       "@angular-business/views": ["libs/views/src/index.ts"],
       "@angular-business/models": ["libs/models/src/index.ts"]
-    }
+    },
+    "rootDir": "."
   },
   "exclude": ["node_modules", "tmp"]
 }

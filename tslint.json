@@ -1,5 +1,5 @@
 {
-  "rulesDirectory": ["node_modules/@nrwl/schematics/src/tslint", "node_modules/codelyzer"],
+  "rulesDirectory": ["node_modules/@nrwl/workspace/src/tslint", "node_modules/codelyzer"],
   "plugins": ["@getify/proper-arrows"],
   "rules": {
     "arrow-return-shorthand": true,
@@ -61,17 +61,34 @@
     "cyclomatic-complexity": [true, 8],
     "directive-class-suffix": true,
     "directive-selector": [true, "attribute", "app", "camelCase"],
-    "id-length": ["error", { "min": 4, "max": 16, "exceptions": ["x", "y", "i", "j"] }],
+    "id-length": [
+      "error",
+      {
+        "min": 4,
+        "max": 16,
+        "exceptions": ["x", "y", "i", "j"]
+      }
+    ],
     "max-depth": ["error", 2],
     "max-file-line-count": [true, 256],
     "max-len": ["error", 96],
     "max-lines": ["error", 256],
     "max-params": ["error", 4],
-    "max-statements-per-line": ["error", { "max": 1 }],
+    "max-statements-per-line": [
+      "error",
+      {
+        "max": 1
+      }
+    ],
     "max-statements": ["error", 32],
     "no-input-rename": true,
     "no-magic-numbers": [true, 0, 1],
-    "no-multiple-empty-lines": ["error", { "max": 1 }],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1
+      }
+    ],
     "no-output-on-prefix": true,
     "no-output-rename": true,
     "use-host-property-decorator": true,
