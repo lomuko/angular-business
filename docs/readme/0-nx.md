@@ -16,13 +16,22 @@ class: impact
 
 ---
 
-    # 1. Nx y el CLI
+    1. Nx y el CLI
+      1.1 Instalación de Nx y CLI
+      1.2 Crear y configurar un workspace
 
-    # 2. Estructura de un workspace
+    2. Estructura de un workspace
+      2.1 Apps
+      2.2 Libs
 
-    # 3. Proyectos
+    3 Aplicaciones
+      3.1 Frontend webs
+      3.2 Backend Apis
 
-    # 4. Librerías
+    4. Librerías
+      4.1 Librerías en TypeScript
+      4.2 Librerías de Angular
+
 
 ---
 
