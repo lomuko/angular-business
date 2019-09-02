@@ -52,7 +52,7 @@
   "dependencies": {
     "@nrwl/angular": "8.4.13",
     "@angular/animations": "^9.0.0-next.4",
-    "@angular/cdk": "~8.0.1",
+    "@angular/cdk": "~8.1.4",
     "@angular/common": "^9.0.0-next.4",
     "@angular/compiler": "^9.0.0-next.4",
     "@angular/core": "^9.0.0-next.4",
