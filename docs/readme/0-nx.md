@@ -53,7 +53,7 @@ class: impact
 
 ```terminal
 yarn add global @angular/cli
-yarn add global @nrwl/schematics
+yarn add global @nrwl/cli
 ```
 
 ---
@@ -131,6 +131,12 @@ As a: seller,
   so that: I can take control
 ```
 
+### Aplicaciones
+
+- shop
+- warehouse
+
+
 ---
 
 ## 2.2 Libs
@@ -144,6 +150,12 @@ As a: seller,
   I want: to be greeted
   so that: I feel at home
 ```
+
+### Librerías
+
+- models
+
+- views
 
 ---
 
