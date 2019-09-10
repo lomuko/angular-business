@@ -27,7 +27,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     _id: 'HP-4',
-    description: 'Pavillion',
+    description: 'Pavilion',
     category: Categories.Computer,
     brand: 'HP',
     price: 1000,
@@ -35,7 +35,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     _id: 'C-5',
-    description: 'Selphy',
+    description: 'Pixma',
     category: Categories.Printer,
     brand: 'Canon',
     price: 200,
